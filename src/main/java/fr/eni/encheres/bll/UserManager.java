@@ -54,15 +54,19 @@ public class UserManager {
 		return false;
 	}
 	
-	public User createUser(int noUtilisateur, String pseudo, String nom, String prenom, String email, String tel, String rue,
-			String codePostal, String ville, String password, int credit, byte admninistrateur) throws BLLException {
+	public void createUser(int noUtilisateur, String pseudo, String nom, String prenom, String email, String tel, String rue,
+			String codePostal, String ville, String password) throws BLLException {
 		User user = null;
-		//On verifie que les données saisies par l'utilisateur sont conformes 
-		
-		
+		int credit=0; 
+		byte admninistrateur=0;
 		//creation de l'instance d'utilisateur à partir des informations saisies par l'utilisateur
 		user = new User(noUtilisateur, pseudo, nom, prenom, email, tel, rue, codePostal, ville, password, credit, admninistrateur);
 		userDAO.insertUser(user);
+	}
+
+	private Exception BLLException(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
