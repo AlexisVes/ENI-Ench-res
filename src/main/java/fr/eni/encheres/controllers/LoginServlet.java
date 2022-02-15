@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.encheres.bll.UserManager;
 
 /**
  * Servlet implementation class LoginServlet
@@ -23,6 +26,8 @@ public class LoginServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    UserManager userManager = UserManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +64,12 @@ public class LoginServlet extends HttpServlet {
 			
 		}
 		
-		//searchUser(pseudo, password);
+		if ( userManager.searchUser(pseudo, password) == true ){
+			
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			session.setAttribute("connect", "connect");
+			
+		}
 		
 		doGet(request, response);
 	}

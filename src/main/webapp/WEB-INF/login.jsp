@@ -15,6 +15,8 @@
 			<input type="submit" value="Valider">
 		
 		</form>
+		
+		<p> ${requestScope.message} </p>
 	
 	</body>
 </html>
