@@ -15,9 +15,8 @@ public class User {
 	//private int credit;
 	//private boolean admninistrateur;
 	
-	public User(int noUtilisateur, String pseudo, String email, String password) {
+	public User(String pseudo, String email, String password) {
 		super();
-		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.email = email;
 		this.password = password;
