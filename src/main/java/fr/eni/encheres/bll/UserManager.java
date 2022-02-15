@@ -1,7 +1,6 @@
 package fr.eni.encheres.bll;
 
 import fr.eni.encheres.bo.User;
-import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UserDAO;
@@ -54,7 +53,7 @@ public class UserManager {
 		}
 		return false;
 	}
-	
+
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
 							String codePostal, String ville, String password) throws BLLException {
 
@@ -100,7 +99,12 @@ public class UserManager {
 		}
 		//creation de l'instance d'utilisateur à partir des informations saisies par l'utilisateur
 		user = new User(pseudo, nom, prenom, email, tel, rue, codePostal, ville, password, credit, admninistrateur);
-		userDAO.insertUser(user);
+		try {
+			userDAO.insertUser(user);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
