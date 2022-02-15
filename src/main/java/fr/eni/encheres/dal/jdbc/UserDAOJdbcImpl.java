@@ -79,7 +79,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setString(6, user.getRue());
 			rqt.setString(7, user.getCodePostal());
 			rqt.setString(8, user.getVille());
-			rqt.setString(8, user.getPassword());
+			rqt.setString(9, user.getPassword());
 			
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
