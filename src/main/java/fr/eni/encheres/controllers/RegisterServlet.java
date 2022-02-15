@@ -67,8 +67,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -78,8 +79,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -89,8 +91,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -100,8 +103,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -110,8 +114,9 @@ public class RegisterServlet extends HttpServlet {
 				tel = request.getParameter("tel");
 			}else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -121,8 +126,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -132,8 +138,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -143,8 +150,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			
@@ -154,13 +162,15 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			if( !reussite )
 			{
 				try {
+					System.out.println("ouite");
 					userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);
 				} catch (DALException e) {
 					request.setAttribute("message", e.getMessage());;
