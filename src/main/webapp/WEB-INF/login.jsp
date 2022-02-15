@@ -16,7 +16,9 @@
 		
 			<form action="${pageContext.request.contextPath}/login" method="Post" >
 		
+				<label for="pseudo"> Votre pseudo :</label>
 				<input type="text" name="pseudo" placeholder="Votre pseudo">
+				<label for="password"> Votre mot de passe :</label>
 				<input type="password" name="password">
 				<input type="submit" value="Valider">
 		
