@@ -22,7 +22,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 		User userBDD = null;
 		try {
 			cnx = ConnectionProvider.getConnection();
-			System.out.println("bdd");
+
 			//créer la commande 
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_USER);
 			//valoriser les paramètres
@@ -31,15 +31,20 @@ public class UserDAOJdbcImpl implements UserDAO{
 			ResultSet rs = rqt.executeQuery();
 			;
 			//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
-			rs.next();
-			String username =rs.getString(1);
-			String email =rs.getString(2);
-			String password =rs.getString(3);
-			//on créé l'objet userBDD
-			userBDD = new User(username, password, email);
+			if(rs != null) {
+				rs.next();
+				String username =rs.getString(1);
+				String email =rs.getString(2);
+				String password =rs.getString(3);
+				
+				//on créé l'objet userBDD
+				userBDD = new User(username, email, password);
+				cnx.close();
+			} 
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("user inconnu");
+			throw new DALException("Utilisateur inconnu");
 		}
 		return userBDD;
 	}
