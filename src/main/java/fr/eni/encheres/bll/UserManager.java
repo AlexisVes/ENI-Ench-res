@@ -59,7 +59,7 @@ public class UserManager {
 		} 
 		catch (DALException e) 
 		{
-			e.printStackTrace();
+			System.out.println(e.getMessage());;
 		}
 		return false;
 	}
