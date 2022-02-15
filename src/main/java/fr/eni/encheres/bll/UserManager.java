@@ -51,6 +51,7 @@ public class UserManager {
 				user = userDAO.getUser(pseudo);
 				if(password.equals(user.getPassword())) 
 				{     
+					System.out.println("ok");
 					return true;
 				}
 				
