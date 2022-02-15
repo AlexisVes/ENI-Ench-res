@@ -66,8 +66,10 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+
 				request.setAttribute("message", "Veuillez rentrer un pseudo");
 				reussite = true;
+
 			}
 			
 			
@@ -79,6 +81,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 				request.setAttribute("message", "Veuillez rentrer un nom");
 				reussite = true;
+
 			}
 			
 			
@@ -88,8 +91,10 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+
 				request.setAttribute("message", "Veuillez rentrer un prénom");
 				reussite = true;
+
 			}
 			
 			
@@ -99,15 +104,18 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+
 				request.setAttribute("message", "Veuillez rentrer un email");
 				reussite = true;
+
 			}
 			
 			
 			if(!request.getParameter("tel").isEmpty())
 			{
 				tel = request.getParameter("tel");
-			}else
+			}
+			else
 			{
 				request.setAttribute("message", "Veuillez rentrer un téléphone");
 				reussite = true;
@@ -120,8 +128,10 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+
 				request.setAttribute("message", "Veuillez rentrer une rue");
 				reussite = true;
+
 			}
 			
 			
@@ -131,8 +141,10 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+
 				request.setAttribute("message", "Veuillez rentrer un code postal");
 				reussite = true;
+
 			}
 			
 			
@@ -142,7 +154,9 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+
 				request.setAttribute("message", "Veuillez rentrer une ville");
+
 			}
 			
 			
@@ -152,14 +166,17 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				doGet(request, response);
 			}
 			
 			if( !reussite )
 			{
+
 				System.out.println("je ne suis sensé passer par là");
 				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);		
+
 			}
 			
 		} 
