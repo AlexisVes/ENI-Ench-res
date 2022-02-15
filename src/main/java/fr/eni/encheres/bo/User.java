@@ -17,10 +17,9 @@ public class User {
 	
 	
 
-	public User(int noUtilisateur, String pseudo, String nom, String prenom, String email, String tel, String rue,
+	public User(String pseudo, String nom, String prenom, String email, String tel, String rue,
 			String codePostal, String ville, String password, int credit, byte admninistrateur) {
 		super();
-		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
