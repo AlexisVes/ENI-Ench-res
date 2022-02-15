@@ -10,7 +10,10 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.UserDAO;
 
 public class UserDAOJdbcImpl implements UserDAO{
-	private static final String SELECT_USER ="SELECT  pseudo, email, mot_de_passe FROM UTILISATEURS WHERE pseudo = ?";
+
+	private static final String INSERT_USER ="INSERT INTO UTILISATEURS ( pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur ) VALUES(?,?,?,?,?,?,?,?,?,0,0)";
+	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
+
 
 	@Override
 	/**
@@ -33,12 +36,21 @@ public class UserDAOJdbcImpl implements UserDAO{
 			//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
 			if(rs != null) {
 				rs.next();
-				String username =rs.getString(1);
-				String email =rs.getString(2);
-				String password =rs.getString(3);
+				int userId = rs.getInt(1);
+				String username =rs.getString(2);
+				String name = rs.getString(3);
+				String firstname = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				String street = rs.getString(7);
+				String zipCode = rs.getString(8);
+				String city = rs.getString(9);
+				String password = rs.getString(10);
+				int credit = rs.getInt(11);
+				byte admin = rs.getByte(12);
 				
 				//on créé l'objet userBDD
-				userBDD = new User(username, email, password);
+				userBDD = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
 				cnx.close();
 			} 
 			
@@ -47,5 +59,42 @@ public class UserDAOJdbcImpl implements UserDAO{
 			throw new DALException("Utilisateur inconnu");
 		}
 		return userBDD;
+	}
+	
+	public void insertUser( User user )
+	{
+		Connection cnx = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			
+			//On prepare la requête SQL
+			PreparedStatement rqt = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			//On y insère nos paramètres, on n'oubliant pas de convertir pour que ce soit compatible à SQL
+			rqt.setString(1, user.getPseudo());
+			rqt.setString(2, user.getNom());
+			rqt.setString(3, user.getPrenom());
+			rqt.setString(4, user.getEmail());
+			rqt.setString(5, user.getTel());
+			rqt.setString(6, user.getRue());
+			rqt.setString(7, user.getCodePostal());
+			rqt.setString(8, user.getVille());
+			rqt.setString(8, user.getPassword());
+			
+			//Éxécution de la requête SQL
+			int numberAffectedLines = rqt.executeUpdate();
+			
+			//Si il y a bien eu des lignes affectées		
+			cnx.close();	
+		} 
+		catch (DALException | SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 }

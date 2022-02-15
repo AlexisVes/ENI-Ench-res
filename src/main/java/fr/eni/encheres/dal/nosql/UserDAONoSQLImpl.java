@@ -12,4 +12,10 @@ public class UserDAONoSQLImpl implements UserDAO{
 	
 	}
 
+	@Override
+	public void insertUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
