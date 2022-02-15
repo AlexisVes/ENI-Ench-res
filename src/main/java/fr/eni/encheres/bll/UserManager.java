@@ -55,7 +55,7 @@ public class UserManager {
 	}
 
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
-							String codePostal, String ville, String password) throws BLLException, DALException{
+							String codePostal, String ville, String password) throws BLLException{
 
 		User user = null;
 		int credit=0; 
@@ -102,8 +102,7 @@ public class UserManager {
 		try {
 			userDAO.insertUser(user);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException(e.getMessage());
 		}
 	}
 	

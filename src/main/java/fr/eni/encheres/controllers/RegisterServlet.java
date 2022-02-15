@@ -160,16 +160,15 @@ public class RegisterServlet extends HttpServlet {
 			
 			if( !reussite )
 			{
-				try {
-					userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);
-				} catch (DALException e) {
-					request.setAttribute("message", e.getMessage());;
-				}		
+				System.out.println("je ne suis sensé passer par là");
+				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);		
 			}
 			
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+		catch (BLLException e) 
+		{	
+			System.out.println(e.getMessage());
+			request.setAttribute("message", e.getMessage());
 		}
 		
 		
