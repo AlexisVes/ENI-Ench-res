@@ -9,7 +9,6 @@
 	<body>
 		
 		<a href="${pageContext.request.contextPath}/login"> Se connecter</a>
-		<a href="${pageContext.request.contextPath}/register"> S'inscrire</a>
 		
 	</body>
 </html>

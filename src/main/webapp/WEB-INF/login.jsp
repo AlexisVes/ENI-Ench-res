@@ -12,17 +12,24 @@
 	</head>
 	<body>
 	
-		<form action="${pageContext.request.contextPath}/login" method="Post" >
+		<c:if test="${sessionScope.connect == null || sessionScope.connect eq 'Mauvais pseudo ou mot de passe'}">
 		
-			<input type="text" name="pseudo" placeholder="Votre pseudo">
-			<input type="password" name="password">
-			<input type="submit" value="Valider">
+			<form action="${pageContext.request.contextPath}/login" method="Post" >
 		
-		</form>
+				<input type="text" name="pseudo" placeholder="Votre pseudo">
+				<input type="password" name="password">
+				<input type="submit" value="Valider">
+		
+			</form>
+		
+		</c:if>
+		
 		
 		<p>
 			${sessionScope.connect}
 		</p>
+		
+		<a href="${pageContext.request.contextPath}/register"> S'inscrire</a>
 		
 	
 		
