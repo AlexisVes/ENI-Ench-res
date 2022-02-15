@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
 
 /**
@@ -47,6 +48,15 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			userManager.createUser(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom")
+					, request.getParameter("email"), request.getParameter("tel"), 
+					request.getParameter("rue"), request.getParameter("code_postal"), 
+					request.getParameter("ville"), request.getParameter("password"));
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		doGet(request, response);

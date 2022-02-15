@@ -31,13 +31,10 @@
 		<input type="text" name="rue" placeholder="Votre rue">
 		
 		<label for="code_postal"> Votre code postal :</label>
-		<input type="number" name="code_postal" placeholder="Votre code postal">
+		<input type="text" name="code_postal" placeholder="Votre code postal">
 		
 		<label for="ville"> Votre ville :</label>
 		<input type="text" name="ville" placeholder="Votre ville">
-		
-		<label for="credit"> Votre credit :</label>
-		<input type="number" name="credit" placeholder="Votre credit">
 		
 		<input type="submit" value="Valider">
 		
