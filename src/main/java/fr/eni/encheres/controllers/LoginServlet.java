@@ -69,6 +69,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("connect", "connect");
 			
 		}
+		
 		doGet(request, response);
 	}
 
