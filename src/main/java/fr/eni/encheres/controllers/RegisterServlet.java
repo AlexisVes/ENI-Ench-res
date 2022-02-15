@@ -61,94 +61,93 @@ public class RegisterServlet extends HttpServlet {
 			String password = null;
 			boolean reussite = false;
 			
-			if(request.getParameter("pseudo") != null)
+			if(!request.getParameter("pseudo").isEmpty())
 			{
 				pseudo = request.getParameter("pseudo");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer un pseudo");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("nom") != null)
+			if(!request.getParameter("nom").isEmpty())
 			{
 				nom = request.getParameter("nom");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer un nom");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("prenom") != null)
+			if(!request.getParameter("prenom").isEmpty())
 			{
 				prenom = request.getParameter("prenom");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer un prénom");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("email") != null)
+			if(!request.getParameter("email").isEmpty())
 			{
 				email = request.getParameter("email");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer un email");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("tel") != null)
+			if(!request.getParameter("tel").isEmpty())
 			{
 				tel = request.getParameter("tel");
 			}else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer un téléphone");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("rue") != null)
+			if(!request.getParameter("rue").isEmpty())
 			{
 				rue = request.getParameter("rue");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer une rue");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("code_postal") != null)
+			if(!request.getParameter("code_postal").isEmpty())
 			{
 				code_postal = request.getParameter("code_postal");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
+				request.setAttribute("message", "Veuillez rentrer un code postal");
 				reussite = true;
 			}
 			
 			
-			if(request.getParameter("ville") != null)
+			if( !request.getParameter("ville").isEmpty())
 			{
 				ville = request.getParameter("ville");
 			}
 			else
 			{
-				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				reussite = true;
+				request.setAttribute("message", "Veuillez rentrer une ville");
 			}
 			
 			
-			if(request.getParameter("password") != null)
+			if(request.getParameter("password") != "")
 			{
 				password = request.getParameter("password");
 			}
