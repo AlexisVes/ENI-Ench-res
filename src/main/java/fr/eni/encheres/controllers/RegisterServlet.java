@@ -163,7 +163,7 @@ public class RegisterServlet extends HttpServlet {
 				try {
 					userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);
 				} catch (DALException e) {
-					request.setAttribute("message", "Le pseudo est déjà utilisé");;
+					request.setAttribute("message", e.getMessage());;
 				}		
 			}
 			

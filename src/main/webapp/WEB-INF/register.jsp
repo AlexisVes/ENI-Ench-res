@@ -41,9 +41,8 @@
 		
 		<input type="submit" value="Valider">
 		
-		<c:if test="${requestScope.message}">
-			<p>${requestScope.message}</p>
-		</c:if>
+		<p>${requestScope.message}</p>
+
 		
 	</form>
 </body>
