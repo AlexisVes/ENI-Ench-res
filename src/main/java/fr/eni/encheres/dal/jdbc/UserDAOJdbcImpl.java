@@ -11,7 +11,7 @@ import fr.eni.encheres.dal.UserDAO;
 import fr.eni.encheres.dal.jdbc.ConnectionProvider;
 
 public class UserDAOJdbcImpl implements UserDAO{
-	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, email, mot_de_passe FROM UTILISATEURS WHERE pseudo = ?";
+	private static final String SELECT_USER ="SELECT  pseudo, email, mot_de_passe FROM UTILISATEURS WHERE pseudo = ?";
 
 	@Override
 	/**
@@ -30,12 +30,11 @@ public class UserDAOJdbcImpl implements UserDAO{
 			//récupérer le contenu du SELECT_USER dans un resultset
 			ResultSet rs = rqt.executeQuery();
 			//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
-			int userId=rs.getInt(0);
 			String username =rs.getString(1);
 			String email =rs.getString(2);
 			String password =rs.getString(3);
 			//on créé l'objet userBDD
-			userBDD = new User(userId, username, email, password);
+			userBDD = new User(username, password, email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
