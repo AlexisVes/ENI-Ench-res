@@ -17,6 +17,7 @@
 		</form>
 		
 		<p> ${requestScope.message} </p>
+		<p> ${sessionScope.connect} </p>
 	
 	</body>
 </html>
