@@ -40,7 +40,6 @@ public class LoginServlet extends HttpServlet {
 		{
 			rd.forward(request, response);
 		}
-		
 	}
 
 	/**
@@ -53,8 +52,6 @@ public class LoginServlet extends HttpServlet {
 		if ( request.getParameter("pseudo") != null || request.getParameter("pseudo") != "") {
 			
 			pseudo = request.getParameter("pseudo");
-			System.out.println(request.getParameter("pseudo"));
-			System.out.println(pseudo);
 			
 		}
 		
@@ -63,7 +60,6 @@ public class LoginServlet extends HttpServlet {
 		if ( request.getParameter("password") != null || request.getParameter("password") != "") {
 			
 			password = request.getParameter("password");
-			System.out.println(password);
 			
 		}
 		
