@@ -50,17 +50,20 @@ public class LoginServlet extends HttpServlet {
 		
 		String pseudo = "";
 		
-		if ( request.getParameter(pseudo) != null || request.getParameter(pseudo) != "") {
+		if ( request.getParameter("pseudo") != null || request.getParameter("pseudo") != "") {
 			
-			pseudo = request.getParameter(pseudo);
+			pseudo = request.getParameter("pseudo");
+			System.out.println(request.getParameter("pseudo"));
+			System.out.println(pseudo);
 			
 		}
 		
 		String password = "";
 		
-		if ( request.getParameter(password) != null || request.getParameter(password) != "") {
+		if ( request.getParameter("password") != null || request.getParameter("password") != "") {
 			
-			password = request.getParameter(password);
+			password = request.getParameter("password");
+			System.out.println(password);
 			
 		}
 		
@@ -70,7 +73,6 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("connect", "connect");
 			
 		}
-		
 		doGet(request, response);
 	}
 
