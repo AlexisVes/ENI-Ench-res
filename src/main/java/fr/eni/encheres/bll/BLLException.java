@@ -23,6 +23,7 @@ public class BLLException extends Exception
 		return messages;
 	}
 	
+	
 	public boolean hasErrors(){
 		return messages.size() > 0 ?true:false;
 	}
