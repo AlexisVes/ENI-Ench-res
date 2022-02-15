@@ -50,7 +50,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 				byte admin = rs.getByte(12);
 				
 				//on créé l'objet userBDD
-				userBDD = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
+				userBDD = new User(username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
 				cnx.close();
 			} 
 			
