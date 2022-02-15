@@ -63,6 +63,5 @@ public class UserManager {
 		user = new User(pseudo, nom, prenom, email, tel, rue, codePostal, ville, password, credit, admninistrateur);
 		userDAO.insertUser(user);
 	}
-
 	
 }
