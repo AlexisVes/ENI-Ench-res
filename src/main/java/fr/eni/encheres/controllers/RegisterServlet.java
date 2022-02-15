@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.UserManager;
+
 /**
  * Servlet implementation class RegisterServlet
  */
@@ -23,6 +25,8 @@ public class RegisterServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    UserManager userManager = UserManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
