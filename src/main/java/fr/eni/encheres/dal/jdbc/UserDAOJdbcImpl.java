@@ -10,7 +10,10 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.UserDAO;
 
 public class UserDAOJdbcImpl implements UserDAO{
+
+	private static final String INSERT_USER ="INSERT INTO UTILISATEURS ( pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur ) VALUES(?,?,?,?,?,?,?,?,?,0,0)";
 	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
+
 
 	@Override
 	/**
@@ -56,5 +59,42 @@ public class UserDAOJdbcImpl implements UserDAO{
 			throw new DALException("Utilisateur inconnu");
 		}
 		return userBDD;
+	}
+	
+	public void insertUser( User user )
+	{
+		Connection cnx = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			
+			//On prepare la requête SQL
+			PreparedStatement rqt = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			//On y insère nos paramètres, on n'oubliant pas de convertir pour que ce soit compatible à SQL
+			rqt.setString(1, user.getPseudo());
+			rqt.setString(2, user.getNom());
+			rqt.setString(3, user.getPrenom());
+			rqt.setString(4, user.getEmail());
+			rqt.setString(5, user.getTel());
+			rqt.setString(6, user.getRue());
+			rqt.setString(7, user.getCodePostal());
+			rqt.setString(8, user.getVille());
+			rqt.setString(8, user.getPassword());
+			
+			//Éxécution de la requête SQL
+			int numberAffectedLines = rqt.executeUpdate();
+			
+			//Si il y a bien eu des lignes affectées		
+			cnx.close();	
+		} 
+		catch (DALException | SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 }
