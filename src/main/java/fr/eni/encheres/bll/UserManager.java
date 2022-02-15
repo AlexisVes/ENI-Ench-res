@@ -46,14 +46,15 @@ public class UserManager {
 	{
 		User user = null;
 		try {
+
 			if(userDAO.getUser(pseudo) != null) 
 			{
 				System.out.println(pseudo);
 				System.out.println(password);
 				user = userDAO.getUser(pseudo);
-				if(password.equals(user.getPassword())) 
+
+				if(password.equals(user.getPassword()))
 				{     
-					System.out.println("ok");
 					return true;
 				}
 				
