@@ -8,7 +8,7 @@
 	</head>
 	<body>
 	
-		<form action="" method="" >
+		<form action="${pageContext.request.contextPath}/login" method="Post" >
 		
 			<input type="text" name="pseudo" placeholder="Votre pseudo">
 			<input type="password" name="password">
