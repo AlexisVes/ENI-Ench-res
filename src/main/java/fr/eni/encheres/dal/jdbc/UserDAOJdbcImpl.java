@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import fr.eni.encheres.bo.User;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.UserDAO;
-import fr.eni.encheres.dal.jdbc.ConnectionProvider;
 
 public class UserDAOJdbcImpl implements UserDAO{
 	private static final String SELECT_USER ="SELECT  pseudo, email, mot_de_passe FROM UTILISATEURS WHERE pseudo = ?";
