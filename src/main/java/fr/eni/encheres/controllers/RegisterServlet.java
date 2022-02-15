@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
-import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -59,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
 			String code_postal = null;
 			String ville = null;
 			String password = null;
-			boolean reussite = false;
+			boolean echec = false;
 			
 			ControllersException exception = new ControllersException();
 			
@@ -70,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un pseudo");
-				reussite = true;
+				echec = true;
 
 			}
 			
@@ -82,8 +81,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un nom");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -94,8 +92,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un prénom");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -106,8 +103,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un email");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -118,7 +114,8 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un téléphone");
-				reussite = true;
+				echec = true;
+
 			}
 			
 			
@@ -129,7 +126,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer une rue");
-				reussite = true;
+				echec = true;
 
 			}
 			
@@ -141,7 +138,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un code postal");
-				reussite = true;
+				echec = true;
 
 			}
 			
@@ -153,7 +150,8 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer une ville");
-				reussite =true;
+				echec = true;
+
 			}
 			
 			
@@ -164,15 +162,12 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un mot de passe");
-				doGet(request, response);
+				echec = true;
 			}
 			
-			if( !reussite )
+			if( echec == false )
 			{
-
-				System.out.println("je ne suis sensé passer par là");
-				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);		
-
+				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
 			}
 			
 			if( exception.hasErrors())
@@ -181,12 +176,11 @@ public class RegisterServlet extends HttpServlet {
 			}
 			
 		} 
-		catch (BLLException  | ControllersException e) 
+		catch (BLLException e) 
 		{	
-			System.out.println(e.getMessage());
-			request.setAttribute("message", e.getMessage());
+			System.out.println(e.getMessages());
+			request.setAttribute("message", e.getMessages());
 		}
-		
 		
 		doGet(request, response);
 	}
