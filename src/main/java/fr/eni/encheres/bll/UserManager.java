@@ -48,6 +48,8 @@ public class UserManager {
 		try {
 			if(userDAO.getUser(pseudo) != null) 
 			{
+				System.out.println(pseudo);
+				System.out.println(password);
 				user = userDAO.getUser(pseudo);
 				if(password.equals(user.getPassword())) 
 				{     

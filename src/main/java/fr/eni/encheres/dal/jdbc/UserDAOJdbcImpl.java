@@ -28,6 +28,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setString(1, pseudo);
 			//récupérer le contenu du SELECT_USER dans un resultset
 			ResultSet rs = rqt.executeQuery();
+			;
 			//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
 			rs.next();
 			String username =rs.getString(1);
