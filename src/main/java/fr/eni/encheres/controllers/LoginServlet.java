@@ -66,11 +66,23 @@ public class LoginServlet extends HttpServlet {
 		if ( userManager.searchUser(pseudo, password) == true ){
 			
 			HttpSession session = ((HttpServletRequest)request).getSession();
-			session.setAttribute("connect", "connect");
+			session.setAttribute("connect", "connection réussie");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/accueil.jsp");
+			
+			if( rd != null)
+			{
+				rd.forward(request, response);
+			}
 			
 		}
+		else
+		{
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			session.setAttribute("connect", "Mauvais pseudo ou mot de passe");
+			doGet(request, response);
+		}
 		
-		doGet(request, response);
 	}
 
 }
