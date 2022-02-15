@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
+import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -159,7 +160,11 @@ public class RegisterServlet extends HttpServlet {
 			
 			if( !reussite )
 			{
-				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);		
+				try {
+					userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);
+				} catch (DALException e) {
+					request.setAttribute("message", "Le pseudo est déjà utilisé");;
+				}		
 			}
 			
 		} catch (BLLException e) {
