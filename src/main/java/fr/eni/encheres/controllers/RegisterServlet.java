@@ -169,7 +169,6 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("message", e.getMessage());
 		}
 		
-		
 		doGet(request, response);
 	}
 
