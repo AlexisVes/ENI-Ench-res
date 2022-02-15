@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import fr.eni.encheres.bo.User;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.UserDAO;
-import fr.eni.encheres.dal.jdbc.ConnectionProvider;
 
 public class UserDAOJdbcImpl implements UserDAO{
 	private static final String SELECT_USER ="SELECT  pseudo, email, mot_de_passe FROM UTILISATEURS WHERE pseudo = ?";
@@ -31,6 +30,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			ResultSet rs = rqt.executeQuery();
 			;
 			//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
+			rs.next();
 			String username =rs.getString(1);
 			String email =rs.getString(2);
 			String password =rs.getString(3);
@@ -42,5 +42,4 @@ public class UserDAOJdbcImpl implements UserDAO{
 		}
 		return userBDD;
 	}
-
 }
