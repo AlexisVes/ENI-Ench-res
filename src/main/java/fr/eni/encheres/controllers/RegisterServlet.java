@@ -58,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
 			String code_postal = null;
 			String ville = null;
 			String password = null;
-			boolean reussite = false;
+			boolean echec = false;
 			
 			if(!request.getParameter("pseudo").isEmpty())
 			{
@@ -68,8 +68,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 
 				request.setAttribute("message", "Veuillez rentrer un pseudo");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -80,7 +79,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				request.setAttribute("message", "Veuillez rentrer un nom");
-				reussite = true;
+				echec = true;
 
 			}
 			
@@ -93,8 +92,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 
 				request.setAttribute("message", "Veuillez rentrer un prénom");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -106,8 +104,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 
 				request.setAttribute("message", "Veuillez rentrer un email");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -118,7 +115,7 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				request.setAttribute("message", "Veuillez rentrer un téléphone");
-				reussite = true;
+				echec = true;
 			}
 			
 			
@@ -130,8 +127,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 
 				request.setAttribute("message", "Veuillez rentrer une rue");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -143,8 +139,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 
 				request.setAttribute("message", "Veuillez rentrer un code postal");
-				reussite = true;
-
+				echec = true;
 			}
 			
 			
@@ -156,7 +151,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 
 				request.setAttribute("message", "Veuillez rentrer une ville");
-
+				echec = true;
 			}
 			
 			
@@ -168,15 +163,12 @@ public class RegisterServlet extends HttpServlet {
 			{
 				System.out.println("raté");
 				request.setAttribute("message", "Veuillez rentrer un mot de passe");
-				doGet(request, response);
+				echec = true;
 			}
 			
-			if( !reussite )
+			if( echec == false )
 			{
-
-				System.out.println("je ne suis sensé passer par là");
-				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);		
-
+				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
 			}
 			
 		} 
@@ -185,7 +177,6 @@ public class RegisterServlet extends HttpServlet {
 			System.out.println(e.getMessages());
 			request.setAttribute("message", e.getMessages());
 		}
-		
 		
 		doGet(request, response);
 	}
