@@ -24,8 +24,8 @@
 		<label for="email"> Votre email :</label>
 		<input type="email" name="email" placeholder="Votre email">
 		
-		<label for="telephone"> Votre telephone :</label>
-		<input type="tel" name="telephone" placeholder="Votre telephone">
+		<label for="tel"> Votre telephone :</label>
+		<input type="text" name="tel" placeholder="Votre telephone">
 		
 		<label for="rue"> Votre rue :</label>
 		<input type="text" name="rue" placeholder="Votre rue">

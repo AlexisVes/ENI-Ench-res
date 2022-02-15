@@ -49,7 +49,14 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			userManager.createUser(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom")
+			String pseudo = null;
+			
+			if(request.getParameter("pseudo") != null)
+			{
+				pseudo = request.getParameter("pseudo");
+			}
+			
+			userManager.createUser(pseudo, request.getParameter("nom"), request.getParameter("prenom")
 					, request.getParameter("email"), request.getParameter("tel"), 
 					request.getParameter("rue"), request.getParameter("code_postal"), 
 					request.getParameter("ville"), request.getParameter("password"));
