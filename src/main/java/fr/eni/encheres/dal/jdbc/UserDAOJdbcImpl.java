@@ -61,7 +61,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 		return userBDD;
 	}
 	
-	public void insertUser( User user )
+	public void insertUser( User user ) throws DALException
 	{
 		Connection cnx = null;
 		try {
@@ -89,8 +89,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 		} 
 		catch (DALException | SQLException e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new DALException("Pseudo déjà existant");
 		}
 		
 		

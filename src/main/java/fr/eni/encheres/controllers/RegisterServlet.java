@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
+import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -56,10 +57,22 @@ public class RegisterServlet extends HttpServlet {
 				pseudo = request.getParameter("pseudo");
 			}
 			
-			userManager.createUser(pseudo, request.getParameter("nom"), request.getParameter("prenom")
-					, request.getParameter("email"), request.getParameter("tel"), 
-					request.getParameter("rue"), request.getParameter("code_postal"), 
-					request.getParameter("ville"), request.getParameter("password"));
+			try {
+				userManager.createUser(pseudo, request.getParameter("nom"), request.getParameter("prenom")
+						, request.getParameter("email"), request.getParameter("tel"), 
+						request.getParameter("rue"), request.getParameter("code_postal"), 
+						request.getParameter("ville"), request.getParameter("password"));
+			} catch (DALException e) {
+				request.setAttribute("message", "Pseudo déjà existant");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/register.jsp");
+				
+				if( rd != null)
+				{
+					rd.forward(request, response);
+				}
+				
+			}
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
