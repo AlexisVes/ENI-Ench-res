@@ -57,52 +57,58 @@ public class UserManager {
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
 							String codePostal, String ville, String password) throws BLLException{
 
+		BLLException exception = new BLLException();
 		User user = null;
 		int credit=0; 
 		byte admninistrateur=0;
 		
 		//Vérification du nombre de caractères dans le pseudo (ne doit pas dépasser 30 caractères)
 		if(pseudo.length() > 30) {
-			throw new BLLException("Le pseudo ne doit pas dépasser 30 caractères");
+			exception.addMessage("Le pseudo ne doit pas dépasser 30 caractères");
 		}
 		//Vérification du nombre de caractères dans le nom (ne doit pas dépasser 30 caractères)
 		if(nom.length() > 30) {
-			throw new BLLException("Le nom ne doit pas dépasser 30 caractères");
+			exception.addMessage("Le nom ne doit pas dépasser 30 caractères");
 		}
 		//Vérification du nombre de caractères dans le prénom (ne doit pas dépasser 30 caractères)
 		if(prenom.length() > 30) {
-			throw new BLLException("Le prenom ne doit pas dépasser 30 caractères");
+			exception.addMessage("Le prénom ne doit pas dépasser 30 caractères");
 		}
 		//Vérification du nombre de caractères dans le mail (ne doit pas dépasser 50 caractères)
 		if(email.length() > 50) {
-			throw new BLLException("Le mail ne doit pas dépasser 50 caractères");
+			exception.addMessage("Le mail ne doit pas dépasser 50 caractères");
 		}
 		//Vérification du nombre de caractères dans le téléphone (ne doit pas dépasser 15 caractères)
 		if(tel.length() > 15) {
-			throw new BLLException("Le téléphone ne doit pas dépasser 15 caractères");
+			exception.addMessage("Le téléphone ne doit pas dépasser 15 caractères");
 		}
 		//Vérification du nombre de caractères dans la rue (ne doit pas dépasser 30 caractères)
 		if(rue.length() > 30) {
-			throw new BLLException("Le nom de la rue ne doit pas dépasser 30 caractères");
+			exception.addMessage("Le nom de la rue ne doit pas dépasser 30 caractères");
 		}
 		//Vérification du nombre de caractères dans le code postal (ne doit pas dépasser 10 caractères)
 		if(codePostal.length() > 10) {
-			throw new BLLException("Le code postal ne doit pas dépasser 10 caractères");
+			exception.addMessage("Le code postal ne doit pas dépasser 10 caractères");
 		}
 		//Vérification du nombre de caractères dans la ville (ne doit pas dépasser 50 caractères)
 		if(ville.length() > 50) {
-			throw new BLLException("Le nom de la ville ne doit pas dépasser 50 caractères");
+			exception.addMessage("Le nom de la ville ne doit pas dépasser 50 caractères");
 		}
 		//Vérification du nombre de caractères dans le mot de passe (ne doit pas dépasser 30 caractères)
-		if(ville.length() > 30) {
-			throw new BLLException("Le mot de passe ne doit pas dépasser 30 caractères");
+		if(password.length() > 30) {
+			exception.addMessage("Le mot de passe ne doit pas dépasser 30 caractères");
 		}
 		//creation de l'instance d'utilisateur à partir des informations saisies par l'utilisateur
+		
+		if(exception.hasErrors()) {
+			throw exception;
+		}
+		
 		user = new User(pseudo, nom, prenom, email, tel, rue, codePostal, ville, password, credit, admninistrateur);
 		try {
 			userDAO.insertUser(user);
 		} catch (DALException e) {
-			throw new BLLException(e.getMessage());
+			throw new BLLException();
 		}
 	}
 	

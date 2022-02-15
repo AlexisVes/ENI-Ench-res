@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
-import fr.eni.encheres.dal.DALException;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -166,8 +165,8 @@ public class RegisterServlet extends HttpServlet {
 		} 
 		catch (BLLException e) 
 		{	
-			System.out.println(e.getMessage());
-			request.setAttribute("message", e.getMessage());
+			System.out.println(e.getMessages());
+			request.setAttribute("message", e.getMessages());
 		}
 		
 		
