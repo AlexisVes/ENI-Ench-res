@@ -17,6 +17,9 @@ public class Article {
 	
 	
 	
+	public Article() {
+		super();
+	}
 
 	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int prixInitial, int prixVente, String etatVente, int noCategorie,

@@ -16,7 +16,7 @@ public class UserManager {
 		 */
 		//avisDAO = new AvisDAOJdbcImpl();
 			try {
-				userDAO = DAOFactory.createDAO("JDBC");
+				userDAO = DAOFactory.createUserDAO("JDBC");
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
