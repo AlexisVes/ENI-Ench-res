@@ -9,6 +9,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	</head>
 	<body>
 	
@@ -28,7 +29,7 @@
 		
 		<c:forEach var="message" items="${requestScope.message}">
 		
-		<p>${message}</p>
+		<p class="error">${message}</p>
 		
 		</c:forEach>
 

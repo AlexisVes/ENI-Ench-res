@@ -5,10 +5,11 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+	</head>
 <body>
 	<form action="${pageContext.request.contextPath}/register" method="Post" >
 		
@@ -41,9 +42,13 @@
 		
 		<input type="submit" value="Valider">
 		
+		<c:if test="${requestScope.message != null }">
+			<p class="error"> Les erreurs sont les suivantes: </p>
+		</c:if>
+		
 		<c:forEach var="message" items="${requestScope.message}">
 		
-			<p> ${message}</p>
+			<p class="error"> ${message}</p>
 		
 		</c:forEach>
 
