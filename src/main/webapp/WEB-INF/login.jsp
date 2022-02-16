@@ -28,7 +28,7 @@
 		
 		<c:forEach var="message" items="${requestScope.message}">
 		
-		<p> ${message} </p>
+		<p>${message}</p>
 		
 		</c:forEach>
 
