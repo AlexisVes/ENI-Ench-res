@@ -35,12 +35,14 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
-		articlesAvailable = articleMgr.getArticlesAvailable();
+		//On vérifie que la liste d'articles n'est pas null
+		if(articleMgr.getArticlesAvailable() != null) {
+			//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
+			articlesAvailable = articleMgr.getArticlesAvailable();
+			request.setAttribute("listeArticles", articlesAvailable);
+		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
-		request.setAttribute("listeArticles", articlesAvailable);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		
 		if( rd != null)
