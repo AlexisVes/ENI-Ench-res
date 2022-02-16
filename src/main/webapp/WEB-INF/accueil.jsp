@@ -28,7 +28,7 @@
 			
 			<p> Vendeur : 
 			<c:if test="${sessionScope.connect == null}">
-				${article.pseudo} 
+				${article.pseudo}
 			</c:if>
 			
 			<c:if test="${sessionScope.connect != null}">
