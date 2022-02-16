@@ -12,7 +12,11 @@ import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DALException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
-	private static final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
+	private static final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+												+ "FROM ARTICLES_VENDUS \r\n"
+												+ "INNER JOIN UTILISATEURS \r\n"
+												+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+												+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
 	
 	public List<Article> getArticles() throws DALException{
@@ -46,7 +50,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					articleCourant.setPrixInitial(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("prix_vente"));
-					articleCourant.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					articleCourant.setPseudo(rs.getString("pseudo"));
 					articleCourant.setNoCategorie(rs.getInt("no_categorie"));
 //					idCurrentArticle = rs.getInt("no_article");
 					lesArticlesExtraits.add(articleCourant);
