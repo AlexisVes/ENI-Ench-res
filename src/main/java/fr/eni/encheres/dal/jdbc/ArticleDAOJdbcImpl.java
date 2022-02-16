@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.bo.User;
+import fr.eni.encheres.bo.Article;
 
 public class ArticleDAOJdbcImpl {
 	private static final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS;";
@@ -23,9 +23,13 @@ public class ArticleDAOJdbcImpl {
 				if (idCurrentArticle != rs.getInt("no_article")) 
 				{
 					articleCourant = new Article();
-					articleCourant.setNo_article(rs.getInt("no_article"));
-					articleCourant.setNom ;
-					articleCourant. ;
+					articleCourant.setNoArticle(rs.getInt("no_article"));
+					articleCourant.setNomArticle(rs.getString("nom_article"));
+					articleCourant.setDescription(rs.getString("description"));
+					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					articleCourant.setMiseAPrix(rs.getInt("prix_initial"));
+					articleCourant.setPrixVente(rs.getInt("prix_vente"));
 					idCurrentArticle = rs.getInt("no_article");
 				}
 			}
