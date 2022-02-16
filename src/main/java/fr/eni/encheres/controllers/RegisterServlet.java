@@ -172,7 +172,7 @@ public class RegisterServlet extends HttpServlet {
 			{
 				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/home");
+				RequestDispatcher rd = request.getRequestDispatcher("/home");
 				
 				if( rd != null)
 				{
