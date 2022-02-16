@@ -26,4 +26,12 @@ public class BLLException extends Exception
 	public boolean hasErrors(){
 		return messages.size() > 0 ?true:false;
 	}
+
+	@Override
+	public String toString() {
+		return "messages";
+	}
+	
+	
+	
 }
