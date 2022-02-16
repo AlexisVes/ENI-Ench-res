@@ -20,11 +20,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		
 		List<Article> lesArticlesExtraits = new ArrayList<Article>();
 		
+		Connection cnx = null;
 		
 		try {
 				
 			
-			Connection cnx = ConnectionProvider.getConnection();		
+			cnx = ConnectionProvider.getConnection();		
 				
 			Statement rqt = cnx.createStatement();
 			
@@ -35,7 +36,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			
 			while(rs.next())
 			{
-				System.out.println("coucou");
+				System.out.println("are");
 				if (idCurrentArticle != rs.getInt("no_article")) 
 				{
 					articleCourant = new Article();
@@ -49,14 +50,22 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					articleCourant.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					articleCourant.setNoCategorie(rs.getInt("no_categorie"));
 					idCurrentArticle = rs.getInt("no_article");
+					lesArticlesExtraits.add(articleCourant);
 				}
 			}
 			
-			cnx.close();
 		} catch (SQLException e) {
 			//propager une exception personnalisée
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
+		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return lesArticlesExtraits;
 	}
 }

@@ -54,7 +54,7 @@ public class ArticleManager {
 				}
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e.printStackTrace( );
 			}
 			//On retire les articles pour lesquelles la date de fin d'enchère est terminée
 			for( Article article : articles)
