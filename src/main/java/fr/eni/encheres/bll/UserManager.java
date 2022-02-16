@@ -128,7 +128,9 @@ public class UserManager {
 		try {
 			userDAO.insertUser(user);
 		} catch (DALException e) {
-			throw new BLLException();
+			BLLException BLLException = new BLLException();
+			BLLException.addMessage(e.getMessage());
+			throw BLLException;
 		}
 	}
 	

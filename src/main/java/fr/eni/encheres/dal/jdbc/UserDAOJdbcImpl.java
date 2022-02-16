@@ -89,7 +89,18 @@ public class UserDAOJdbcImpl implements UserDAO{
 		} 
 		catch (DALException | SQLException e) 
 		{
-			throw new DALException("Pseudo déjà existant");
+			System.out.println(e.getMessage());
+			
+			if( e.getMessage().contains("UK_email"))
+			{
+				throw new DALException("Cette adresse mail est déjà utilisée");
+			}
+			else
+			{
+				throw new DALException("Pseudo déjà existant");
+			}
+
+			
 		}
 		
 		
