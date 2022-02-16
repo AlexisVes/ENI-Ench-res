@@ -37,8 +37,9 @@ public class Accueil extends HttpServlet {
 		
 		//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
 		articlesAvailable = articleMgr.getArticlesAvailable();
-		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 		
+		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
+		request.setAttribute("listeArticles", articlesAvailable);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		
