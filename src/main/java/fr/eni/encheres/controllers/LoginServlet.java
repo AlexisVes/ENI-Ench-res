@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = ((HttpServletRequest)request).getSession();
 				session.setAttribute("connect", "connection réussie");
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/accueil.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/home");
 				
 				if( rd != null)
 				{
