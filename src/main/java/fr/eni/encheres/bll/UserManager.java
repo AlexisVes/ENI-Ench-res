@@ -49,7 +49,7 @@ public class UserManager {
 			{
 				user = userDAO.getUser(pseudo);
 
-				//On compare le mot de passe qu'on a en base de données, et celui qui a été rentré
+				//On compare le mot de passe rentré par l'utilisateur et celui trouvé en base de données
 				if(password.equals(user.getPassword()))
 				{     
 					return true;
@@ -63,7 +63,6 @@ public class UserManager {
 		return false;
 	}
 
-	
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
 							String codePostal, String ville, String password) throws BLLException{
 

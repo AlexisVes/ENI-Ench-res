@@ -26,6 +26,7 @@
 		
 		</c:if>
 		
+		<p> ${requestScope.message}</p>
 		
 		<p>
 			${sessionScope.connect}
