@@ -13,7 +13,7 @@
 		
 		<h1>Articles disponibles à la vente</h1>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
-		<c:forEach var="article" items="${articlesAvailable}">
+		<c:forEach var="article" items="${requestScope.listeArticles}">
 			<h2>${article.nomArticle}</h2>
 			<p>Prix : ${article.prixVente}</p>
 			<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
