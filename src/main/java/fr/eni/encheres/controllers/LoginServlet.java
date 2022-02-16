@@ -79,10 +79,9 @@ public class LoginServlet extends HttpServlet {
 				if( rd != null)
 				{
 					rd.forward(request, response);
+					return;
 				}
-				
-				return;
-				
+						
 			}
 		
 		} 
