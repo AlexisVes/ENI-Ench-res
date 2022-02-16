@@ -3,10 +3,10 @@ package fr.eni.encheres.bll;
 import java.time.LocalDate;
 import java.util.List;
 
+import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
-import fr.eni.encheres.dal.UserDAO;
-import fr.eni.encheres.bo.Article;
 
 public class ArticleManager {
 	
@@ -20,7 +20,7 @@ public class ArticleManager {
 			 */
 			//avisDAO = new AvisDAOJdbcImpl();
 				try {
-					articleDAO = DAOFactory.createDAO("JDBC");
+					articleDAO = DAOFactory.createArticleDAO("JDBC");
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -53,14 +53,13 @@ public class ArticleManager {
 			//On retire les articles pour lesquelles la date de fin d'enchère est terminée
 			for( Article article : articles)
 			{
-				if( article.getDateFinEncheres <= LocalDate.now() )
+				if( article.getDateFinEncheres() <= LocalDate.now(). )
 				{
 					articles.remove(article);
 				}
 			}
 			
 			return articles;
-			
 		}
 
 }
