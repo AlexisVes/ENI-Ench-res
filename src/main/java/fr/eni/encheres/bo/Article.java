@@ -12,7 +12,7 @@ public class Article {
 	private int prixVente;
 	private String etatVente;
 	private int noCategorie;
-	private int noUtilisateur;
+	private String pseudo;
 	
 	
 	public Article() {
@@ -31,7 +31,7 @@ public class Article {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 		this.noCategorie = noCategorie;
-		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
 	}
 
 	public int getNoArticle() {
@@ -106,13 +106,14 @@ public class Article {
 		this.noCategorie = noCategorie;
 	}
 
-	public int getNoUtilisateur() {
-		return noUtilisateur;
+	public String getPseudo() {
+		return pseudo;
 	}
 
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
 	}
 
+	
 }
 

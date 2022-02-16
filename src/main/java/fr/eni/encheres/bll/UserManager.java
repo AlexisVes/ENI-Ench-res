@@ -86,6 +86,11 @@ public class UserManager {
 		if(pseudo.length() > 30) {
 			exception.addMessage("Le pseudo ne doit pas dépasser 30 caractères");
 		}
+		
+		if( !pseudo.matches("[a-zA-Z0-9_]*"))
+		{
+			exception.addMessage("Le pseudo ne doit pas contenir de caractères spéciaux");
+		}
 		//Vérification du nombre de caractères dans le nom (ne doit pas dépasser 30 caractères)
 		if(nom.length() > 30) {
 			exception.addMessage("Le nom ne doit pas dépasser 30 caractères");

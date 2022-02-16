@@ -171,13 +171,15 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("/home");
 				
 				if( rd != null)
 				{
 					rd.forward(request, response);
+					return;
 				}
+
 			}
 			
 		} 

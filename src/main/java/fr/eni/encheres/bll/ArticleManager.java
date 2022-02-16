@@ -58,21 +58,8 @@ public class ArticleManager {
 				e.printStackTrace( );
 			}
 			
-			int cpt = 0;
-			List<Article> articleOnSell = new ArrayList<>();
-			//On retire les articles pour lesquelles la date de fin d'enchère est terminée
-			for( Article article : articles)
-			{
-				System.out.println(article.getDateFinEncheres().compareTo(LocalDate.now()));
-				
-				if( article.getDateFinEncheres().compareTo(LocalDate.now()) > 0 )
-				{
-					articleOnSell.add(article);
-				} 
 			
-			}
-			
-			return articleOnSell;
+			return articles;
 			
 		}
 
