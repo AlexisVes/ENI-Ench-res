@@ -18,7 +18,6 @@
 			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 		</c:if>
 		
-		
 		<h1>Liste des enchères</h1>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
