@@ -1,10 +1,12 @@
 package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UserDAO;
+import fr.eni.encheres.bo.Article;
 
 public class ArticleManager {
 	
