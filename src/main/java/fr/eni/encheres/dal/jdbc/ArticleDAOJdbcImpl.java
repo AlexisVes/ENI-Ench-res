@@ -28,7 +28,7 @@ public class ArticleDAOJdbcImpl {
 					articleCourant.setDescription(rs.getString("description"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
 					articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-					articleCourant.setMiseAPrix(rs.getInt("prix_initial"));
+					articleCourant.set(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("prix_vente"));
 					idCurrentArticle = rs.getInt("no_article");
 				}
