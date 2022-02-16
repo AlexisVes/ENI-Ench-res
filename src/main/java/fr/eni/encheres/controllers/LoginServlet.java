@@ -81,12 +81,10 @@ public class LoginServlet extends HttpServlet {
 					rd.forward(request, response);
 				}
 				
+				return;
+				
 			}
-			else
-			{
-				HttpSession session = ((HttpServletRequest)request).getSession();
-				session.setAttribute("connect", "Mauvais pseudo ou mot de passe");
-			}
+		
 		} 
 		catch (BLLException e) 
 		{
