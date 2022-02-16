@@ -15,7 +15,7 @@
 		
 		
 		<c:if test="${sessionScope.connect != null }">
-			<a href="${pageContext.request.contextPath}/home"> Se déconnecter</a>
+			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 		</c:if>
 		
 		
@@ -25,7 +25,16 @@
 			<h2>${article.nomArticle}</h2>
 			<p>Prix : ${article.prixVente}</p>
 			<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-			<p>Vendeur : ${article.pseudo}</p>
+			
+			<p> Vendeur : 
+			<c:if test="${sessionScope.connect == null}">
+				${article.pseudo} 
+			</c:if>
+			
+			<c:if test="${sessionScope.connect != null}">
+				<a href="${pageContext.request.contextPath}/profil?pseudo=${article.pseudo}" >${article.pseudo}</a>
+			</c:if>
+			</p>
 		</c:forEach>
 		
 	</body>

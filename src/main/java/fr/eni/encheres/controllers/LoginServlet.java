@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
 		
 		if( rd != null)

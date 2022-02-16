@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bo.Article;
@@ -40,6 +41,12 @@ public class Accueil extends HttpServlet {
 			//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
 			articlesAvailable = articleMgr.getArticlesAvailable();
 			request.setAttribute("listeArticles", articlesAvailable);
+		}
+		
+		if( request.getParameter("param") != null)
+		{
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			session.removeAttribute("connect");
 		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs

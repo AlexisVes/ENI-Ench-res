@@ -73,6 +73,26 @@ public class UserManager {
 		return false;
 	}
 
+	public User searchUser(String pseudo) throws BLLException
+	{
+		User user = null;
+		try {
+
+			//Si il éxiste bien un utilisateur avec ce pseudo
+			if(userDAO.getUser(pseudo) != null) 
+			{
+				user = userDAO.getUser(pseudo);
+
+			}
+		} 
+		catch (DALException e) 
+		{
+			BLLException exception = new BLLException();
+			exception.addMessage("Le pseudo rentré ne correspond à aucun utilisateurs");
+			throw exception;
+		}
+		return user;
+	}
 
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
 							String codePostal, String ville, String password) throws BLLException{
