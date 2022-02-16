@@ -73,6 +73,7 @@ public class UserManager {
 		return false;
 	}
 
+
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
 							String codePostal, String ville, String password) throws BLLException{
 
