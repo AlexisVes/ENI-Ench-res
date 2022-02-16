@@ -36,6 +36,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			
 			while(rs.next())
 			{	
+				System.out.println("ara");
 					articleCourant = new Article();
 					articleCourant.setNomArticle(rs.getString("nom_article"));
 					articleCourant.setDescription(rs.getString("description"));
