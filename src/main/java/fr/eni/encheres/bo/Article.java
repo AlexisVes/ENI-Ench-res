@@ -15,9 +15,6 @@ public class Article {
 	private int noUtilisateur;
 	
 	
-	
-	
-
 	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int prixInitial, int prixVente, String etatVente, int noCategorie,
 			int noUtilisateur) {
