@@ -37,11 +37,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			while(rs.next())
 			{
 				System.out.println("are");
-				if (idCurrentArticle != rs.getInt("no_article")) 
+				if (idCurrentArticle != rs.getInt("no_utilisateur")) 
 					
 				{
 					articleCourant = new Article();
-					articleCourant.setNoArticle(rs.getInt("no_article"));
+//					articleCourant.setNoArticle(rs.getInt("no_article"));
 					articleCourant.setNomArticle(rs.getString("nom_article"));
 					articleCourant.setDescription(rs.getString("description"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
@@ -50,7 +50,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					articleCourant.setPrixVente(rs.getInt("prix_vente"));
 					articleCourant.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					articleCourant.setNoCategorie(rs.getInt("no_categorie"));
-					idCurrentArticle = rs.getInt("no_article");
+//					idCurrentArticle = rs.getInt("no_article");
 					lesArticlesExtraits.add(articleCourant);
 				}
 			}
