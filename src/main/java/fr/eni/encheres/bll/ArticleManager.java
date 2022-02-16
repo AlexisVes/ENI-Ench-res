@@ -1,6 +1,7 @@
 package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.dal.ArticleDAO;
@@ -56,16 +57,23 @@ public class ArticleManager {
 				// TODO Auto-generated catch block
 				e.printStackTrace( );
 			}
+			
+			int cpt = 0;
+			List<Article> articleOnSell = new ArrayList<>();
 			//On retire les articles pour lesquelles la date de fin d'enchère est terminée
 			for( Article article : articles)
 			{
-				if( article.getDateFinEncheres().compareTo(LocalDate.now()) <= 0 )
+				System.out.println(article.getDateFinEncheres().compareTo(LocalDate.now()));
+				
+				if( article.getDateFinEncheres().compareTo(LocalDate.now()) > 0 )
 				{
-					articles.remove(article);
+					articleOnSell.add(article);
 				}
+			
 			}
 			
-			return articles;
+			return articleOnSell;
+			
 		}
 
 }
