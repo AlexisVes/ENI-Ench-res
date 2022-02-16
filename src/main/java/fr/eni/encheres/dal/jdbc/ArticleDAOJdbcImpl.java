@@ -47,7 +47,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					articleCourant.setPrixInitial(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("prix_vente"));
 					articleCourant.setNoUtilisateur(rs.getInt("no_utilisateur"));
-					articleCourant.setNoCategorie(rs.getInt("no_coategorie"));
+					articleCourant.setNoCategorie(rs.getInt("no_categorie"));
 					idCurrentArticle = rs.getInt("no_article");
 				}
 			}
