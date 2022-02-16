@@ -36,7 +36,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			
 			while(rs.next())
 			{
-
+				System.out.println("are");
 				if (idCurrentArticle != rs.getInt("no_article")) 
 				{
 					articleCourant = new Article();
