@@ -64,7 +64,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return lesArticlesExtraits;
 	}
 }
