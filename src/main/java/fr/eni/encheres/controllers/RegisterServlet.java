@@ -172,12 +172,6 @@ public class RegisterServlet extends HttpServlet {
 			{
 				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/home");
-				
-				if( rd != null)
-				{
-					rd.forward(request, response);
-				}
 			}
 			
 		} 
