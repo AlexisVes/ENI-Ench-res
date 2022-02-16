@@ -177,6 +177,7 @@ public class RegisterServlet extends HttpServlet {
 				if( rd != null)
 				{
 					rd.forward(request, response);
+					return;
 				}
 
 			}

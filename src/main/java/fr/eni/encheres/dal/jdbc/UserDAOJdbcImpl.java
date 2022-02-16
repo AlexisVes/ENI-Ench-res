@@ -63,9 +63,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 	
 	public void insertUser( User user ) throws DALException
 	{
-		Connection cnx = null;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 			//On prepare la requête SQL
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -83,9 +81,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
-			
-			//Si il y a bien eu des lignes affectées		
-			cnx.close();	
+	
 		} 
 		catch (DALException | SQLException e) 
 		{
