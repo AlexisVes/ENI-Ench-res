@@ -17,7 +17,7 @@
 			<h2>${article.nomArticle}</h2>
 			<p>Prix : ${article.prixVente}</p>
 			<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-			<p>Vendeur : A DEFINIR</p>
+			<p>Vendeur : A DEFINIR !</p>
 		</c:forEach>
 		
 	</body>
