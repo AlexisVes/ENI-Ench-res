@@ -113,6 +113,5 @@ public class Article {
 		this.noUtilisateur = noUtilisateur;
 	}
 
-	
 }
 
