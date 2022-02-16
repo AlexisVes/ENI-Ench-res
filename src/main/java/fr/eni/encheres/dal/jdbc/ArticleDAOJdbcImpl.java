@@ -40,7 +40,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					
 				{
 					articleCourant = new Article();
-//					articleCourant.setNomArticle(rs.getString("nom_article"));
+					articleCourant.setNomArticle(rs.getString("nom_article"));
 					articleCourant.setDescription(rs.getString("description"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
 					articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
