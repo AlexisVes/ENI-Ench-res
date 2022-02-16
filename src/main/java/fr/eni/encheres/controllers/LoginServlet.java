@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
 
 /**
@@ -67,25 +68,32 @@ public class LoginServlet extends HttpServlet {
 		
 		// Nous vérifions si les données rentrées par l'utilisateurs correspondent à un utilisateurs dans notre base de données
 		// Si oui on ouvre une session qui correspond à une connection réussie
-		if ( userManager.searchUser(pseudo, password) == true ){
-			
-			HttpSession session = ((HttpServletRequest)request).getSession();
-			session.setAttribute("connect", "connection réussie");
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/accueil.jsp");
-			
-			if( rd != null)
-			{
-				rd.forward(request, response);
+		try {
+			if ( userManager.searchUser(pseudo, password) == true ){
+				
+				HttpSession session = ((HttpServletRequest)request).getSession();
+				session.setAttribute("connect", "connection réussie");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/accueil.jsp");
+				
+				if( rd != null)
+				{
+					rd.forward(request, response);
+				}
+				
 			}
-			
-		}
-		else
+			else
+			{
+				HttpSession session = ((HttpServletRequest)request).getSession();
+				session.setAttribute("connect", "Mauvais pseudo ou mot de passe");
+			}
+		} 
+		catch (BLLException e) 
 		{
-			HttpSession session = ((HttpServletRequest)request).getSession();
-			session.setAttribute("connect", "Mauvais pseudo ou mot de passe");
-			doGet(request, response);
+			request.setAttribute("message", e.getMessages());
 		}
+		
+		doGet(request, response);
 		
 	}
 
