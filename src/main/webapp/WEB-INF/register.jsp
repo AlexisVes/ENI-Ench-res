@@ -41,7 +41,11 @@
 		
 		<input type="submit" value="Valider">
 		
-		<p>${requestScope.message}</p>
+		<c:forEach var="message" items="${requestScope.message}">
+		
+			<p> ${message} </p>
+		
+		</c:forEach>
 
 		
 	</form>
