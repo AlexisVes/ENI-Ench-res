@@ -50,7 +50,9 @@ public class ConnectFilter implements Filter {
 		else 
 		{
 			((HttpServletRequest)request).setAttribute("message", "Vous n'êtes pas connecté");
+			
 			RequestDispatcher rd = ((HttpServletRequest)request).getRequestDispatcher("/home");
+			
 			if(rd != null) 
 			{
 				rd.forward(request, response);
