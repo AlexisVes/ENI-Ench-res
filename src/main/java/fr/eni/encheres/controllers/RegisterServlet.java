@@ -60,8 +60,10 @@ public class RegisterServlet extends HttpServlet {
 			String password = null;
 			boolean echec = false;
 			
+			//On créer une exception pour pouvoir lui attribuer des messages d'erreurs
 			ControllersException exception = new ControllersException();
 			
+			//Si l'utilisateur n'a pas rentré de pseudo, on rajoute une message à notre exception
 			if(!request.getParameter("pseudo").isEmpty())
 			{
 				pseudo = request.getParameter("pseudo");
@@ -69,11 +71,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un pseudo");
-				echec = true;
-
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de nom, on rajoute une message à notre exception
 			if(!request.getParameter("nom").isEmpty())
 			{
 				nom = request.getParameter("nom");
@@ -81,10 +82,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un nom");
-				echec = true;
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de prénom, on rajoute une message à notre exception
 			if(!request.getParameter("prenom").isEmpty())
 			{
 				prenom = request.getParameter("prenom");
@@ -92,10 +93,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un prénom");
-				echec = true;
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de de mail, on rajoute une message à notre exception
 			if(!request.getParameter("email").isEmpty())
 			{
 				email = request.getParameter("email");
@@ -103,10 +104,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un email");
-				echec = true;
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de numéro, on rajoute une message à notre exception
 			if(!request.getParameter("tel").isEmpty())
 			{
 				tel = request.getParameter("tel");
@@ -114,11 +115,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un téléphone");
-				echec = true;
-
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de rue, on rajoute une message à notre exception
 			if(!request.getParameter("rue").isEmpty())
 			{
 				rue = request.getParameter("rue");
@@ -126,11 +126,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer une rue");
-				echec = true;
-
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de code postal, on rajoute une message à notre exception
 			if(!request.getParameter("code_postal").isEmpty())
 			{
 				code_postal = request.getParameter("code_postal");
@@ -138,11 +137,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un code postal");
-				echec = true;
-
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de ville, on rajoute une message à notre exception
 			if( !request.getParameter("ville").isEmpty())
 			{
 				ville = request.getParameter("ville");
@@ -150,11 +148,10 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer une ville");
-				echec = true;
-
 			}
 			
 			
+			//Si l'utilisateur n'a pas rentré de mot de passe, on rajoute une message à notre exception
 			if(request.getParameter("password") != "")
 			{
 				password = request.getParameter("password");
@@ -162,17 +159,18 @@ public class RegisterServlet extends HttpServlet {
 			else
 			{
 				exception.addMessage("Veuillez rentrer un mot de passe");
-				echec = true;
 			}
 			
-			if( echec == false )
-			{
-				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
-			}
 			
+			//Si l'exception contient des messages d'erreurs, nous la jetons
+			// Sinon nous créeons l'utilisateur
 			if( exception.hasErrors())
 			{
 				throw exception;
+			}
+			else
+			{
+				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
 			}
 			
 		} 
