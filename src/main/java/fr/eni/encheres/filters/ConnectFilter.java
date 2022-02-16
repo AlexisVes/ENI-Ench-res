@@ -42,22 +42,15 @@ public class ConnectFilter implements Filter {
 	{
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
-		String connect = null;
 		
 		if(session.getAttribute("connect") != null) 
 		{
-			connect = String.valueOf(session.getAttribute("connect"));
-		}
-		
-		if(connect != null && connect.equals("connect")) 
-		{
-			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}
 		else 
 		{
-			((HttpServletRequest)request).setAttribute("message", "Mot de pass incorrect");
-			RequestDispatcher rd = ((HttpServletRequest)request).getRequestDispatcher("/login.jsp");
+			((HttpServletRequest)request).setAttribute("message", "Vous n'êtes pas connecté");
+			RequestDispatcher rd = ((HttpServletRequest)request).getRequestDispatcher("/home");
 			if(rd != null) 
 			{
 				rd.forward(request, response);
