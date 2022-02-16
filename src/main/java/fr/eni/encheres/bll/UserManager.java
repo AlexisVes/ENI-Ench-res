@@ -32,14 +32,16 @@ public class UserManager {
 	
 	private UserDAO userDAO;
 	
+	
 	/**
 	 * 
 	 * @param pseudo : Le pseudo rentré par l'utilisateur dans la tentative de connexion
 	 * @param password : Le mot de passe rentré par l'utilisateur dans la tentative de connexion
 	 * @return un booléen true si les données rentrées par l'utilisateur correspondent à
 	 * un utilisateur dans notre base de données
+	 * @throws BLLException 
 	 */
-	public boolean searchUser(String pseudo, String password)
+	public boolean searchUser(String pseudo, String password) throws BLLException
 	{
 		User user = null;
 		try {
@@ -54,11 +56,19 @@ public class UserManager {
 				{     
 					return true;
 				}
+				else
+				{
+					BLLException exception = new BLLException();
+					exception.addMessage("Le mot de passe rentré ne correspond pas au nom d'utilisateur");
+					throw exception;
+				}
 			}
 		} 
 		catch (DALException e) 
 		{
-			e.printStackTrace();
+			BLLException exception = new BLLException();
+			exception.addMessage("Le pseudo rentré ne correspond à aucun utilisateurs");
+			throw exception;
 		}
 		return false;
 	}
