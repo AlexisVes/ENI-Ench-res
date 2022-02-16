@@ -8,9 +8,10 @@ public class Article {
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
-	private int miseAPrix;
+	private int prixInitial;
 	private int prixVente;
 	private String etatVente;
+	private int noCategorie;
 	
 	public Article(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 			int miseAPrix, int prixVente) {
@@ -19,7 +20,7 @@ public class Article {
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
+		this.prixInitial = miseAPrix;
 		this.prixVente = prixVente;
 	}
 
@@ -64,11 +65,11 @@ public class Article {
 	}
 
 	public int getMiseAPrix() {
-		return miseAPrix;
+		return prixInitial;
 	}
 
 	public void setMiseAPrix(int miseAPrix) {
-		this.miseAPrix = miseAPrix;
+		this.prixInitial = miseAPrix;
 	}
 
 	public int getPrixVente() {
@@ -85,6 +86,14 @@ public class Article {
 
 	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
+	}
+
+	public int getPrixInitial() {
+		return prixInitial;
+	}
+
+	public int getNoCategorie() {
+		return noCategorie;
 	}
 	
 	
