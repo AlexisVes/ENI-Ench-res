@@ -14,14 +14,28 @@ import fr.eni.encheres.dal.DALException;
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SELECT_ARTICLE = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS;";
 	
+	
 	public List<Article> getArticles() throws DALException{
+		
+		
 		List<Article> lesArticlesExtraits = new ArrayList<Article>();
-		try (Connection cnx = ConnectionProvider.getConnection(); Statement rqt = cnx.createStatement();){
+		
+		
+		try {
+				
+			
+			Connection cnx = ConnectionProvider.getConnection();		
+				
+			Statement rqt = cnx.createStatement();
+			
 			ResultSet rs = rqt.executeQuery(SELECT_ARTICLE);
 			int idCurrentArticle = 0;
 			Article articleCourant = null;
+			
+			
 			while(rs.next())
 			{
+				System.out.println("coucou");
 				if (idCurrentArticle != rs.getInt("no_article")) 
 				{
 					articleCourant = new Article();
@@ -37,6 +51,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					idCurrentArticle = rs.getInt("no_article");
 				}
 			}
+			
+			cnx.close();
 		} catch (SQLException e) {
 			//propager une exception personnalisée
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
