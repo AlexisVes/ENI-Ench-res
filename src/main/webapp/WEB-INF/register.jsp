@@ -7,10 +7,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>Mon profil</title>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	</head>
 <body>
+	<h1>Mon Profil</h1>
 	<form action="${pageContext.request.contextPath}/register" method="Post" >
 		
 		<label for="pseudo"> Votre pseudo :</label>
@@ -41,6 +42,8 @@
 		<input type="text" name="ville" placeholder="Votre ville">
 		
 		<input type="submit" value="Valider">
+		
+		<a href="${pageContext.request.contextPath}/home">Annuler</a>
 		
 		<c:if test="${requestScope.message != null }">
 			<p class="error"> Les erreurs sont les suivantes: </p>

@@ -19,7 +19,7 @@
 		</c:if>
 		
 		
-		<h1>Articles disponibles à la vente</h1>
+		<h1>Liste des enchères</h1>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
 			<h2>${article.nomArticle}</h2>
