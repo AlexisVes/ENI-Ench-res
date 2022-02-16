@@ -15,7 +15,7 @@
 		
 		
 		<c:if test="${sessionScope.connect != null }">
-			<a href="${pageContext.request.contextPath}/login"> Se déconnecter</a>
+			<a href="${pageContext.request.contextPath}/home%"> Se déconnecter</a>
 		</c:if>
 		
 		
