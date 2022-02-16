@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String pseudo = "";
 		
+		//Si l'utilisateur a bien rentré un pseudo, nous l'assimilons à une variable pseudo
 		if ( request.getParameter("pseudo") != null || request.getParameter("pseudo") != "") {
 			
 			pseudo = request.getParameter("pseudo");
@@ -57,12 +58,15 @@ public class LoginServlet extends HttpServlet {
 		
 		String password = "";
 		
+		//Si l'utilisateur a bien rentré un mot de passe, nous l'assimilons à une variable password
 		if ( request.getParameter("password") != null || request.getParameter("password") != "") {
 			
 			password = request.getParameter("password");
 			
 		}
 		
+		// Nous vérifions si les données rentrées par l'utilisateurs correspondent à un utilisateurs dans notre base de données
+		// Si oui on ouvre une session qui correspond à une connection réussie
 		if ( userManager.searchUser(pseudo, password) == true ){
 			
 			HttpSession session = ((HttpServletRequest)request).getSession();
