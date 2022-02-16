@@ -85,7 +85,6 @@ public class UserDAOJdbcImpl implements UserDAO{
 		} 
 		catch (DALException | SQLException e) 
 		{
-			System.out.println(e.getMessage());
 			
 			if( e.getMessage().contains("UK_email"))
 			{

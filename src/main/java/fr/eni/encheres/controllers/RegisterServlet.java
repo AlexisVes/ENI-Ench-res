@@ -185,12 +185,10 @@ public class RegisterServlet extends HttpServlet {
 		} 
 		catch (BLLException  e) 
 		{	
-			System.out.println(e.getMessages());
 			request.setAttribute("message", e.getMessages());
 		}
 		catch ( ControllersException e)
 		{
-			System.out.println(e.getMessages());
 			request.setAttribute("message", e.getMessages());
 		}
 		

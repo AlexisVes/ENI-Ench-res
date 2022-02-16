@@ -48,7 +48,6 @@ public class ArticleManager {
 			
 			//Récupération de tout les articles dans la DAO
 			try {
-				System.out.println(articleDAO.getArticles() + "articlemanager");
 				if( articleDAO.getArticles() != null )
 				{
 					articles = articleDAO.getArticles();
