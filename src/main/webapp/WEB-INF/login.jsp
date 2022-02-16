@@ -26,7 +26,12 @@
 		
 		</c:if>
 		
-		<p> ${requestScope.message}</p>
+		<c:forEach var="message" items="${requestScope.message}">
+		
+		<p>${message}</p>
+		
+		</c:forEach>
+
 		
 		<p>
 			${sessionScope.connect}
