@@ -9,7 +9,6 @@ public class BLLException extends Exception
 {
 	private List<String> messages;
 	
-	
 	public BLLException(){
 		super();
 		messages = new ArrayList<String>();

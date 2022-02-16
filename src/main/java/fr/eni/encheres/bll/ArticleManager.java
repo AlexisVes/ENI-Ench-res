@@ -1,5 +1,7 @@
 package fr.eni.encheres.bll;
 
+import java.time.LocalDate;
+
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UserDAO;
@@ -16,7 +18,7 @@ public class ArticleManager {
 			 */
 			//avisDAO = new AvisDAOJdbcImpl();
 				try {
-					userDAO = DAOFactory.createDAO("JDBC");
+					articleDAO = DAOFactory.createDAO("JDBC");
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -30,8 +32,27 @@ public class ArticleManager {
 			return instance;
 		}
 		
-		private UserDAO userDAO;
+		private ArticleDAO articleDAO;
 		
-		public List<Article> 
+		public List<Article> getArticles()
+		{
+			List<Article> articles;
+			
+			if( articleDAO.getArticles() != null )
+			{
+				articles = articleDAO.getArticles();
+			}
+			
+			for( Article article : articles)
+			{
+				if( article.getDateFinEncheres <= LocalDate.now() )
+				{
+					articles.remove(article);
+				}
+			}
+			
+			return articles;
+			
+		}
 
 }
