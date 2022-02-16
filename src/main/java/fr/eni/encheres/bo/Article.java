@@ -15,8 +15,6 @@ public class Article {
 	private int noUtilisateur;
 	
 	
-	
-	
 	public Article() {
 		super();
 	}

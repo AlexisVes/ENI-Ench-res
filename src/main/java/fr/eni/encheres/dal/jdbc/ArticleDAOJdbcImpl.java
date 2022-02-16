@@ -35,9 +35,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			
 			
 			while(rs.next())
-			{
-				System.out.println("are");
-		
+			{	
 					articleCourant = new Article();
 					articleCourant.setNomArticle(rs.getString("nom_article"));
 					articleCourant.setDescription(rs.getString("description"));
@@ -47,8 +45,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					articleCourant.setPrixVente(rs.getInt("prix_vente"));
 					articleCourant.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					articleCourant.setNoCategorie(rs.getInt("no_categorie"));
-					lesArticlesExtraits.add(articleCourant);
-				
+					lesArticlesExtraits.add(articleCourant);	
 			}
 			
 		} catch (SQLException e) {
