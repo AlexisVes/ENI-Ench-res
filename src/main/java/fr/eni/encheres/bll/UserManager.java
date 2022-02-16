@@ -32,15 +32,24 @@ public class UserManager {
 	
 	private UserDAO userDAO;
 	
+	/**
+	 * 
+	 * @param pseudo : Le pseudo rentré par l'utilisateur dans la tentative de connexion
+	 * @param password : Le mot de passe rentré par l'utilisateur dans la tentative de connexion
+	 * @return un booléen true si les données rentrées par l'utilisateur correspondent à
+	 * un utilisateur dans notre base de données
+	 */
 	public boolean searchUser(String pseudo, String password)
 	{
 		User user = null;
 		try {
 
+			//Si il éxiste bien un utilisateur avec ce pseudo
 			if(userDAO.getUser(pseudo) != null) 
 			{
 				user = userDAO.getUser(pseudo);
 
+				//On compare le mot de passe qu'on a en base de données, et celui qui a été rentré
 				if(password.equals(user.getPassword()))
 				{     
 					return true;
@@ -54,6 +63,7 @@ public class UserManager {
 		return false;
 	}
 
+	
 	public void createUser(	String pseudo, String nom, String prenom, String email, String tel, String rue,
 							String codePostal, String ville, String password) throws BLLException{
 
