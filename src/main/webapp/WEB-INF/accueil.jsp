@@ -9,7 +9,15 @@
 	</head>
 	<body>
 		
-		<a href="${pageContext.request.contextPath}/login"> Se connecter</a>
+		<c:if test="${sessionScope.connect == null}">
+			<a href="${pageContext.request.contextPath}/login"> Se connecter</a>
+		</c:if>
+		
+		
+		<c:if test="${sessionScope.connect != null }">
+			<a href="${pageContext.request.contextPath}/login"> Se déconnecter</a>
+		</c:if>
+		
 		
 		<h1>Articles disponibles à la vente</h1>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
