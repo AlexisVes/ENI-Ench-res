@@ -34,15 +34,21 @@ public class ArticleManager {
 		
 		private ArticleDAO articleDAO;
 		
-		public List<Article> getArticles()
+		/**
+		 * Récupération grâce à la DAO de tous les articles
+		 * @return on retourne dans une liste tout les articles encore en ventee
+		 */
+		public List<Article> getArticlesAvailable()
 		{
 			List<Article> articles;
 			
+			//Récupération de tout les articles dans la DAO
 			if( articleDAO.getArticles() != null )
 			{
 				articles = articleDAO.getArticles();
 			}
 			
+			//On retire les articles pour lesquelles la date de fin d'enchère est terminée
 			for( Article article : articles)
 			{
 				if( article.getDateFinEncheres <= LocalDate.now() )
