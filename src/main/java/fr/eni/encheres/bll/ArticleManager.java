@@ -68,7 +68,7 @@ public class ArticleManager {
 				if( article.getDateFinEncheres().compareTo(LocalDate.now()) > 0 )
 				{
 					articleOnSell.add(article);
-				}
+				} 
 			
 			}
 			
