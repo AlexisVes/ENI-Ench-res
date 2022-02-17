@@ -14,7 +14,7 @@
 <a href="${pageContext.request.contextPath}/home" ><img src="../img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 
 	
-	<form action="${pageContext.request.contextPath}/connect/update_profil" method="post">
+	<form action="${pageContext.request.contextPath}/connect/update_profil" method="post" class="grid">
 	
 		<label for="pseudo"> Votre pseudo :</label>
 		<input type="text" name="pseudo" value="${requestScope.userProfil.pseudo}">
@@ -59,7 +59,6 @@
 		
 		</c:forEach>
 		
-	
 	</form>
 
 	<%@ include file="/WEB-INF/fragments/footer.jspf"%>
