@@ -18,6 +18,10 @@
 			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 		</c:if>
 		
+		<c:if test="${sessionScope.connect != null }">
+			<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
+		</c:if>
+		
 		<h2>Liste des enchères</h2>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
