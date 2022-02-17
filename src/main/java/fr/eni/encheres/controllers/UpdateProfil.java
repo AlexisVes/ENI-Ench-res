@@ -65,9 +65,9 @@ public class UpdateProfil extends HttpServlet {
 			
 			if( verification )
 			{
-		
+
 				User userCredit = userManager.searchUser(request.getParameter("pseudo"));
-				
+
 				String pseudo = null;
 				String nom = null;
 				String prenom = null;
@@ -79,7 +79,6 @@ public class UpdateProfil extends HttpServlet {
 				String password = null;
 				int userId = userCredit.getUserId();
 				int credit = userCredit.getCredit();
-				
 				
 				
 				//On créer une exception pour pouvoir lui attribuer des messages d'erreurs
@@ -205,7 +204,6 @@ public class UpdateProfil extends HttpServlet {
 					}
 
 				}
-				
 				
 			}
 			
