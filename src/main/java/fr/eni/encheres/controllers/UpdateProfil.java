@@ -208,7 +208,7 @@ public class UpdateProfil extends HttpServlet {
 		} catch (BLLException e) {
 			request.setAttribute("message", e.getMessages());
 		} catch (ControllersException e) {
-			request.setAttribute("message", e.getMessages());
+			request.setAttribute("message", e.getMessages() );
 		}
 		
 	}

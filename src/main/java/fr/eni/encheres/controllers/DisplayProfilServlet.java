@@ -50,7 +50,7 @@ public class DisplayProfilServlet extends HttpServlet {
 		
 		if( rd != null)
 		{
-			rd.forward(request, response);
+			rd.forward(request, response );
 		}
 		
 	}
