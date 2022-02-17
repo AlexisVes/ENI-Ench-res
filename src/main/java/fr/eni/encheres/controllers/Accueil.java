@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bo.Article;
 
 /**
@@ -29,6 +30,7 @@ public class Accueil extends HttpServlet {
     }
     
     ArticleManager articleMgr = ArticleManager.getInstance();
+    CategorieManager categorieMgr = CategorieManager.getInstance();
     List<Article> articlesAvailable;
 
 	/**
@@ -48,6 +50,10 @@ public class Accueil extends HttpServlet {
 			HttpSession session = ((HttpServletRequest)request).getSession();
 			session.removeAttribute("connect");
 		}
+		
+		request.setAttribute("listeCategories", categorieMgr.getCategories());
+		
+		;
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");

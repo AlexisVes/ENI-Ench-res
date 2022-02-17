@@ -1,8 +1,10 @@
 package fr.eni.encheres.bll;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.dal.CategorieDAO;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UserDAO;
@@ -19,7 +21,7 @@ public class CategorieManager {
 		 */
 		//avisDAO = new AvisDAOJdbcImpl();
 			try {
-				userDAO = DAOFactory.createUserDAO("JDBC");
+				categorieDAO = DAOFactory.createCategorieDAO("JDBC");
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -33,13 +35,22 @@ public class CategorieManager {
 		return instance;
 	}
 	
-	private UserDAO userDAO;
+	private CategorieDAO categorieDAO;
 	
 	public List<Categorie> getCategories(){
 		
-		//userDao.getC
+		List<Categorie> categories = new ArrayList<Categorie>();
 		
-		return null;
+		try {
+			
+			categories = categorieDAO.getCategories();
+			
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return categories;
 	}
 	
 }
