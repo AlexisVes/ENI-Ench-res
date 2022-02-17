@@ -11,7 +11,7 @@
 <body>
 <a href="${pageContext.request.contextPath}/home" ><img src="${pageContext.request.contextPath}/img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 <h2>Nouvelle vente</h2>
-<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil}" class="grid">
+<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.pseudo}" class="grid">
 
 	<label for="article"> Votre pseudo :</label>
 	<input type="text" name="article">
@@ -37,6 +37,7 @@
 
 	<label for="finEnchere"> Fin de l'enchère :</label>
 	<input type="date" name="finEnchere">
+	
 	
 	<h2>Retrait</h2>
 	<label for="rue"> Rue :</label>
