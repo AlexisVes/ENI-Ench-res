@@ -197,6 +197,8 @@ public class UpdateProfil extends HttpServlet {
 
 					RequestDispatcher rd = request.getRequestDispatcher("/home");
 					
+					request.setAttribute("confirmation", "La modification demandée a bien été effectuée");
+					
 					if( rd != null)
 					{
 						rd.forward(request, response);

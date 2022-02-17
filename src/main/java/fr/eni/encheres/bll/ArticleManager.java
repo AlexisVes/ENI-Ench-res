@@ -83,7 +83,12 @@ public class ArticleManager {
 				throw exception;
 			}
 			
-			articleDAO.insertArticle(article);
+			try {
+				articleDAO.insertArticle(article);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 }

@@ -27,6 +27,7 @@
 			
 		</nav>
 		
+		<p class="jaune"> ${requestScope.confirmation } </p>
 		
 		<h2>Liste des enchères</h2>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
