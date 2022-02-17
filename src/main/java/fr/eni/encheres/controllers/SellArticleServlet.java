@@ -91,12 +91,14 @@ public class SellArticleServlet extends HttpServlet {
 		String ville = request.getParameter("ville");
 		
 		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie);
-		int noArticle = articleManager.getArticle(article.getNomArticle()).getNoArticle();
-		
-		Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
 		
 		try {
 			articleManager.vendreArticle(article);
+			
+			int noArticle = articleManager.getArticle(nom).getNoArticle();
+			
+			Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
+			
 			retraitMgr.insertRetrait(retrait);
 		} catch (BLLException e) {
 			

@@ -21,9 +21,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 												+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?);";
-	private static final String SELECT_ARTICLE = 	"SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, no_utilisateur "
-													+ "FROM ARTICLES_VENDUS"
-													+ "WHERE nom_article = ?";
+	private static final String SELECT_ARTICLE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, no_utilisateur \r\n"
+												+ "FROM ARTICLES_VENDUS \r\n"
+												+ "WHERE nom_article = ?;";
 	
 	
 	public List<Article> getArticles() throws DALException{
@@ -112,10 +112,12 @@ Article articleBDD = null;
 			cnx = ConnectionProvider.getConnection();		
 				
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_ARTICLE);
-			
+
 			rqt.setString(1, nom);
 			
+			
 			ResultSet rs = rqt.executeQuery();
+			
 			
 			if(rs != null) {
 				rs.next();

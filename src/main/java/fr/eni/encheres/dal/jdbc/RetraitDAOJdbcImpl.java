@@ -29,7 +29,6 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 			rqt.setString(3, retrait.getCodePostal());
 			rqt.setString(4, retrait.getVille());
 
-			
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 	
