@@ -9,14 +9,15 @@
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	</head>
 	<body>
+
 		<h1>ENI-Enchères</h1>
 		
 		<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay"></a>
 		
+
 		<c:if test="${sessionScope.connect == null}">
-			<a href="${pageContext.request.contextPath}/login"> Se connecter</a>
+			<a href="${pageContext.request.contextPath}/login">S'inscrire - Se connecter</a>
 		</c:if>
-		
 		
 		<c:if test="${sessionScope.connect != null }">
 			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
@@ -43,7 +44,6 @@
 			</c:if>
 			</p>
 		</c:forEach>
-		
 		<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 	</body>
 </html>
