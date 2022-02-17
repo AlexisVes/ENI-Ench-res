@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
 
 /**
@@ -33,7 +34,12 @@ public class DeleteUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		userManager.deleteUser(request.getParameter("utilisateur"));
+		try {
+			userManager.deleteUser(request.getParameter("utilisateur"));
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 				RequestDispatcher rd = request.getRequestDispatcher("/home");
