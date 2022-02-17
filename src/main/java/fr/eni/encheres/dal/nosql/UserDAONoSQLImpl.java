@@ -18,4 +18,10 @@ public class UserDAONoSQLImpl implements UserDAO{
 		
 	}
 
+	@Override
+	public void updateUser(User user) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

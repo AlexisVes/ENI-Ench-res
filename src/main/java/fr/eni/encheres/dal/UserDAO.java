@@ -6,5 +6,7 @@ public interface UserDAO {
 	User getUser(String pseudo) throws DALException;
 	
 	void insertUser(User user) throws DALException;
+	
+	void updateUser(User user) throws DALException;
 }
 
