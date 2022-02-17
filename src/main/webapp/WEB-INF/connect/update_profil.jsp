@@ -47,7 +47,9 @@
 		<label for="ville"> Votre crédit :</label>
 		<input type="text" name="ville" value="${requestScope.userProfil.credit}" disabled="disabled">
 		
-		<input type="submit" value="Valider">
+		<input type="submit" value="Modifier profil">
+		
+		<a href="${pageContext.request.contextPath}/connect/delete_user?pseudo=${requestScope.userProfil.pseudo}"> Supprimer mon compte </a>
 	
 		<c:forEach var="message" items="${requestScope.message}">
 		
