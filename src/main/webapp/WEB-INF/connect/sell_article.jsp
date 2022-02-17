@@ -11,7 +11,7 @@
 <body>
 <a href="${pageContext.request.contextPath}/home" ><img src="${pageContext.request.contextPath}/img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 <h2>Nouvelle vente</h2>
-<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.pseudo}" class="grid">
+<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.userId}" class="grid" method="post">
 
 	<label for="article"> Article :</label>
 	<input type="text" name="article">
