@@ -22,7 +22,7 @@
 
 <c:if test="${sessionScope.connect eq requestScope.userProfil.pseudo}">
 
-	<a href=""> Modifier </a>
+	<a href="${pageContext.request.contextPath}/update_profil"> Modifier </a>
 	
 </c:if>
 
