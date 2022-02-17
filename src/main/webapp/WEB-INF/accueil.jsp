@@ -8,7 +8,7 @@
 		<title>Accueil</title>
 	</head>
 	<body>
-		
+		<h1>ENI-Enchères</h1>
 		<c:if test="${sessionScope.connect == null}">
 			<a href="${pageContext.request.contextPath}/login"> Se connecter</a>
 		</c:if>
@@ -18,10 +18,10 @@
 			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 		</c:if>
 		
-		<h1>Liste des enchères</h1>
+		<h2>Liste des enchères</h2>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
-			<h2>${article.nomArticle}</h2>
+			<h3>${article.nomArticle}</h3>
 			<p>Prix : ${article.prixVente}</p>
 			<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
 			
