@@ -37,7 +37,7 @@ public class CategorieManager {
 	
 	public List<Categorie> getCategories(){
 		
-		userDao.getC
+		//userDao.getC
 		
 		return null;
 	}
