@@ -8,4 +8,6 @@ public interface ArticleDAO {
 	List<Article> getArticles() throws DALException;
 	
 	void insertArticle(Article article) throws DALException;
+	
+	Article getArticle( String nom ) throws DALException;
 }

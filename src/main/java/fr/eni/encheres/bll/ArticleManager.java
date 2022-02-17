@@ -90,5 +90,19 @@ public class ArticleManager {
 				e.printStackTrace();
 			}
 		}
+		
+		public Article getArticle( String nom )
+		{
+			
+			Article article = null;
+			
+			try {
+				article =  articleDAO.getArticle(nom);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return article;
+		}
 
 }

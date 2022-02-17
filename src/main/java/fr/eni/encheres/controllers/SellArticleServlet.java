@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bll.UserManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.User;
 
 /**
@@ -35,6 +37,7 @@ public class SellArticleServlet extends HttpServlet {
     UserManager userManager = UserManager.getInstance();
     ArticleManager articleManager = ArticleManager.getInstance();
     CategorieManager categorieMgr = CategorieManager.getInstance();
+    RetraitManager retraitMgr = RetraitManager.getInstance();
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -81,10 +84,20 @@ public class SellArticleServlet extends HttpServlet {
 		
 		int userID = Integer.parseInt(request.getParameter("user"));
 		
+		String rue = request.getParameter("rue");
+		
+		String codePostal = request.getParameter("codePostal");
+		
+		String ville = request.getParameter("ville");
+		
 		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie);
+		int noArticle = articleManager.getArticle(article.getNomArticle()).getNoArticle();
+		
+		Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
 		
 		try {
 			articleManager.vendreArticle(article);
+			retraitMgr.insertRetrait(retrait);
 		} catch (BLLException e) {
 			
 			request.setAttribute("message", e.getMessages());
