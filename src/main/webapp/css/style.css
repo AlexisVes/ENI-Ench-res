@@ -3,3 +3,12 @@
 .error{
 	color: red;
 }
+
+body{
+	background-color: black;
+	color : white;
+}
+
+footer.footer{
+	background-color: #48596f;
+}
