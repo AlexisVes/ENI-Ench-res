@@ -13,7 +13,6 @@
 			<a href="${pageContext.request.contextPath}/login">S'inscrire - Se connecter</a>
 		</c:if>
 		
-		
 		<c:if test="${sessionScope.connect != null }">
 			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 		</c:if>
