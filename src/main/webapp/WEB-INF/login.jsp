@@ -13,7 +13,7 @@
 	</head>
 	<body>
 	
-	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay"></a>
+	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" height="200px" width="auto" alt="logo enibay"></a>
 	
 		<c:if test="${sessionScope.connect == null || sessionScope.connect eq 'Mauvais pseudo ou mot de passe'}">
 		

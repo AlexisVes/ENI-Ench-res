@@ -12,7 +12,7 @@
 	</head>
 <body>
 
-	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay"></a>
+	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" height="200px" width="auto" alt="logo enibay"></a>
 
 	<h1>Mon Profil</h1>
 	<form action="${pageContext.request.contextPath}/register" method="Post" >
