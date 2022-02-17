@@ -26,7 +26,6 @@
 				<input type="submit" value="Connexion">
 		
 			</form>
-		
 		</c:if>
 		
 		<c:forEach var="message" items="${requestScope.message}">
