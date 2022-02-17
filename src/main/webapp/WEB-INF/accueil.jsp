@@ -19,11 +19,9 @@
 				</c:if>
 				
 				<c:if test="${sessionScope.connect != null }">
-					<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
-				</c:if>
-				
-				<c:if test="${sessionScope.connect != null }">
+				<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
 					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
+					<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 				</c:if>
 			</div>
 			
