@@ -12,11 +12,7 @@
 	</head>
 <body>
 
-<<<<<<< HEAD
 	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
-=======
-	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" height="200px" width="auto" alt="logo enibay"></a>
->>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 
 	<h1>Mon Profil</h1>
 	<form action="${pageContext.request.contextPath}/register" method="Post" >
