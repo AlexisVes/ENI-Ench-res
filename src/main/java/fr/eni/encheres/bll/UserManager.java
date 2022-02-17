@@ -79,7 +79,7 @@ public class UserManager {
 		try {
 
 			//Si il éxiste bien un utilisateur avec ce pseudo
-			if(userDAO.getUser(pseudo) != null) 
+			if(userDAO.getUser(pseudo) != null)
 			{
 				user = userDAO.getUser(pseudo);
 
@@ -157,6 +157,16 @@ public class UserManager {
 			BLLException.addMessage(e.getMessage());
 			throw BLLException;
 		}
+	}
+	
+	public void updateUser(User user) throws BLLException{
+		try {
+			userDAO.updateUser(user);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }
