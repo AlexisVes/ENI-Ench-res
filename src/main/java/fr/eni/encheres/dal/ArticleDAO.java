@@ -6,4 +6,6 @@ import fr.eni.encheres.bo.Article;
 
 public interface ArticleDAO {
 	List<Article> getArticles() throws DALException;
+	
+	void insertArticle(Article article) throws DALException;
 }

@@ -37,7 +37,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			int idCurrentArticle = 0;
 			Article articleCourant = null;
 			
-			
 			while(rs.next())
 			{
 				if (idCurrentArticle != rs.getInt("no_utilisateur")) 
@@ -68,5 +67,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 		}
 		return lesArticlesExtraits;
+	}
+
+
+	@Override
+	public void insertArticle(Article article) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 }
