@@ -32,7 +32,7 @@ a{
 	color: #e1bd29;
 }
 
-.enibay_link:hover {
+a:hover {
 	color: grey;
 }
 
