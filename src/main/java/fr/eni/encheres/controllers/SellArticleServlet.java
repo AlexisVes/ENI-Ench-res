@@ -69,9 +69,9 @@ public class SellArticleServlet extends HttpServlet {
 
 		String description = request.getParameter("description");
 		
-		Int categorie = Integer.parseInt(request.getParameter("categorieSelect"));
+		int categorie = Integer.parseInt(request.getParameter("categorieSelect"));
 		
-		String miseAPrix = request.getParameter("miseAPrix");
+		int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
 		
 		LocalDate debutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
 		
