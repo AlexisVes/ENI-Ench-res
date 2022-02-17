@@ -42,6 +42,8 @@
 			</c:forEach>
 			
 			</select>
+			
+			<input type="submit" value="Rechercher">
 		
 		</form>
 		
