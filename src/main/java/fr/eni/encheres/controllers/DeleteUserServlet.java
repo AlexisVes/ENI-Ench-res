@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.UserManager;
+
 /**
  * Servlet implementation class DeleteUserServlet
  */
@@ -23,13 +25,15 @@ public class DeleteUserServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    UserManager userManager = UserManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		userManager.deleteUser(request.getParameter("utilisateur"));
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 				RequestDispatcher rd = request.getRequestDispatcher("/home");

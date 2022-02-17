@@ -49,7 +49,7 @@
 		
 		<input type="submit" value="Modifier profil">
 		
-		<a href="${pageContext.request.contextPath}/connect/delete_user?pseudo=${requestScope.userProfil.pseudo}"> Supprimer mon compte </a>
+		<a href="${pageContext.request.contextPath}/connect/delete_user?utilisateur=${requestScope.userProfil.pseudo}"> Supprimer mon compte </a>
 	
 		<c:forEach var="message" items="${requestScope.message}">
 		
