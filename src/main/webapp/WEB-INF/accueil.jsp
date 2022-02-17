@@ -31,19 +31,21 @@
 		<h2>Liste des enchères</h2>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
-			<h3>${article.nomArticle}</h3>
-			<p>Prix : ${article.prixVente}</p>
-			<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-			
-			<p> Vendeur : 
-			<c:if test="${sessionScope.connect == null}">
-				${article.pseudo}
-			</c:if>
-			
-			<c:if test="${sessionScope.connect != null}">
-				<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${article.pseudo}" class="enibay_link">${article.pseudo}</a>
-			</c:if>
-			</p>
+			<article>
+				<h3>${article.nomArticle}</h3>
+				<p>Prix : ${article.prixVente}</p>
+				<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
+				
+				<p> Vendeur : 
+				<c:if test="${sessionScope.connect == null}">
+					${article.pseudo}
+				</c:if>
+				
+				<c:if test="${sessionScope.connect != null}">
+					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${article.pseudo}" class="enibay_link">${article.pseudo}</a>
+				</c:if>
+				</p>
+			</article>
 		</c:forEach>
 		<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 	</body>

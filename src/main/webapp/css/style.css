@@ -30,3 +30,10 @@ footer{
 .enibay_link:hover {
 	color: grey;
 }
+
+article{
+	border : 5px solid #e1bd29;
+	padding: 1em;
+	margin-bottom : 2em;
+	width: 20%;
+}
