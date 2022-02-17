@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,12 @@
 <p>Rue :  			${requestScope.userProfil.rue}</p>
 <p>Code Postal :  	${requestScope.userProfil.codePostal}</p>
 <p>Ville :  		${requestScope.userProfil.ville}</p>
+
+<c:if test="${sessionScope.connect eq requestScope.userProfil.pseudo}">
+
+	<a href="${pageContext.request.contextPath}/update_profil"> Modifier </a>
+	
+</c:if>
 
 <a href="${pageContext.request.contextPath}/home">Accueil</a>
 
