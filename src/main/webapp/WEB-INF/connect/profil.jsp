@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" height="200px" width="auto" alt="logo enibay"></a>
+<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 
 <h2>Profil</h2>
 <p>Nom :  			${requestScope.userProfil.nom}</p>
