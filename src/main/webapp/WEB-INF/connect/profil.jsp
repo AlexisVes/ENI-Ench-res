@@ -27,8 +27,6 @@
 	
 </c:if>
 
-<a href="${pageContext.request.contextPath}/home">Accueil</a>
-
 <%@ include file="/WEB-INF/fragments/footer.jspf"%>
 
 </body>
