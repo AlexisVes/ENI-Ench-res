@@ -8,9 +8,8 @@
 		<title>Accueil</title>
 	</head>
 	<body>
-		<h1>ENI-Enchères</h1>
 		<c:if test="${sessionScope.connect == null}">
-			<a href="${pageContext.request.contextPath}/login"> Se connecter</a>
+			<a href="${pageContext.request.contextPath}/login">S'inscrire - Se connecter</a>
 		</c:if>
 		
 		
@@ -39,7 +38,6 @@
 			</c:if>
 			</p>
 		</c:forEach>
-		
 		<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 	</body>
 </html>
