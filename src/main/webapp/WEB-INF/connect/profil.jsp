@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Profil</title>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
 
