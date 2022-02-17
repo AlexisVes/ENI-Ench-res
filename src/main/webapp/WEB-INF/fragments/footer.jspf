@@ -2,5 +2,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <footer>
-	<p>Copyright Alexis VESLIN &copy; - <%=LocalDate.now().getYear() %></p>
+	<p>Copyright Alexis VESLIN ssss&copy; - <%=LocalDate.now().getYear() %></p>
 </footer>
