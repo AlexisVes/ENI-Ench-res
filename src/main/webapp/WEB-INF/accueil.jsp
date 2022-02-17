@@ -9,6 +9,11 @@
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	</head>
 	<body>
+
+		
+		<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay"></a>
+		
+
 		<c:if test="${sessionScope.connect == null}">
 			<a href="${pageContext.request.contextPath}/login">S'inscrire - Se connecter</a>
 		</c:if>
