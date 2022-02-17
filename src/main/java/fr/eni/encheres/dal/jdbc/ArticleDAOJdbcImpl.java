@@ -69,4 +69,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		return lesArticlesExtraits;
 	}
+
+
+	@Override
+	public void insertArticle(Article article) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
 }
