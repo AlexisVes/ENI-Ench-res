@@ -44,7 +44,7 @@ public class SellArticleServlet extends HttpServlet {
 		try {
 			User user = userManager.searchUser(request.getParameter("pseudo"));
 			
-			request.setAttribute("userProfil", user.getUserId());
+			request.setAttribute("userProfil", user);
 			
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
