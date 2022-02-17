@@ -31,7 +31,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		
 		try {
 				
-			
 			cnx = ConnectionProvider.getConnection();		
 				
 			Statement rqt = cnx.createStatement();

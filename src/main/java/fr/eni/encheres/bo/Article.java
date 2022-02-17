@@ -34,6 +34,18 @@ public class Article {
 		this.noCategorie = noCategorie;
 		this.pseudo = pseudo;
 	}
+	
+	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int prixInitial, int noUtilisateur, int noCategorie)
+	{
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.prixInitial = prixInitial;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+	}
 
 	public int getNoArticle() {
 		return noArticle;
