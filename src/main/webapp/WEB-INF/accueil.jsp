@@ -10,7 +10,6 @@
 	</head>
 	<body>
 
-		<h1>ENI-Enchères</h1>
 		
 		<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay"></a>
 		
