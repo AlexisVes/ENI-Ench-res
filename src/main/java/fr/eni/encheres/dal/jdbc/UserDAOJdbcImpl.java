@@ -13,7 +13,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 
 	private static final String INSERT_USER ="INSERT INTO UTILISATEURS ( pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur ) VALUES(?,?,?,?,?,?,?,?,?,100,0)";
 	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
-	private static final String UPDATE_USER ="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE pseudo = ?;";
+	private static final String UPDATE_USER ="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE no_utilisateur = ?;";
 	private static final String DELETE_USER ="DELETE UTILISATEURS WHERE pseudo = ?;";
 
 	@Override
@@ -96,9 +96,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 				throw new DALException("Pseudo déjà existant");
 			}
 
-			
 		}
-		
 		
 	}
 
@@ -121,7 +119,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setString(7, user.getCodePostal());
 			rqt.setString(8, user.getVille());
 			rqt.setString(9, user.getPassword());
-			
+			rqt.setInt(10, user.getUserId());
 			//Éxécution de la requête SQL
 			rqt.executeUpdate();
 			

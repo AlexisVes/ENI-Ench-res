@@ -67,8 +67,6 @@ public class UpdateProfil extends HttpServlet {
 			if( verification )
 			{
 				
-				userVerification.doPost(request, response);
-				
 				String pseudo = null;
 				String nom = null;
 				String prenom = null;
