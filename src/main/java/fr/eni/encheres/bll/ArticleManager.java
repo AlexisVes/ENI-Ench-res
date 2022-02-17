@@ -1,5 +1,6 @@
 package fr.eni.encheres.bll;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.encheres.bo.Article;
@@ -57,6 +58,32 @@ public class ArticleManager {
 			
 			return articles;
 			
+		}
+		
+		public void vendreArticle( Article article ) throws BLLException
+		{
+			
+			//nom < 30, description < 300, dateDébut > dateJour, 
+			BLLException exception = new BLLException();
+			
+			//Vérification du nombre de caractères dans le nom d'articcle (ne doit pas dépasser 30 caractères)
+			if(article.getNomArticle().length() > 30) {
+				exception.addMessage("Le nom de l'article ne doit pas dépasser 30 caractères");
+			}
+			
+			if(article.getDescription().length() > 300) {
+				exception.addMessage("La description ne doit pas dépasser 300 caractères");
+			}
+			
+			if(article.getDateDebutEncheres().compareTo(LocalDate.now()) < 0) {
+				exception.addMessage("La date de début d'enchère ne peut commencer dans le passé");
+			}
+			
+			if(exception.hasErrors()) {
+				throw exception;
+			}
+			
+			articleDAO.insertArticle(article);
 		}
 
 }
