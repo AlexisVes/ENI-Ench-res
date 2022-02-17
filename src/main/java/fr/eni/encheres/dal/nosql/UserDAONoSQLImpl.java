@@ -24,4 +24,10 @@ public class UserDAONoSQLImpl implements UserDAO{
 		
 	}
 
+	@Override
+	public void deleteUser(String pseudo) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

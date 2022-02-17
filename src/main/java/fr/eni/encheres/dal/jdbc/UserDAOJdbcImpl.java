@@ -14,7 +14,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 	private static final String INSERT_USER ="INSERT INTO UTILISATEURS ( pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur ) VALUES(?,?,?,?,?,?,?,?,?,100,0)";
 	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
 	private static final String UPDATE_USER ="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE pseudo = ?;";
-
+	private static final String DELETE_USER ="DELETE UTILISATEURS WHERE pseudo = ?;";
 
 	@Override
 	/**
@@ -104,9 +104,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 
 	@Override
 	public void updateUser(User user) throws DALException {
-		
 		//Établir la connexion avec la bases de données 
-		User userBDD = null;
 		PreparedStatement rqt;
 		
 		//créer la commande 
@@ -125,9 +123,23 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setString(9, user.getPassword());
 			
 			//Éxécution de la requête SQL
-			int numberAffectedLines = rqt.executeUpdate();
+			rqt.executeUpdate();
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteUser(String pseudo) throws DALException {
+		//Établir la connexion avec la bases de données et créer la commande
+		PreparedStatement rqt;
+		try(Connection cnx = ConnectionProvider.getConnection()) {
+			rqt = cnx.prepareStatement(DELETE_USER);
+			//Éxécution de la requête de suppression en SQL
+			rqt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
