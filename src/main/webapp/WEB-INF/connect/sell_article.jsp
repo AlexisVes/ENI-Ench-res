@@ -13,7 +13,7 @@
 <h2>Nouvelle vente</h2>
 <form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.pseudo}" class="grid">
 
-	<label for="article"> Votre pseudo :</label>
+	<label for="article"> Article :</label>
 	<input type="text" name="article">
 
 	<label for="description"> Description :</label>
