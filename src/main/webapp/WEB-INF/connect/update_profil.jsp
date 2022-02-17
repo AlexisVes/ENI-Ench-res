@@ -56,6 +56,7 @@
 			<p class="error"> ${message}</p>
 		
 		</c:forEach>
+		
 	
 	</form>
 
