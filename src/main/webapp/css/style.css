@@ -12,7 +12,7 @@ nav{
 }
 
 .liens-nav{
-	width : 15%;
+	width : 15% ;
 	display: flex;
 	justify-content: space-around;
 }
