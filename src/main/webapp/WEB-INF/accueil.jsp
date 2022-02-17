@@ -13,18 +13,20 @@
 		<nav>
 			<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 		
-
-			<c:if test="${sessionScope.connect == null}">
-				<a href="${pageContext.request.contextPath}/login" class="enibay_link">S'inscrire - Se connecter</a>
-			</c:if>
+			<div class="liens-nav">
+				<c:if test="${sessionScope.connect == null}">
+					<a href="${pageContext.request.contextPath}/login" class="enibay_link">S'inscrire - Se connecter</a>
+				</c:if>
+				
+				<c:if test="${sessionScope.connect != null }">
+					<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
+				</c:if>
+				
+				<c:if test="${sessionScope.connect != null }">
+					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
+				</c:if>
+			</div>
 			
-			<c:if test="${sessionScope.connect != null }">
-				<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
-			</c:if>
-			
-			<c:if test="${sessionScope.connect != null }">
-				<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
-			</c:if>
 		</nav>
 		
 		

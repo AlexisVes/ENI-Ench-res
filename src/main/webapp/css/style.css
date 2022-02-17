@@ -5,8 +5,16 @@
 }
 
 nav{
+	width: 100%;
 	display : flex;
 	align-items : center;
+	justify-content: space-around;
+}
+
+.liens-nav{
+	width : 15%;
+	display: flex;
+	justify-content: space-around;
 }
 
 body{
