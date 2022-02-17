@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
@@ -36,6 +37,10 @@ public class DeleteUserServlet extends HttpServlet {
 		
 		try {
 			userManager.deleteUser(request.getParameter("utilisateur"));
+			
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			session.removeAttribute("connect");
+
 		} catch (BLLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

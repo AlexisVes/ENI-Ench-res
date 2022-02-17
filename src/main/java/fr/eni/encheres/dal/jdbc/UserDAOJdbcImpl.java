@@ -134,6 +134,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 		PreparedStatement rqt;
 		try(Connection cnx = ConnectionProvider.getConnection()) {
 			rqt = cnx.prepareStatement(DELETE_USER);
+			rqt.setString(1, pseudo);
 			//Éxécution de la requête de suppression en SQL
 			rqt.executeUpdate();
 		} catch (SQLException e) {
