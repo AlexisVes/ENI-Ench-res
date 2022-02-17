@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.UserManager;
@@ -32,6 +33,7 @@ public class SellArticleServlet extends HttpServlet {
     }
 
     UserManager userManager = UserManager.getInstance();
+    ArticleManager articleManager = ArticleManager.getInstance();
     CategorieManager categorieMgr = CategorieManager.getInstance();
     
 	/**
@@ -81,7 +83,21 @@ public class SellArticleServlet extends HttpServlet {
 		
 		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie);
 		
-		doGet(request, response);
+		try {
+			articleManager.vendreArticle(article);
+		} catch (BLLException e) {
+			
+			request.setAttribute("message", e.getMessages());
+			
+		}
+		
+		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
+				RequestDispatcher rd = request.getRequestDispatcher("/home");
+					
+				if( rd != null)
+				{
+					rd.forward(request, response);
+				}
 	}
 
 }
