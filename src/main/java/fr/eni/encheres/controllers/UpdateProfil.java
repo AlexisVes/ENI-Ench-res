@@ -77,6 +77,7 @@ public class UpdateProfil extends HttpServlet {
 				String code_postal = null;
 				String ville = null;
 				String password = null;
+				int userId = userCredit.getUserId();
 				int credit = userCredit.getCredit();
 				
 				
@@ -190,7 +191,7 @@ public class UpdateProfil extends HttpServlet {
 				}
 				else
 				{
-					User user = new User(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password, credit, (byte) 0);	
+					User user = new User( userId, pseudo, nom, prenom, email, tel, rue, code_postal, ville, password, credit, (byte) 0);	
 					
 					userManager.updateUser(user);
 
