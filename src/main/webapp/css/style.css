@@ -49,3 +49,20 @@ article:hover{
 	box-shadow : 3px 3px 3px #e1bd29;
 	zoom: 120%;
 }
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.grid input{
+	grid-column:2;
+}
+
+.grid label{
+	grid-column:1;
+}
+
+.grid button{
+	grid-row: 11;
+}
