@@ -28,7 +28,6 @@
 	<a href="${pageContext.request.contextPath}/connect/update_profil?pseudo=${requestScope.userProfil.pseudo}"> Modifier </a>
 	
 </c:if>
-
 <%@ include file="/WEB-INF/fragments/footer.jspf"%>
 
 </body>
