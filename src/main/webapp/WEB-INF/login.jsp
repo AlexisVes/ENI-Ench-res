@@ -40,7 +40,6 @@
 		
 		<a href="${pageContext.request.contextPath}/register">Créer un compte</a>
 		
-	
 		
 	</body>
 	
