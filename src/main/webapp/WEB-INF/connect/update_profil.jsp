@@ -12,7 +12,7 @@
 
 <h2>Modifier profil</h2>
 	
-	<form action="${pageContext.request.contextPath}/connect/update_profil?credit=${requestScope.userProfil.credit}" method="post">
+	<form action="${pageContext.request.contextPath}/connect/update_profil" method="post">
 	
 		<label for="pseudo"> Votre pseudo :</label>
 		<input type="text" name="pseudo" value="${requestScope.userProfil.pseudo}">
