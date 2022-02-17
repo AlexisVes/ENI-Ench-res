@@ -11,7 +11,7 @@
 	<body>
 
 		<nav>
-			<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
+			<a href="${pageContext.request.contextPath}/home" ><img src="${pageContext.request.contextPath}/img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 		
 			<div class="liens-nav">
 				<c:if test="${sessionScope.connect == null}">
