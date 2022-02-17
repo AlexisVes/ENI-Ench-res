@@ -13,7 +13,7 @@ import fr.eni.encheres.dal.DALException;
 
 public class CategorieDAOJdbcImpl implements CategorieDAO{
 	
-	private static final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES;";
+	private static final String SELECT_CATEGORIE = "SELECT no_categorie, libelle FROM CATEGORIES;";
 
 	@Override
 	public List<Categorie> getCategories() throws DALException {
@@ -30,7 +30,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			ResultSet rs = rqt.executeQuery(SELECT_CATEGORIE);
 			
 			while(rs.next()) {
-				Categorie categorieCourant = new Categorie(rs.getString("libelle"));
+				Categorie categorieCourant = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
 				listeCategorie.add(categorieCourant);
 			}
 			
