@@ -15,5 +15,18 @@ body{
 }
 
 footer{
-	color: yellow;
+	color: #e1bd29;
+}
+
+.logo_enibay{
+	width:170px;
+	height: auto;
+}
+.enibay_link{
+	text-decoration: none;
+	color: #e1bd29;
+}
+
+.enibay_link:hover {
+	color: grey;
 }

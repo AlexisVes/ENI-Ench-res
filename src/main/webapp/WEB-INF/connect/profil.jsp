@@ -14,7 +14,6 @@
 <a href="${pageContext.request.contextPath}/home" ><img src="../img/enibay_logo.png" alt="logo enibay"></a>
 
 <h2>Profil</h2>
-
 <p>Nom :  			${requestScope.userProfil.nom}</p>
 <p>Prenom :  		${requestScope.userProfil.prenom}</p>
 <p>Email :  		${requestScope.userProfil.email}</p>

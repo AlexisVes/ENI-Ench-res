@@ -11,7 +11,7 @@
 	<body>
 
 		<nav>
-			<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" height="200px" width="auto" alt="logo enibay"></a>
+			<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 		
 
 			<c:if test="${sessionScope.connect == null}">
@@ -41,7 +41,7 @@
 			</c:if>
 			
 			<c:if test="${sessionScope.connect != null}">
-				<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${article.pseudo}" >${article.pseudo}</a>
+				<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${article.pseudo}" class="enibay_link">${article.pseudo}</a>
 			</c:if>
 			</p>
 		</c:forEach>
