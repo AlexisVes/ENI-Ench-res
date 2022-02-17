@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
 			if ( userManager.searchUser(pseudo, password) == true ){
 				
 				HttpSession session = ((HttpServletRequest)request).getSession();
-				session.setAttribute("connect", "connection réussie");
+				session.setAttribute("connect", pseudo);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/home");
 				
