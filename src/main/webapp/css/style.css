@@ -44,3 +44,8 @@ article{
 	width: 20%;
 	font-family: arial;
 }
+
+article:hover{
+	box-shadow : 5px 5px 5px #e1bd29;
+	zoom: 120%;
+}
