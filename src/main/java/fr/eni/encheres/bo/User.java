@@ -2,7 +2,7 @@ package fr.eni.encheres.bo;
 
 public class User {
 	
-	private int noUtilisateur;
+	private int userId;
 	private String pseudo;
 	private String nom;
 	private String prenom;
@@ -32,20 +32,29 @@ public class User {
 		this.credit = credit;
 		this.admninistrateur = admninistrateur;
 	}
-
-
-
-	public int getNoUtilisateur() {
-		return noUtilisateur;
+	
+	public User(int userId, String pseudo, String nom, String prenom, String email, String tel, String rue,
+			String codePostal, String ville, String password, int credit, byte admninistrateur) {
+		super();
+		this.userId = userId;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.tel = tel;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.password = password;
+		this.credit = credit;
+		this.admninistrateur = admninistrateur;
 	}
 
 
 
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public int getUserId() {
+		return userId;
 	}
-
-
 
 	public String getPseudo() {
 		return pseudo;
@@ -176,10 +185,5 @@ public class User {
 	public void setAdmninistrateur(byte admninistrateur) {
 		this.admninistrateur = admninistrateur;
 	}
-
-	
-	
-	
-	
 
 }

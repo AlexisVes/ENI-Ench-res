@@ -60,13 +60,14 @@ public class UpdateProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			
 			boolean verification = userManager.searchUser(request.getParameter("pseudo"), request.getParameter("password"));
-			
-			
 			
 			if( verification )
 			{
-				
+
+				User userCredit = userManager.searchUser(request.getParameter("pseudo"));
+
 				String pseudo = null;
 				String nom = null;
 				String prenom = null;
@@ -76,7 +77,8 @@ public class UpdateProfil extends HttpServlet {
 				String code_postal = null;
 				String ville = null;
 				String password = null;
-				int credit = 0;
+				int credit = userCredit.getCredit();
+				
 				
 				//On créer une exception pour pouvoir lui attribuer des messages d'erreurs
 				ControllersException exception = new ControllersException();
@@ -179,10 +181,6 @@ public class UpdateProfil extends HttpServlet {
 					exception.addMessage("Veuillez rentrer un mot de passe");
 				}
 				
-				credit= Integer.parseInt(request.getParameter("credit"));
-				
-		
-			
 				
 				//Si l'exception contient des messages d'erreurs, nous la jetons
 				// Sinon nous créeons l'utilisateur
@@ -195,10 +193,17 @@ public class UpdateProfil extends HttpServlet {
 					User user = new User(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password, credit, (byte) 0);	
 					
 					userManager.updateUser(user);
+
+					RequestDispatcher rd = request.getRequestDispatcher("/home");
 					
-					
-					doGet(request, response);
+					if( rd != null)
+					{
+						rd.forward(request, response);
+						return;
+					}
+
 				}
+				
 				
 			}
 			
@@ -206,8 +211,10 @@ public class UpdateProfil extends HttpServlet {
 		} catch (BLLException e) {
 			request.setAttribute("message", e.getMessages());
 		} catch (ControllersException e) {
-			request.setAttribute("message", e.getMessages() );
-		}
+			request.setAttribute("message", e.getMessages());
+		} 
+		
+		doGet(request, response);
 		
 	}
 		
