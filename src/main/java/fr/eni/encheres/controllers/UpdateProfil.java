@@ -173,13 +173,13 @@ public class UpdateProfil extends HttpServlet {
 				
 				
 				//Si l'utilisateur n'a pas rentré de mot de passe, on rajoute une message à notre exception
-				if(request.getParameter("password") != "")
+				if(request.getParameter("new_password") != "")
 				{
-					password = request.getParameter("password");
+					password = request.getParameter("new_password");
 				}
 				else
 				{
-					exception.addMessage("Veuillez rentrer un mot de passe");
+					password = request.getParameter("password");
 				}
 				
 				
