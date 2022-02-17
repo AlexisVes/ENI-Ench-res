@@ -8,5 +8,7 @@ public interface UserDAO {
 	void insertUser(User user) throws DALException;
 	
 	void updateUser(User user) throws DALException;
+	
+	void deleteUser(String pseudo) throws DALException;
 }
 
