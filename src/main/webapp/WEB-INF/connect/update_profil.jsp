@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -56,8 +57,11 @@
 			<p class="error"> ${message}</p>
 		
 		</c:forEach>
+		
 	
 	</form>
+
+	<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 
 </body>
 </html>

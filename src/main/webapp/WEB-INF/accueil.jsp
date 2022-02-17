@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Accueil</title>
+		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<c:if test="${sessionScope.connect == null}">

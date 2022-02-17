@@ -54,8 +54,9 @@
 			<p class="error"> ${message}</p>
 		
 		</c:forEach>
-
 		
 	</form>
+	
+	<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 </body>
 </html>
