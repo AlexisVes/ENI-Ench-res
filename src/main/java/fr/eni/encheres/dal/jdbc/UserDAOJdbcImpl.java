@@ -131,5 +131,4 @@ public class UserDAOJdbcImpl implements UserDAO{
 			e.printStackTrace();
 		}
 	}
-	
 }
