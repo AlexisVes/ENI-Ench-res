@@ -30,6 +30,21 @@
 		<p class="jaune"> ${requestScope.confirmation } </p>
 		
 		<h2>Liste des enchères</h2>
+		
+		<form>
+		
+			<input type="text" name="search" placeholder="Rechercher">
+			
+			<select name="categorie">
+			
+			<c:forEach var="categorie" items="${requestScope.listeCategories}">
+				<option value="${categorie.libelle}"> ${categorie.libelle} </option>
+			</c:forEach>
+			
+			</select>
+		
+		</form>
+		
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
 			<article>
