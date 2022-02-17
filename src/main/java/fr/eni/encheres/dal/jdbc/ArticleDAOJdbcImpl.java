@@ -80,6 +80,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		cnx = ConnectionProvider.getConnection();
 		
 		//on prepare la requête pour ajouter l'article en BDD
-		PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
+		try {
+			PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
