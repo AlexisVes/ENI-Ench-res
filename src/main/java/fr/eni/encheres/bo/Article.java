@@ -13,6 +13,7 @@ public class Article {
 	private String etatVente;
 	private int noCategorie;
 	private String pseudo;
+	private int noUtilisateur;
 	
 	
 	public Article() {
@@ -21,7 +22,7 @@ public class Article {
 
 	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int prixInitial, int prixVente, String etatVente, int noCategorie,
-			int noUtilisateur) {
+			int noUtilisateur, String pseudo) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -32,6 +33,18 @@ public class Article {
 		this.etatVente = etatVente;
 		this.noCategorie = noCategorie;
 		this.pseudo = pseudo;
+	}
+	
+	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int prixInitial, int noUtilisateur, int noCategorie)
+	{
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.prixInitial = prixInitial;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
 	}
 
 	public int getNoArticle() {
@@ -112,6 +125,14 @@ public class Article {
 
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
+	}
+
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	
