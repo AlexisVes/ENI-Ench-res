@@ -17,11 +17,11 @@
 		
 			<form action="${pageContext.request.contextPath}/login" method="Post" >
 		
-				<label for="pseudo"> Votre pseudo :</label>
+				<label for="pseudo">Pseudo :</label>
 				<input type="text" name="pseudo" placeholder="Votre pseudo">
-				<label for="password"> Votre mot de passe :</label>
-				<input type="password" name="password">
-				<input type="submit" value="Valider">
+				<label for="password">Mot de passe :</label>
+				<input type="password" name="password" placeholder="Votre mot de passe">
+				<input type="submit" value="Connexion">
 		
 			</form>
 		
@@ -38,9 +38,8 @@
 			${sessionScope.connect}
 		</p>
 		
-		<a href="${pageContext.request.contextPath}/register"> S'inscrire</a>
+		<a href="${pageContext.request.contextPath}/register">Créer un compte</a>
 		
-	
 		
 	</body>
 	
