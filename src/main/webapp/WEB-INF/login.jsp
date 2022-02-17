@@ -41,8 +41,7 @@
 		
 		<a href="${pageContext.request.contextPath}/register">Créer un compte</a>
 		
-		<%@ include file="/WEB-INF/fragments/footer.jspf"%>
-		
+		<%@ include file="/WEB-INF/fragments/footer.jspf"%>	
 		
 	</body>
 	
