@@ -75,8 +75,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	@Override
 	public void insertArticle(Article article) throws DALException {
 		
-		//on prepare la requête pour ajouter l'article en BDD
-		
+		//on prepare la requête pour ajouter l'article en BDD		
 		try(Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
 			

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.BLLException;
+import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.UserManager;
 
 /**
