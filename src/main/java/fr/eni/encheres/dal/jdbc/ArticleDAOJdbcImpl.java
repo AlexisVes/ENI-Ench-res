@@ -75,11 +75,27 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public void insertArticle(Article article) throws DALException {
-		Connection cnx = null;
-		
-		cnx = ConnectionProvider.getConnection();
 		
 		//on prepare la requête pour ajouter l'article en BDD
-		PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
+		
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
+			
+			//on valorise les paramètres de la requête 
+			rqt.setString(1, article.getNomArticle());
+			rqt.setString(2, article.getDescription());
+			rqt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
+			rqt.setDate(4, java.sql.Date.valueOf(article.getDateFinEncheres()));
+			rqt.setInt(5, article.getPrixInitial());
+			rqt.setInt(6, article.getNoUtilisateur());
+			rqt.setInt(7, article.getNoCategorie());
+			
+			//exécuter la requête vers la BDD
+			rqt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
