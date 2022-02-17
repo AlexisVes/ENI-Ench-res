@@ -99,8 +99,6 @@ public class UserDAOJdbcImpl implements UserDAO{
 		}
 		
 		
-		
-		
 	}
 
 	@Override
