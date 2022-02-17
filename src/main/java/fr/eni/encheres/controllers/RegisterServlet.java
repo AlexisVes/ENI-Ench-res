@@ -58,7 +58,6 @@ public class RegisterServlet extends HttpServlet {
 			String code_postal = null;
 			String ville = null;
 			String password = null;
-			boolean echec = false;
 			
 			//On créer une exception pour pouvoir lui attribuer des messages d'erreurs
 			ControllersException exception = new ControllersException();
