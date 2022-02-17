@@ -10,21 +10,23 @@
 	</head>
 	<body>
 
-		
-		<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay"></a>
+		<nav>
+			<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" height="50px" width="auto" alt="logo enibay"></a>
 		
 
-		<c:if test="${sessionScope.connect == null}">
-			<a href="${pageContext.request.contextPath}/login">S'inscrire - Se connecter</a>
-		</c:if>
+			<c:if test="${sessionScope.connect == null}">
+				<a href="${pageContext.request.contextPath}/login">S'inscrire - Se connecter</a>
+			</c:if>
+			
+			<c:if test="${sessionScope.connect != null }">
+				<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
+			</c:if>
+			
+			<c:if test="${sessionScope.connect != null }">
+				<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
+			</c:if>
+		</nav>
 		
-		<c:if test="${sessionScope.connect != null }">
-			<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
-		</c:if>
-		
-		<c:if test="${sessionScope.connect != null }">
-			<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
-		</c:if>
 		
 		<h2>Liste des enchères</h2>
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
