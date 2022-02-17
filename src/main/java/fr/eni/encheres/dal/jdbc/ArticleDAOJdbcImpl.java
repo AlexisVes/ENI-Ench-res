@@ -1,6 +1,7 @@
 package fr.eni.encheres.dal.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -74,7 +75,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public void insertArticle(Article article) throws DALException {
-		// TODO Auto-generated method stub
+		Connection cnx = null;
 		
+		cnx = ConnectionProvider.getConnection();
+		
+		//on prepare la requête pour ajouter l'article en BDD
+		PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
 	}
 }
