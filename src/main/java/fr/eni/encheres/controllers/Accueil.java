@@ -53,7 +53,7 @@ public class Accueil extends HttpServlet {
 		
 		request.setAttribute("listeCategories", categorieMgr.getCategories());
 		
-		;
+		System.out.println("iy");
 		
 		request.setAttribute("achat", "achat");
 		
@@ -72,12 +72,6 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Si /home est appelé depuis la connection, nous ne passons pas par doPost 
-		if( request.getParameter("get") != null )
-		{
-			doGet(request, response);
-			return;
-		}
 		
 		String recherche = request.getParameter("search");
 		int categorie = Integer.parseInt(request.getParameter("categorie"));

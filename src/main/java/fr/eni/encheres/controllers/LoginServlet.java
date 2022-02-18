@@ -91,13 +91,8 @@ public class LoginServlet extends HttpServlet {
 				
 				session.setAttribute("connect", pseudo);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/home?get=yes");
-				
-				if( rd != null)
-				{
-					rd.forward(request, response);
-					return;
-				}
+				response.sendRedirect("http://localhost:9189/ENI-Encheres/home");  
+				return;
 
 			}
 		

@@ -172,13 +172,8 @@ public class RegisterServlet extends HttpServlet {
 			{
 				userManager.createUser(pseudo, nom, prenom, email, tel, rue, code_postal, ville, password);	
 
-				RequestDispatcher rd = request.getRequestDispatcher("/home");
-				
-				if( rd != null)
-				{
-					rd.forward(request, response);
-					return;
-				}
+				response.sendRedirect("http://localhost:9189/ENI-Encheres/home");  
+				return;
 
 			}
 			

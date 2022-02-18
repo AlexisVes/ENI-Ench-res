@@ -107,12 +107,8 @@ public class SellArticleServlet extends HttpServlet {
 		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
-				RequestDispatcher rd = request.getRequestDispatcher("/home");
-					
-				if( rd != null)
-				{
-					rd.forward(request, response);
-				}
+		response.sendRedirect("http://localhost:9189/ENI-Encheres/home");  
+		return;
 	}
 
 }
