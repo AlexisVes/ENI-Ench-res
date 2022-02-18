@@ -18,8 +18,8 @@
 					<a href="${pageContext.request.contextPath}/login" class="enibay_link">S'inscrire - Se connecter</a>
 				</c:if>
 				
-				<c:if test="${sessionScope.connect != null }">
-				<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
+				<c:if test="${ sessionScope.connect != null }">
+					<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
 					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
 					<a href="${pageContext.request.contextPath}/home?param=disconnect"> Se déconnecter</a>
 				</c:if>
@@ -31,7 +31,7 @@
 		
 		<h2>Liste des enchères</h2>
 		
-		<form>
+		<form action="${pageContext.request.contextPath}/home" method="post">
 		
 			<input type="text" name="search" placeholder="Rechercher">
 			
@@ -42,6 +42,42 @@
 			</c:forEach>
 			
 			</select>
+			
+			<c:if test="${sessionScope.connect != null }">
+			
+				<input type="radio"  name="achat" value="achat">
+				<label for="achat"> Achat </label>
+				
+				<c:if test="${requestScope.achat != null }">
+					
+					<input type="checkbox" name="encheres_ouvertes">
+	  				<label for="encheres_ouvertes">Enchères ouvertes</label>
+	  				
+	  				<input type="checkbox" name="mes_encheres">
+	  				<label for="mes_encheres">Mes enchères</label>
+	  				
+	  				<input type="checkbox" name="mes_encheres_remportees">
+	  				<label for="mes_encheres_remportees">Mes enchères remportées</label>
+				
+				</c:if>
+				
+				<input type="radio"  name="vente" value="vente">
+				<label for="vente"> Mes ventes </label>
+				
+				<c:if test="${requestScope.vente != null }">
+				
+					<input type="checkbox" name="mes_ventes_ouvertes">
+		  			<label for="mes_ventes_ouvertes">Mes ventes en cours</label>
+		  				
+		  			<input type="checkbox" name="mes_ventes_futur">
+		  			<label for="mes_ventes_futur">Ventes non débutées</label>
+		  				
+		  			<input type="checkbox" name="ventes_terminees">
+		  			<label for="ventes_terminees">Ventes terminées</label>
+				
+				</c:if>
+			
+			</c:if>
 			
 			<input type="submit" value="Rechercher">
 		

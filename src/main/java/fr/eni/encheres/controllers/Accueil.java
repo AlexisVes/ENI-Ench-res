@@ -55,6 +55,8 @@ public class Accueil extends HttpServlet {
 		
 		;
 		
+		request.setAttribute("achat", "achat");
+		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		
@@ -68,7 +70,10 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
+		System.out.println(request.getParameter("achat"));
+		
 		doGet(request, response);
 	}
 

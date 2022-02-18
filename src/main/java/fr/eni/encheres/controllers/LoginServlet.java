@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,6 +74,21 @@ public class LoginServlet extends HttpServlet {
 			if ( userManager.searchUser(pseudo, password) == true ){
 				
 				HttpSession session = ((HttpServletRequest)request).getSession();
+				
+				if(  request.getParameter("souvenir") != null )
+				{
+					// create objet cookie 
+					Cookie login = new Cookie("login", pseudo); 
+					Cookie mdp = new Cookie("password", password); 
+					// set the validity 
+					login.setMaxAge(24*3600); 
+					mdp.setMaxAge(24*3600);
+					// send cookie via HTTP 
+					response.addCookie(login);
+					response.addCookie(mdp);				
+				}
+				
+				
 				session.setAttribute("connect", pseudo);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/home");

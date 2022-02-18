@@ -20,9 +20,11 @@
 			<form action="${pageContext.request.contextPath}/login" method="Post" >
 		
 				<label for="pseudo">Pseudo :</label>
-				<input type="text" name="pseudo" placeholder="Votre pseudo">
+				<input type="text" name="pseudo" placeholder="Votre pseudo" value="${cookie.login.value}">
 				<label for="password">Mot de passe :</label>
-				<input type="password" name="password" placeholder="Votre mot de passe">
+				<input type="password" name="password" placeholder="Votre mot de passe" value="${cookie.password.value}">
+				<input type="checkbox" name="souvenir">
+				<label for="souvenir"> Se souvenir</label>
 				<input type="submit" value="Connexion">
 		
 			</form>
