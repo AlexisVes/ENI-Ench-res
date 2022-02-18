@@ -91,6 +91,7 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 		}
 		
 		return retraitBDD;
+		
 	}
 
 }
