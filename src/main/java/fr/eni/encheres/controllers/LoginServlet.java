@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 				
 				session.setAttribute("connect", pseudo);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/home");
+				RequestDispatcher rd = request.getRequestDispatcher("/home?get=yes");
 				
 				if( rd != null)
 				{

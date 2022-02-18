@@ -57,6 +57,7 @@ public class Accueil extends HttpServlet {
 		
 		request.setAttribute("achat", "achat");
 		
+		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		
@@ -71,6 +72,12 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Si /home est appelé depuis la connection, nous ne passons pas par doPost 
+		if( request.getParameter("get") != null )
+		{
+			doGet(request, response);
+			return;
+		}
 		
 		String recherche = request.getParameter("search");
 		int categorie = Integer.parseInt(request.getParameter("categorie"));
