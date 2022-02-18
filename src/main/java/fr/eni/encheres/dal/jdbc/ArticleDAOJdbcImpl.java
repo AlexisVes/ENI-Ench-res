@@ -20,7 +20,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 												+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 												+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
-	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?);";
+	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_ARTICLE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, no_utilisateur \r\n"
 												+ "FROM ARTICLES_VENDUS \r\n"
 												+ "WHERE nom_article = ?;";
@@ -95,6 +95,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			
 			//exécuter la requête vers la BDD
 			rqt.executeUpdate();
+			
+			cnx.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

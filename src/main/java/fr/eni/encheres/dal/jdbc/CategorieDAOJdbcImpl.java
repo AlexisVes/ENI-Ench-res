@@ -39,6 +39,13 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			e.printStackTrace();
 		}
 		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return listeCategorie;
 	}
 

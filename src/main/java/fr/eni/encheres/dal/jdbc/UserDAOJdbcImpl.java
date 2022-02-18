@@ -52,12 +52,18 @@ public class UserDAOJdbcImpl implements UserDAO{
 				
 				//on créé l'objet userBDD
 				userBDD = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
-				cnx.close();
 			} 
 			
 		} catch (SQLException e) {
 			System.out.println("user inconnu");
 			throw new DALException("Utilisateur inconnu");
+		}
+		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return userBDD;
 	}
@@ -83,6 +89,8 @@ public class UserDAOJdbcImpl implements UserDAO{
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 	
+			cnx.close();
+			
 		} 
 		catch (DALException | SQLException e) 
 		{

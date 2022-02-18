@@ -31,6 +31,8 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
+			
+			cnx.close();
 	
 		} 
 		catch (DALException | SQLException e) 
