@@ -34,7 +34,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	public List<Article> getArticles() throws DALException{
 		
 		
-		List<Article> lesArticlesExtraits = new ArrayList<Article>();
+		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
 		
 		Connection cnx = null;
 		
