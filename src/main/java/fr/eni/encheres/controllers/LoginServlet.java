@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 				
 				session.setAttribute("connect", pseudo);
 				
-				response.sendRedirect("http://localhost:9189/ENI-Encheres/home");  
+				response.sendRedirect("http://localhost:9189/ENI-Encheres/home"); 
 				return;
 
 			}

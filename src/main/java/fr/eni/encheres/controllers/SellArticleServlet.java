@@ -107,8 +107,7 @@ public class SellArticleServlet extends HttpServlet {
 		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
-		response.sendRedirect("http://localhost:9189/ENI-Encheres/home");  
-		return;
+		response.sendRedirect("http://localhost:9189/ENI-Encheres/home"); 
 	}
 
 }
