@@ -48,23 +48,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			int idCurrentArticle = 0;
 			Article articleCourant = null;
 			
-			while(rs.next())
-			{
-				if (idCurrentArticle != rs.getInt("no_utilisateur")) 
-					
-				{
-					articleCourant = new Article();
-					articleCourant.setNomArticle(rs.getString("nom_article"));
-					articleCourant.setDescription(rs.getString("description"));
-					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
-					articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-					articleCourant.setPrixInitial(rs.getInt("prix_initial"));
-					articleCourant.setPrixVente(rs.getInt("prix_vente"));
-					articleCourant.setPseudo(rs.getString("pseudo"));
-					articleCourant.setNoCategorie(rs.getInt("no_categorie"));
-					lesArticlesExtraits.add(articleCourant);
-				}
-			}
+			listerArticles(lesArticlesExtraits, rs, idCurrentArticle);
 			
 		} catch (SQLException e) {
 			//propager une exception personnalisée
@@ -78,6 +62,29 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 		}
 		return lesArticlesExtraits;
+	}
+
+
+	private void listerArticles(List<Article> lesArticlesExtraits, ResultSet rs, int idCurrentArticle)
+			throws SQLException {
+		Article articleCourant;
+		while(rs.next())
+		{
+			if (idCurrentArticle != rs.getInt("no_utilisateur")) 
+				
+			{
+				articleCourant = new Article();
+				articleCourant.setNomArticle(rs.getString("nom_article"));
+				articleCourant.setDescription(rs.getString("description"));
+				articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleCourant.setPrixInitial(rs.getInt("prix_initial"));
+				articleCourant.setPrixVente(rs.getInt("prix_vente"));
+				articleCourant.setPseudo(rs.getString("pseudo"));
+				articleCourant.setNoCategorie(rs.getInt("no_categorie"));
+				lesArticlesExtraits.add(articleCourant);
+			}
+		}
 	}
 
 
@@ -160,7 +167,58 @@ Article articleBDD = null;
 		
 		
 	}
-	
-	
+
+
+	@Override
+	public List<Article> getArticlesByName(String mot) {
+		
+		Connection cnx = null;
+		Article articleBDD = null;
+		List<Article> searchList=null;
+						
+		try {
+			cnx = ConnectionProvider.getConnection();
+			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE);
+			rqt.setString(1, "%" + mot + "%");
+			ResultSet rs = rqt.executeQuery();
+			int idCurrentArticle = 0;
+			
+			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
+			listerArticles(searchList, rs, idCurrentArticle);
+			
+		} catch (DALException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		
+		return searchList;
+	}
+
+	@Override
+	public List<Article> getArticlesByCat(String mot, int categorie) {
+		
+		Connection cnx = null;
+		Article articleBDD = null;
+		List<Article> searchList=null;
+						
+		try {
+			cnx = ConnectionProvider.getConnection();
+			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE_NAME_CAT);
+			rqt.setString(1, "%" + mot + "%");
+			rqt.setInt(2, categorie);
+			ResultSet rs = rqt.executeQuery();
+			int idCurrentArticle = 0;
+			
+			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
+			listerArticles(searchList, rs, idCurrentArticle);
+			
+		} catch (DALException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+
+		return searchList;
+		
+	}
 	
 }
