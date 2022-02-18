@@ -4,6 +4,6 @@ import fr.eni.encheres.bo.Retrait;
 
 public interface RetraitDAO {
 	void insertRetrait(Retrait retrait) throws DALException;
-	
-	Retrait getRetrait() throws DALException;
+
+	Retrait getRetrait(int noArticle) throws DALException;
 }

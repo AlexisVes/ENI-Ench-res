@@ -106,9 +106,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	public Article getArticle( String nom) throws DALException {
 		
-Connection cnx = null;
+		Connection cnx = null;
 
-Article articleBDD = null;
+		Article articleBDD = null;
 		
 		try {
 				
