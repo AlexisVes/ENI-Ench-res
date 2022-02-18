@@ -72,9 +72,28 @@ public class Accueil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		System.out.println(request.getParameter("achat"));
+		String recherche = request.getParameter("search");
+		int categorie = Integer.parseInt(request.getParameter("categorie"));
 		
-		doGet(request, response);
+		
+		
+		if( categorie == 0 )
+		{
+			articlesAvailable = articleMgr.getArticlesByName(recherche);
+		}
+		else 
+		{
+			articlesAvailable = articleMgr.getArticlesByCategorie(recherche, categorie);
+		}
+		
+		request.setAttribute("listeArticles", articlesAvailable);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+		
+		if( rd != null)
+		{
+			rd.forward(request, response);
+		}
 	}
 
 }
