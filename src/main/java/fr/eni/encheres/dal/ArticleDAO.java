@@ -11,9 +11,7 @@ public interface ArticleDAO {
 	
 	Article getArticle( String nom ) throws DALException;
 	
-	public List<Article> getArticlesByName( String mot );
+	List<Article> getArticlesByName( String mot );
 	
-	public List<Article> getArticlesByCategorie( String mot, int categorie);
-
 	List<Article> getArticlesByCat(String mot, int categorie);
 }
