@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
+        
+=======
             
     
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
     <wb-module deploy-name="ENI-Encheres">
+<<<<<<< HEAD
+                
+=======
                         
         
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+                
+=======
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                         
         
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
         <property name="context-root" value="ENI-Encheres"/>
+<<<<<<< HEAD
+                
+=======
                         
         
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
         <property name="java-output-path" value="/ENI-Encheres/build/classes"/>
+<<<<<<< HEAD
+            
+=======
                     
     
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
     </wb-module>
+<<<<<<< HEAD
+    
+=======
         
 
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 </project-modules>
