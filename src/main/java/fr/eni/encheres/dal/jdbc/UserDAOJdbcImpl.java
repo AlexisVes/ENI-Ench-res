@@ -122,10 +122,12 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setInt(10, user.getUserId());
 			//Éxécution de la requête SQL
 			rqt.executeUpdate();
+			cnx.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	@Override
@@ -137,9 +139,11 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setString(1, pseudo);
 			//Éxécution de la requête de suppression en SQL
 			rqt.executeUpdate();
+			cnx.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }
