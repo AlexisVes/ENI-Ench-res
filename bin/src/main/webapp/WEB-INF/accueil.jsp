@@ -31,7 +31,7 @@
 		
 		<h2>Liste des enchères</h2>
 		
-		<form action="${pageContext.request.contextPath}/home" method="post" >
+		<form action="${pageContext.request.contextPath}/home" method="post">
 		
 			<input type="text" name="search" placeholder="Rechercher">
 			
