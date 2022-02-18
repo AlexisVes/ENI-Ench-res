@@ -45,10 +45,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			Statement rqt = cnx.createStatement();
 			
 			ResultSet rs = rqt.executeQuery(SELECT_ARTICLES);
-			int idCurrentArticle = 0;
 			Article articleCourant = null;
 			
-			listerArticles(lesArticlesExtraits, rs, idCurrentArticle);
+			listerArticles(lesArticlesExtraits, rs, true);
 			
 		} catch (SQLException e) {
 			//propager une exception personnalisée
@@ -65,12 +64,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 
-	private void listerArticles(List<Article> lesArticlesExtraits, ResultSet rs, int idCurrentArticle)
+	private void listerArticles(List<Article> lesArticlesExtraits, ResultSet rs, boolean user)
 			throws SQLException {
 		Article articleCourant;
 		while(rs.next())
 		{
-			if (idCurrentArticle != rs.getInt("no_utilisateur")) 
+
 				
 			{
 				articleCourant = new Article();
@@ -80,8 +79,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 				articleCourant.setPrixInitial(rs.getInt("prix_initial"));
 				articleCourant.setPrixVente(rs.getInt("prix_vente"));
-				articleCourant.setPseudo(rs.getString("pseudo"));
 				articleCourant.setNoCategorie(rs.getInt("no_categorie"));
+				
+				if( user )
+				{
+					articleCourant.setPseudo(rs.getString("pseudo"));		
+				}
+				
 				lesArticlesExtraits.add(articleCourant);
 			}
 		}
@@ -181,10 +185,10 @@ Article articleBDD = null;
 			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE);
 			rqt.setString(1, "%" + mot + "%");
 			ResultSet rs = rqt.executeQuery();
-			int idCurrentArticle = 0;
+			boolean user = false;
 			
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
-			listerArticles(searchList, rs, idCurrentArticle);
+			listerArticles(searchList, rs, true );
 			
 		} catch (DALException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -210,7 +214,7 @@ Article articleBDD = null;
 			int idCurrentArticle = 0;
 			
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
-			listerArticles(searchList, rs, idCurrentArticle);
+			listerArticles(searchList, rs, false);
 			
 		} catch (DALException | SQLException e) {
 			// TODO Auto-generated catch block
