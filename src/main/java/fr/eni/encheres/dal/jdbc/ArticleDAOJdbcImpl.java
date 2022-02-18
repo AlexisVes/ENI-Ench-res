@@ -20,7 +20,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 												+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 												+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
-	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?);";
+	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_ARTICLE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, no_utilisateur \r\n"
 												+ "FROM ARTICLES_VENDUS \r\n"
 												+ "WHERE nom_article = ?;";
@@ -89,8 +89,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			rqt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
 			rqt.setDate(4, java.sql.Date.valueOf(article.getDateFinEncheres()));
 			rqt.setInt(5, article.getPrixInitial());
-			rqt.setInt(6, article.getNoUtilisateur());
-			rqt.setInt(7, article.getNoCategorie());
+			rqt.setInt(6, article.getPrixInitial());
+			rqt.setInt(7, article.getNoUtilisateur());
+			rqt.setInt(8, article.getNoCategorie());
 			
 			//exécuter la requête vers la BDD
 			rqt.executeUpdate();
