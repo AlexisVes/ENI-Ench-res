@@ -50,16 +50,17 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 		return listeCategorie;
 	}
 	
-	public String getCategorie(int noCategorie) {
-		String categorie;
+	public String getCategorie(int noCategorie) throws DALException {
+		String categorie = null;
 		
 		//On établit la connexion vers la BDD
 				Connection cnx = null;
 				
-				cnx = ConnectionProvider.getConnection();		
+						
 				Statement rqt;
 				
 				try {
+					cnx = ConnectionProvider.getConnection();
 					rqt = cnx.createStatement();
 					
 					ResultSet rs = rqt.executeQuery(SELECT_CATEGORIE);
@@ -78,6 +79,6 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 				
 				return categorie;
 			}
-	}
+	
 
 }
