@@ -104,5 +104,15 @@ public class ArticleManager {
 			}
 			return article;
 		}
+		
+		public List<Article> getArticlesByName( String mot )
+		{
+			return articleDAO.getArticlesByName(mot);
+		}
+		
+		public List<Article> getArticlesByCategorie( String mot, int categorie)
+		{
+			return articleDAO.getArticlesByCat(mot, categorie);
+		}
 
 }
