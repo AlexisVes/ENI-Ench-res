@@ -55,14 +55,11 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 		
 		//On établit la connexion vers la BDD
 				Connection cnx = null;
-				
-						
-				Statement rqt;
-				
+	
 				try {
 					cnx = ConnectionProvider.getConnection();
-					rqt = cnx.createStatement();
-					
+					Statement rqt = cnx.createStatement();
+
 					ResultSet rs = rqt.executeQuery(SELECT_CATEGORIE);
 				
 				} catch (SQLException e) {
