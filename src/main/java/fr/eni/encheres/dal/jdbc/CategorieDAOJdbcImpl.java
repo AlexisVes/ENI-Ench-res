@@ -13,7 +13,8 @@ import fr.eni.encheres.dal.DALException;
 
 public class CategorieDAOJdbcImpl implements CategorieDAO{
 	
-	private static final String SELECT_CATEGORIE = "SELECT no_categorie, libelle FROM CATEGORIES;";
+	private static final String SELECT_CATEGORIES = "SELECT no_categorie, libelle FROM CATEGORIES;";
+	private static final String SELECT_CATEGORIE = "SELECT libelle FROM CATEGORIES WHERE no_categorie=?;";
 
 	@Override
 	public List<Categorie> getCategories() throws DALException {
@@ -27,7 +28,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 		
 		try {
 			rqt = cnx.createStatement();
-			ResultSet rs = rqt.executeQuery(SELECT_CATEGORIE);
+			ResultSet rs = rqt.executeQuery(SELECT_CATEGORIES);
 			
 			while(rs.next()) {
 				Categorie categorieCourant = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
@@ -47,6 +48,36 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 		}
 		
 		return listeCategorie;
+	}
+	
+	public String getCategorie(int noCategorie) {
+		String categorie;
+		
+		//On établit la connexion vers la BDD
+				Connection cnx = null;
+				
+				cnx = ConnectionProvider.getConnection();		
+				Statement rqt;
+				
+				try {
+					rqt = cnx.createStatement();
+					
+					ResultSet rs = rqt.executeQuery(SELECT_CATEGORIE);
+				
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				return categorie;
+			}
 	}
 
 }

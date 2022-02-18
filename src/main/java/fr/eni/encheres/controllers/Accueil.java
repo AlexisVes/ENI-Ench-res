@@ -97,5 +97,4 @@ public class Accueil extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-
 }
