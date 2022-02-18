@@ -197,6 +197,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 		}				
 		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return searchList;
 	}
 
@@ -220,7 +226,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		} catch (DALException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}				
+		} 	
+		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	
 		return searchList;
 		

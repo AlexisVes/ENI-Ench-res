@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.RetraitDAO;
