@@ -87,6 +87,8 @@ public class Accueil extends HttpServlet {
 		}
 		
 		request.setAttribute("listeArticles", articlesAvailable);
+		request.setAttribute("listeCategories", categorieMgr.getCategories());
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		

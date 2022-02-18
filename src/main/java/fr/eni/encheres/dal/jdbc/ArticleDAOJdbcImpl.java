@@ -47,7 +47,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ResultSet rs = rqt.executeQuery(SELECT_ARTICLES);
 			Article articleCourant = null;
 			
-			listerArticles(lesArticlesExtraits, rs, true);
+			lesArticlesExtraits  = listerArticles(rs, true);
 			
 		} catch (SQLException e) {
 			//propager une exception personnalisée
@@ -60,13 +60,14 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return lesArticlesExtraits;
+		return lesArticlesExtraits ;
 	}
 
 
-	private void listerArticles(List<Article> lesArticlesExtraits, ResultSet rs, boolean user)
+	private List<Article> listerArticles( ResultSet rs, boolean user)
 			throws SQLException {
 		Article articleCourant;
+		List<Article> searchList= new ArrayList<Article>();
 		while(rs.next())
 		{
 
@@ -80,15 +81,16 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				articleCourant.setPrixInitial(rs.getInt("prix_initial"));
 				articleCourant.setPrixVente(rs.getInt("prix_vente"));
 				articleCourant.setNoCategorie(rs.getInt("no_categorie"));
-				
 				if( user )
 				{
 					articleCourant.setPseudo(rs.getString("pseudo"));		
 				}
 				
-				lesArticlesExtraits.add(articleCourant);
+				searchList.add(articleCourant);
 			}
 		}
+		
+		return searchList;
 	}
 
 
@@ -188,7 +190,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			boolean user = false;
 			
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
-			listerArticles(searchList, rs, true );
+			searchList = listerArticles( rs, false );
 			
 		} catch (DALException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -208,19 +210,18 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE_NAME_CAT);
-			rqt.setString(1, "%" + mot + "%");
-			rqt.setInt(2, categorie);
+			rqt.setInt(1, categorie);
+			rqt.setString(2, "%" + mot + "%");
 			ResultSet rs = rqt.executeQuery();
-			int idCurrentArticle = 0;
 			
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
-			listerArticles(searchList, rs, false);
+			searchList = listerArticles( rs, false);
 			
 		} catch (DALException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}				
-
+	
 		return searchList;
 		
 	}
