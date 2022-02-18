@@ -10,4 +10,8 @@ public interface ArticleDAO {
 	void insertArticle(Article article) throws DALException;
 	
 	Article getArticle( String nom ) throws DALException;
+	
+	List<Article> getArticlesByName( String mot );
+	
+	List<Article> getArticlesByCat(String mot, int categorie);
 }

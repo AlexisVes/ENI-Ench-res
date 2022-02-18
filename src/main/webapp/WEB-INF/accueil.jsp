@@ -37,8 +37,10 @@
 			
 			<select name="categorie">
 			
+			<option value="0"> Toutes catégories </option>
+			
 			<c:forEach var="categorie" items="${requestScope.listeCategories}">
-				<option value="${categorie.libelle}"> ${categorie.libelle} </option>
+				<option value="${categorie.noCategorie}"> ${categorie.libelle} </option>
 			</c:forEach>
 			
 			</select>
