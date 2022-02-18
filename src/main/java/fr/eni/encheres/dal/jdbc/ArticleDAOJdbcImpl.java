@@ -25,6 +25,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 												+ "FROM ARTICLES_VENDUS \r\n"
 												+ "WHERE nom_article = ?;";
 	
+	private static final String SEARCH_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
+;
+	
+	private static final String SEARCH_ARTICLE_NAME_CAT = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND nom_article LIKE ? AND date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
+	
 	
 	public List<Article> getArticles() throws DALException{
 		
@@ -155,5 +160,7 @@ Article articleBDD = null;
 		
 		
 	}
+	
+	
 	
 }
