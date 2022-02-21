@@ -69,14 +69,16 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//On récupère l'enchère en cours
-		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
+		//On récupère l'enchère en cours (si elle existe...)
+		if (enchereMgr.getEnchere(article.getNoArticle()) != null) {
+			Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
+			request.setAttribute("enchere", enchere.getMontant_enchere()) ;
+			try {
+				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
 			
-		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
-		try {
-			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
-		} catch (DALException e) {
-			e.printStackTrace();
 		}
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
@@ -107,8 +109,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		if( rd != null)
 		{
 			rd.forward(request, response);
-		}
-				
+		}		
 	}
 
 	/**
@@ -116,8 +117,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
 		doGet(request, response);
+
 	}
 }

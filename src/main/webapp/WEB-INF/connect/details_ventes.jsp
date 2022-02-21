@@ -17,7 +17,11 @@
 	<p>${requestScope.article.nomArticle}</p>
 	<p><span class="detail_vente">Description :</span> ${requestScope.article.description}</p>
 	<p><span class="detail_vente">Catégorie :</span> ${requestScope.libelleCategorie}</p>
-	<p><span class="detail_vente">Meilleure offre :</span> ${requestScope.enchere} crédits par ${requestScope.encherisseur} </p>
+	<p><span class="detail_vente">Meilleure offre :</span> 
+	<c:if test="${requestScope.enchere != null}">
+		${requestScope.enchere} crédits par ${requestScope.encherisseur}
+	</c:if>
+	</p>
 	<p><span class="detail_vente">Mise à prix :</span> ${requestScope.article.prixInitial}</p>
 	<p><span class="detail_vente">Fin de l'enchère :</span> ${requestScope.article.dateFinEncheres}</p>
 	<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
