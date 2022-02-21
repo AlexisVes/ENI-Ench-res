@@ -46,8 +46,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		if(categorieMgr.getLibelleCategorie(article.getNoCategorie()) != null){
 			String libelleCategorie = categorieMgr.getLibelleCategorie(article.getNoCategorie());
 			request.setAttribute("libelleCategorie", libelleCategorie);
-		}
-		
+		} 
 		//On récupère le prix de départ de l'article 
 		if(request.getParameter("nomArticle") != null) {
 			request.setAttribute("article", article);
