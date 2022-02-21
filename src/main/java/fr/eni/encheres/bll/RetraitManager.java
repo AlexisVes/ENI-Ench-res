@@ -43,4 +43,8 @@ public class RetraitManager {
 				}
 			}
 			
+			public Retrait getRetrait(int noArticle) throws DALException {
+					return retraitDAO.getRetrait(noArticle);
+			}
+			
 }

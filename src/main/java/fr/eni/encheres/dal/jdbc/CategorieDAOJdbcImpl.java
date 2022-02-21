@@ -1,6 +1,7 @@
 package fr.eni.encheres.dal.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,16 +52,20 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 	}
 	
 	public String getCategorie(int noCategorie) throws DALException {
-		String categorie = null;
+		String libelleCategorie = null;
 		
 		//On établit la connexion vers la BDD
 				Connection cnx = null;
 	
 				try {
 					cnx = ConnectionProvider.getConnection();
-					Statement rqt = cnx.createStatement();
+					PreparedStatement rqt = cnx.prepareStatement(SELECT_CATEGORIE);
 
-					ResultSet rs = rqt.executeQuery(SELECT_CATEGORIE);
+					rqt.setInt(1, noCategorie);
+					
+					ResultSet rs = rqt.executeQuery();
+					
+					libelleCategorie = rs.getString(1);
 				
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -74,7 +79,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 					e.printStackTrace();
 				}
 				
-				return categorie;
+				return libelleCategorie;
 			}
 	
 

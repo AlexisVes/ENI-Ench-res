@@ -88,7 +88,7 @@
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
 			<article>
-				<h3><a href="">${article.nomArticle}</a></h3>
+				<h3><a href="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${article.nomArticle}">${article.nomArticle}</a></h3>
 				<p>Prix : ${article.prixVente}</p>
 				<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
 				

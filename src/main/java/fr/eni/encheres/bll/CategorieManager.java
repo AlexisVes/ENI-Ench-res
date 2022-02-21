@@ -53,4 +53,16 @@ public class CategorieManager {
 		return categories;
 	}
 	
+	public String getLibelleCategorie(int noCategorie) {
+		String libelleCategorie = null;
+		try {
+			libelleCategorie = categorieDAO.getCategorie(noCategorie);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return libelleCategorie;
+	}
+	
+	
 }

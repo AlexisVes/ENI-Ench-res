@@ -12,9 +12,13 @@
 	
 	<p>${requestScope.article.nomArticle}</p>
 	<p>Description : ${requestScope.article.description}</p>
-	<p>Catégorie : </p>
-	
-	
+	<p>Catégorie : ${requestScope.libelleCategorie}</p>
+	<p>Meilleure offre : </p>
+	<p>Mise à prix : ${requestScope.article.prixInitial}</p>
+	<p>Fin de l'enchère : ${requestScope.article.dateFinEncheres}</p>
+	<p>Retrait : ${requestScope.retrait.rue}</p>
+	<p>${requestScope.retrait.codePostal} ${requestScope.retrait.ville}</p>
+	<p>Vendeur : ${requestScope.artile.pseudo}
 	
 	
 

@@ -9,10 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.RetraitManager;
+import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Retrait;
+import fr.eni.encheres.dal.DALException;
+
 /**
  * Servlet implementation class getDetailsOnSellServlet
  */
-@WebServlet("/getDetailsOnSellServlet")
+@WebServlet("/connect/sell_details")
 public class getDetailsOnSellServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,14 +30,41 @@ public class getDetailsOnSellServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    CategorieManager categorieMgr = CategorieManager.getInstance();
+    ArticleManager articleMgr = ArticleManager.getInstance();
+    RetraitManager retraitMgr = RetraitManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
+		int noArticle = article.getNoArticle();
+		
+		//On vérifie que le libellé de catégorie n'est pas null
+		if(categorieMgr.getLibelleCategorie((int) request.getAttribute("noCategorie")) != null){
+			String libelleCategorie = categorieMgr.getLibelleCategorie((int) request.getAttribute("noCategorie"));
+			request.setAttribute("libelleCategorie", libelleCategorie);
+		}
+		
+		//On récupère le prix de départ de l'article 
+		if(request.getParameter("nomArticle") != null) {
+			request.setAttribute("article", article);
+		}
+		
+		//On recupère le lieu du retrait que l'on envoie en attribut 
+		try {
+			Retrait retrait = retraitMgr.getRetrait(noArticle);
+			request.setAttribute("retrait", retrait);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+			
 		
 		
-		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
 				
 				if( rd != null)
