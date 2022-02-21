@@ -133,7 +133,7 @@ public class ArticleManager {
 				switch(mode)
 				{
 					case "on sell" : return articleDAO.getMyArticles(pseudo);
-					case "futur" : return articleDAO.getMyFuturArticles(pseudo);
+					case "future" : return articleDAO.getMyFuturArticles(pseudo);
 					case "sold" : return articleDAO.getMySoldArticles(pseudo);
 				}
 				
@@ -141,6 +141,7 @@ public class ArticleManager {
 			catch(DALException e)
 			{
 				System.out.println("aie");
+				e.printStackTrace();
 			}
 			return null;
 		}
@@ -159,7 +160,7 @@ public class ArticleManager {
 				switch(mode)
 				{
 					case "on sell" : return articleDAO.getArticles();
-					case "futur" : return articleDAO.getFuturArticles();
+					case "future" : return articleDAO.getFuturArticles();
 					case "sold" : return articleDAO.getSoldArticles();
 				}
 				

@@ -32,20 +32,20 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SEARCH_ARTICLE_NAME_CAT = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND nom_article LIKE ? AND date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
 	
-	private static final String	SELECT_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
-													+ "FROM ARTICLES_VENDUS"
+	private static final String	SELECT_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+													+ "FROM ARTICLES_VENDUS \r\n" 
 													+ "INNER JOIN UTILISATEURS \r\n"
 													+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 													+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE() AND pseudo = ?;";
 	
-	private static final String	SELECT_MY_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
-															+ "FROM ARTICLES_VENDUS"
+	private static final String	SELECT_MY_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+															+ "FROM ARTICLES_VENDUS \r\n"
 															+ "INNER JOIN UTILISATEURS \r\n"
 															+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
-															+ "date_fin_encheres < GETDATE() AND pseudo = ?;";
+															+ "WHERE date_fin_encheres < GETDATE() AND pseudo = ?;";
 	
-	private static final String	SELECT_MY_FUTURE_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
-														+ "FROM ARTICLES_VENDUS"
+	private static final String	SELECT_MY_FUTURE_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+														+ "FROM ARTICLES_VENDUS \r\n"
 														+ "INNER JOIN UTILISATEURS \r\n"
 														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 														+ "WHERE date_debut_encheres > GETDATE() AND pseudo = ?;";
@@ -139,14 +139,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			
 			ResultSet rs = rqt.executeQuery();
 			
-			Article articleCourant = null;
-			
-			lesArticlesExtraits  = listerArticles(rs, false);
+			lesArticlesExtraits  = listerArticles(rs, true);
 							
 		} 
 		catch (SQLException e) {
 			//propager une exception personnalisée
-			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+
+
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

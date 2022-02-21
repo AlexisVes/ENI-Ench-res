@@ -1,6 +1,7 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -39,7 +40,7 @@ public class Accueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//On vérifie que la liste d'articles n'est pas null
-		if(articleMgr.getArticlesAvailable() != null) {
+		if(articleMgr.getArticlesAvailable() != null && request.getAttribute("listeArticles") == null) { 
 			//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
 			articlesAvailable = articleMgr.getArticlesAvailable();
 			request.setAttribute("listeArticles", articlesAvailable);
@@ -69,10 +70,11 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		HttpSession session = ((HttpServletRequest)request).getSession();
 		String recherche = request.getParameter("search");
 		int categorie = Integer.parseInt(request.getParameter("categorie"));
-		
+		List<Article> articles = new ArrayList<Article>();
+		String pseudo = (String) session.getAttribute("connect");
 		
 		
 		if( categorie == 0 )
@@ -92,16 +94,55 @@ public class Accueil extends HttpServlet {
 			if( request.getParameter("achat").equals("achat") )
 			{
 				request.setAttribute("achat", true);
+				
+				
 			}
 			
 			if( request.getParameter("achat").equals("vente"))
 			{
 				request.setAttribute("vente", true);
+				
+				if( request.getParameter("mes_ventes_ouvertes") != null)
+				{	
+					System.out.println( pseudo);
+					if(articleMgr.getMyArticles( pseudo, "on sell") != null )
+					{
+						for( Article article : articleMgr.getMyArticles( pseudo, "on sell"))
+						{
+							articles.add(article);
+						}
+					}
+					
+				}	
+				if( request.getParameter("mes_ventes_futur") != null)
+				{
+					if(articleMgr.getMyArticles( pseudo, "future") != null )
+					{
+						for( Article article : articleMgr.getMyArticles( pseudo, "future"))
+						{
+							articles.add(article);
+						}
+					}
+					
+				}
+				
+				if( request.getParameter("ventes_terminees") != null)
+				{
+					if(articleMgr.getMyArticles( pseudo, "sold") != null )
+					{
+						for( Article article : articleMgr.getMyArticles( pseudo, "sold"))
+						{
+							articles.add(article);
+						}
+					}
+					
+				}
+				
 			}
 			
 		}
 		
-		
+		request.setAttribute("listeArticles", articles);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		
