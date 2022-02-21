@@ -1,13 +1,12 @@
 package fr.eni.encheres.bll;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
-import fr.eni.encheres.dal.RetraitDAO;
 
 public class EnchereManager {
 	
@@ -21,7 +20,7 @@ public class EnchereManager {
 
 	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) {
 		
-		LocalTime now = LocalTime.now();
+		LocalDate now = LocalDate.now();
 		
 		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
 		
@@ -35,7 +34,8 @@ public class EnchereManager {
 		}
 		else
 		{
-			enchereDAO.
+			enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
+			enchereDAO.insertEnchere(enchere);
 		}
 		
 	}
