@@ -22,9 +22,9 @@
 	<p><span class="detail_vente">Fin de l'enchère :</span> ${requestScope.article.dateFinEncheres}</p>
 	<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
 	<p><span class="detail_vente">Vendeur :</span> ${sessionScope.connect}</p>
-	<form action="" method="post">
+	<form action="${pageContext.request.contextPath}/connect/encherir" method="post">
 	<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
-		<input type="number" name="proposition" placeholder="${requestScope.article.prixVente}">
+		<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente}" required="required" min="${requestScope.article.prixVente}">
 		<button>Enchérir</button>
 	</form>
 </body>

@@ -3,6 +3,7 @@ package fr.eni.encheres.dal;
 
 import fr.eni.encheres.dal.jdbc.ArticleDAOJdbcImpl;
 import fr.eni.encheres.dal.jdbc.CategorieDAOJdbcImpl;
+import fr.eni.encheres.dal.jdbc.EnchereDAOJdbcImpl;
 import fr.eni.encheres.dal.jdbc.RetraitDAOJdbcImpl;
 import fr.eni.encheres.dal.jdbc.UserDAOJdbcImpl;
 import fr.eni.encheres.dal.nosql.UserDAONoSQLImpl;
@@ -47,6 +48,17 @@ public class DAOFactory {
 				return new RetraitDAOJdbcImpl();
 			case "NOSQL" :
 				return new RetraitDAOJdbcImpl();
+			default : 
+				throw new DALException("Source de données inconnue");
+		}
+	}
+	
+	public static EnchereDAO createEnchereDAO(String type) throws DALException {
+		switch(type) {
+			case "JDBC":
+				return new EnchereDAOJdbcImpl();
+			case "NOSQL" :
+				return new EnchereDAOJdbcImpl();
 			default : 
 				throw new DALException("Source de données inconnue");
 		}
