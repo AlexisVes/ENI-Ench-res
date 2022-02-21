@@ -27,9 +27,11 @@ public class ArticleManager {
 				} //passer par la Factory
 		}
 		
+		
 		public synchronized static ArticleManager getInstance() {
 			if (instance == null) {
 				instance = new ArticleManager();
+				
 			}
 			return instance;
 		}

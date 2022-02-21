@@ -14,4 +14,5 @@ public interface ArticleDAO {
 	List<Article> getArticlesByName( String mot );
 	
 	List<Article> getArticlesByCat(String mot, int categorie);
+	
 }
