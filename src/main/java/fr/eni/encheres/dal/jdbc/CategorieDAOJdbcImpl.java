@@ -65,7 +65,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 					
 					ResultSet rs = rqt.executeQuery();
 					
-					libelleCategorie = rs.getString("libelle");
+					if(rs != null) {
+					libelleCategorie = rs.getString(2);
+					}
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
