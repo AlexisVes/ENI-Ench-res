@@ -45,21 +45,6 @@ public class getDetailsOnSellServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
-				
-		if( rd != null)
-		{
-			rd.forward(request, response);
-		}
-				
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
 		int noArticle = article.getNoArticle();
 		
@@ -82,9 +67,25 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 			
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
+				
+		if( rd != null)
+		{
+			rd.forward(request, response);
+		}
+				
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
 		//On récupère l'enchère en cours
 		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
-		request.setAttribute("enchere", enchere.getMontant_enchere());
+		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
 		try {
 			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
 		} catch (DALException e) {
