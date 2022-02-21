@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.RetraitManager;
@@ -67,34 +69,53 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//On récupère l'enchère en cours
+		//On récupère l'enchère en cours (si elle existe...)
 		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
+		
+		if (enchere != null) {
+			request.setAttribute("enchere", enchere.getMontant_enchere()) ;
+			try {
+				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
 			
-		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
+		}
+		
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		
+		String pseudo = (String) session.getAttribute("connect");
+		
+		int userId = 0;
+		
 		try {
-			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
-		} catch (DALException e) {
+			userId = userMgr.searchUser(pseudo).getUserId();
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		int proposition = 0;
+		if( request.getParameter("proposition") != null)
+		{
+			proposition = Integer.parseInt(request.getParameter("proposition"));
+		}
+		
+		enchereMgr.controlerEnchere(proposition, article, userId);
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
 				
 		if( rd != null)
 		{
 			rd.forward(request, response);
-		}
-				
+		}		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		
-		
 		
 		
 		response.sendRedirect( request.getContextPath() + "/home");
