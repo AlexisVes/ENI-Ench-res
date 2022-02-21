@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.RetraitManager;
+import fr.eni.encheres.bll.UserManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
 
@@ -34,6 +37,8 @@ public class getDetailsOnSellServlet extends HttpServlet {
     CategorieManager categorieMgr = CategorieManager.getInstance();
     ArticleManager articleMgr = ArticleManager.getInstance();
     RetraitManager retraitMgr = RetraitManager.getInstance();
+    EnchereManager enchereMgr = EnchereManager.getInstance();
+    UserManager userMgr = UserManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,15 +66,21 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 			
-			
+		//On récupère l'enchère en cours
+		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
+		request.setAttribute("enchere", enchere.getMontant_enchere());
+		try {
+			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 		
-		
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
 				
-				if( rd != null)
-				{
-					rd.forward(request, response);
-				}
+		if( rd != null)
+		{
+			rd.forward(request, response);
+		}
 				
 	}
 

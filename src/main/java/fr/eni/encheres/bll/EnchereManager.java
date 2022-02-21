@@ -10,6 +10,9 @@ import fr.eni.encheres.dal.EnchereDAO;
 
 public class EnchereManager {
 	
+	//volonté de n'avoir qu'une seule instance de cette classe en mémoire => SINGLETON
+	private static EnchereManager instance=null;
+	
 	
 	public EnchereManager() throws DALException {
 		super();
@@ -17,6 +20,10 @@ public class EnchereManager {
 	}
 	
 	private EnchereDAO enchereDAO;
+	
+	public Enchere getEnchere(int no_article) {
+		return enchereDAO.getEnchere(no_article);
+	}
 
 	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) {
 		
@@ -38,6 +45,18 @@ public class EnchereManager {
 			enchereDAO.insertEnchere(enchere);
 		}
 		
+	}
+
+	public synchronized static EnchereManager getInstance() {
+		if (instance == null) {
+			try {
+				instance = new EnchereManager();
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return instance;
 	}
 
 }
