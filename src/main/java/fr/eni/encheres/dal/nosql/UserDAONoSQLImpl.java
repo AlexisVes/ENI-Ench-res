@@ -30,4 +30,10 @@ public class UserDAONoSQLImpl implements UserDAO{
 		
 	}
 
+	@Override
+	public User getUserById(int no_utilisateur) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
