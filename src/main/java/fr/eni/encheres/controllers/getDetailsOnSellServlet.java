@@ -70,9 +70,8 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		}
 		
 		//On récupère l'enchère en cours (si elle existe...)
-		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
-		
-		if (enchere != null) {
+		if (enchereMgr.getEnchere(article.getNoArticle()) != null) {
+			Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
 			request.setAttribute("enchere", enchere.getMontant_enchere()) ;
 			try {
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());

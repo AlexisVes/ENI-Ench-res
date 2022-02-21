@@ -86,7 +86,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 		}
 		
-		
 	}
 
 
@@ -108,7 +107,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			rqt.setInt( 4 , enchere.getNo_utilisateur() );
 			
 			ResultSet rs = rqt.executeQuery();
-			
 			
 		}
 		catch (SQLException e) {
