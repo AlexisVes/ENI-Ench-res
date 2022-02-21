@@ -18,9 +18,6 @@
 	<p>Fin de l'enchère : ${requestScope.article.dateFinEncheres}</p>
 	<p>Retrait : ${requestScope.retrait.rue}</p>
 	<p>${requestScope.retrait.codePostal} ${requestScope.retrait.ville}</p>
-	<p>Vendeur : ${requestScope.artile.pseudo}
-	
-
-
+	<p>Vendeur : ${requestScope.article.pseudo}</p>
 </body>
 </html>
