@@ -91,7 +91,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect( request.getContextPath() + "/home");
+		doGet(request, response);
 	}
 
 }
