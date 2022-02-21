@@ -78,14 +78,7 @@ public class Accueil extends HttpServlet {
 		boolean all = true;
 		
 		
-		if( categorie == 0 )
-		{
-			articlesAvailable = articleMgr.getArticlesByName(recherche);
-		}
-		else 
-		{
-			articlesAvailable = articleMgr.getArticlesByCategorie(recherche, categorie);
-		}
+		
 		
 		request.setAttribute("listeArticles", articlesAvailable);
 		request.setAttribute("listeCategories", categorieMgr.getCategories());
@@ -186,7 +179,38 @@ public class Accueil extends HttpServlet {
 			
 		}
 		
+		if(  request.getParameter("achat") == null )
+		{
+			if( categorie == 0 )
+			{
+				for( Article article : articleMgr.getArticlesByName(recherche))
+				{
+					articles.add(article);
+				}
+			}
+			else 
+			{
+				for( Article article : articleMgr.getArticlesByCategorie(recherche, categorie))
+				{
+					articles.add(article);
+				}
+			}
+		}
+		else
+		{
+			if( categorie == 0 )
+			{
+				articles = articleMgr.orderArticleByNames(articles, recherche);
+			}
+			else 
+			{
+				articles = articleMgr.orderArticleByCatAndNames(articles, recherche, categorie);
+			}
+		}
+		
+		
 		request.setAttribute("listeArticles", articles);
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		

@@ -78,3 +78,9 @@ article:hover{
 .grid button{
 	grid-row: 11;
 }
+
+form .select_filters{
+	
+	display: flex;
+	flex-direction: column;
+}
