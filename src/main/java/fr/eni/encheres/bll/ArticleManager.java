@@ -116,5 +116,59 @@ public class ArticleManager {
 		{
 			return articleDAO.getArticlesByCat(mot, categorie);
 		}
+		
+		
+		
+		/**
+		 * 
+		 * @param pseudo LE nom du possesseur des articles
+		 * @param mode renvoi les vendu, a vendre ou en vente selon le mode choisi, respectivement: sold, futur, sell
+		 * 
+		 * @return
+		 */
+		public List<Article> getMyArticles( String pseudo, String mode)
+		{
+			try {
+				
+				switch(mode)
+				{
+					case "on sell" : return articleDAO.getMyArticles(pseudo);
+					case "futur" : return articleDAO.getMyFuturArticles(pseudo);
+					case "sold" : return articleDAO.getMySoldArticles(pseudo);
+				}
+				
+			}	
+			catch(DALException e)
+			{
+				System.out.println("aie");
+			}
+			return null;
+		}
+		
+		
+		/**
+		 * 
+		 * @param pseudo
+		 *@param mode renvoi les vendu, a vendre ou en vente selon le mode choisi, respectivement: sold, futur, sell
+		 * @return
+		 */
+		public List<Article> getArticles( String mode )
+		{
+			try {
+				
+				switch(mode)
+				{
+					case "on sell" : return articleDAO.getArticles();
+					case "futur" : return articleDAO.getFuturArticles();
+					case "sold" : return articleDAO.getSoldArticles();
+				}
+				
+			}	
+			catch(DALException e)
+			{
+				System.out.println("aie");
+			}
+			return null;
+		}
 
 }
