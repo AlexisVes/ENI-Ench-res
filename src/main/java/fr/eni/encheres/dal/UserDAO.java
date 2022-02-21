@@ -5,7 +5,7 @@ import fr.eni.encheres.bo.User;
 public interface UserDAO {
 	User getUser(String pseudo) throws DALException;
 	
-	User getUserByID(int no_utilisateur) throws DALException;
+	User getUserById(int no_utilisateur) throws DALException;
 	
 	void insertUser(User user) throws DALException;
 	
