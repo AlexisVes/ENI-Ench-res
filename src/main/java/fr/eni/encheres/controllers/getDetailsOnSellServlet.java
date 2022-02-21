@@ -93,6 +93,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		}
 		
 		int proposition = 0;
+		System.out.println("oui" + request.getParameter("proposition"));
 		if( request.getParameter("proposition") != null)
 		{
 			proposition = Integer.parseInt(request.getParameter("proposition"));
@@ -117,11 +118,6 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		
 		
 		
-		
-		
-		
-		
-		response.sendRedirect( request.getContextPath() + "/home");
+		doGet(request, response);
 	}
-
 }

@@ -14,29 +14,36 @@ public class EnchereManager {
 	private static EnchereManager instance=null;
 	
 	
-	public EnchereManager() throws DALException {
+	public EnchereManager() throws DALException 
+	{
 		super();
 		enchereDAO = DAOFactory.createEnchereDAO("JDBC");
 	}
 	
 	private EnchereDAO enchereDAO;
 	
-	public Enchere getEnchere(int no_article) {
+	
+	public Enchere getEnchere(int no_article)
+	{
 		return enchereDAO.getEnchere(no_article);
 	}
+	
+	
 
-	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) {
+	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) 
+	{
 		
 		LocalDate now = LocalDate.now();
 		
-		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
+		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());	
 		
 		if( enchere != null) 
 		{
 			
 			if( prixSaisi > article.getPrixVente() ) 
 			{
-				enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur);
+				System.out.println("3");
+				enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
 			}
 		}
 		else
@@ -47,11 +54,16 @@ public class EnchereManager {
 		
 	}
 
-	public synchronized static EnchereManager getInstance() {
-		if (instance == null) {
-			try {
+	public synchronized static EnchereManager getInstance()
+{
+		if (instance == null) 
+		{
+			try 
+			{
 				instance = new EnchereManager();
-			} catch (DALException e) {
+			} 
+			catch (DALException e) 
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
