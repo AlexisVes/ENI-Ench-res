@@ -1,10 +1,14 @@
 package fr.eni.encheres.dal.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.EnchereDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
@@ -12,6 +16,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String SELECT_ENCHERE = "SELECT no_enchere, date_enchere, montant_enchere, no_article, no_utilisateur WHERE no_article = ?;";
 
+	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET date_enchere = ?; montant_enchere = ?, no_utilisateur = ? WHERE no_article = ?;";
 	
 	public Enchere getEnchere( int no_article )
 	{
@@ -33,12 +38,48 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			return enchere;
 			
 		}
-		catch( Exception e )
-		{
-			System.out.println("aie");
+		catch (SQLException e) {
+			//propager une exception personnalisée
+			e.printStackTrace();
+
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return null;
+	}
+
+
+	@Override
+	public void updateEnchere( Enchere enchere) {
+		
+Connection cnx = null;
+		
+		try {
+			
+			cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
+			
+			rqt.setDate(1,  Date.valueOf(enchere.getDate_enchere()));
+			rqt.setInt( 2 , enchere.getMontant_enchere() );
+			rqt.setInt( 3 , enchere.getNo_utilisateur() );
+			
+			ResultSet rs = rqt.executeQuery();
+			
+			
+		}
+		catch (SQLException e) {
+			//propager une exception personnalisée
+			e.printStackTrace();
+
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 }
