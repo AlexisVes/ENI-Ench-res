@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.RetraitManager;
@@ -76,6 +78,28 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
+		
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		
+		String pseudo = (String) session.getAttribute("connect");
+		
+		int userId = 0;
+		
+		try {
+			userId = userMgr.searchUser(pseudo).getUserId();
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int proposition = 0;
+		if( request.getParameter("proposition") != null)
+		{
+			proposition = Integer.parseInt(request.getParameter("proposition"));
+		}
+		
+		enchereMgr.controlerEnchere(proposition, article, userId);
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
 				
