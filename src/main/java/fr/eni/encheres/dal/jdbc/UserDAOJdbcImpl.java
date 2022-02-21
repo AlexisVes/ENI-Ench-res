@@ -15,7 +15,58 @@ public class UserDAOJdbcImpl implements UserDAO{
 	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
 	private static final String UPDATE_USER ="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE no_utilisateur = ?;";
 	private static final String DELETE_USER ="DELETE UTILISATEURS WHERE pseudo = ?;";
+	private static final String SELECT_USER_BY_ID ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur = ?";
 
+	
+	public User getUserById(int no_utilisateur) throws DALException
+	{
+		//Établir la connexion avec la bases de données 
+				Connection cnx = null;
+				User userBDD = null;
+				try {
+					cnx = ConnectionProvider.getConnection();
+
+					//créer la commande 
+					PreparedStatement rqt = cnx.prepareStatement(SELECT_USER_BY_ID);
+					//valoriser les paramètres
+					rqt.setInt(1, no_utilisateur);
+					//récupérer le contenu du SELECT_USER dans un resultset
+					ResultSet rs = rqt.executeQuery();
+					
+					//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
+					if(rs != null) {
+						rs.next();
+						int userId = rs.getInt(1);
+						String username =rs.getString(2);
+						String name = rs.getString(3);
+						String firstname = rs.getString(4);
+						String email = rs.getString(5);
+						String phone = rs.getString(6);
+						String street = rs.getString(7);
+						String zipCode = rs.getString(8);
+						String city = rs.getString(9);
+						String password = rs.getString(10);
+						int credit = rs.getInt(11);
+						byte admin = rs.getByte(12);
+						
+						//on créé l'objet userBDD
+						userBDD = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
+					} 
+					
+				} catch (SQLException e) {
+					System.out.println("user inconnu");
+					throw new DALException("Utilisateur inconnu");
+				}
+				
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return userBDD;
+	}
+	
 	@Override
 	/**
 	 * Methode permettant de récupérer un User depuis la base de données afin de le fournir aux couches supérieures
