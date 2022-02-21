@@ -75,6 +75,7 @@ public class Accueil extends HttpServlet {
 		int categorie = Integer.parseInt(request.getParameter("categorie"));
 		List<Article> articles = new ArrayList<Article>();
 		String pseudo = (String) session.getAttribute("connect");
+		boolean all = true;
 		
 		
 		if( categorie == 0 )
@@ -95,6 +96,32 @@ public class Accueil extends HttpServlet {
 			{
 				request.setAttribute("achat", true);
 				
+				if( request.getParameter("encheres_ouvertes") != null)
+				{
+					
+					if(articleMgr.getArticles( "on sell") != null )
+					{
+						for( Article article : articleMgr.getArticles("on sell"))
+						{
+							articles.add(article);
+						}
+					}
+					
+					all = false;
+					
+				}
+				
+				if( all )
+				{
+					if(articleMgr.getArticles("on sell") != null )
+					{
+						for( Article article : articleMgr.getArticles("on sell"))
+						{
+							articles.add(article);
+						}
+					}
+				}
+				
 				
 			}
 			
@@ -104,7 +131,7 @@ public class Accueil extends HttpServlet {
 				
 				if( request.getParameter("mes_ventes_ouvertes") != null)
 				{	
-					System.out.println( pseudo);
+
 					if(articleMgr.getMyArticles( pseudo, "on sell") != null )
 					{
 						for( Article article : articleMgr.getMyArticles( pseudo, "on sell"))
@@ -112,6 +139,8 @@ public class Accueil extends HttpServlet {
 							articles.add(article);
 						}
 					}
+					
+					all = false;
 					
 				}	
 				if( request.getParameter("mes_ventes_futur") != null)
@@ -123,6 +152,8 @@ public class Accueil extends HttpServlet {
 							articles.add(article);
 						}
 					}
+					
+					all = false;
 					
 				}
 				
@@ -136,6 +167,19 @@ public class Accueil extends HttpServlet {
 						}
 					}
 					
+					all = false;
+					
+				}
+				
+				if( all )
+				{
+					if(articleMgr.getMyArticles( pseudo, "sold") != null )
+					{
+						for( Article article : articleMgr.getMyArticles( pseudo, "all"))
+						{
+							articles.add(article);
+						}
+					}
 				}
 				
 			}

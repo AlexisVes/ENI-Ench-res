@@ -14,15 +14,13 @@ public interface ArticleDAO {
 	List<Article> getArticlesByName( String mot );
 	
 	List<Article> getArticlesByCat(String mot, int categorie);
-	
-	public List<Article> getFuturArticles() throws DALException;
-	
-	public List<Article> getSoldArticles() throws DALException;
 
 	public List<Article> getMyArticles(String pseudo) throws DALException;
 	
 	public List<Article> getMyFuturArticles(String pseudo) throws DALException;	
 
 	public List<Article> getMySoldArticles(String pseudo) throws DALException;
+	
+	public List<Article> getAllMyArticles(String pseudo) throws DALException;
 	
 }

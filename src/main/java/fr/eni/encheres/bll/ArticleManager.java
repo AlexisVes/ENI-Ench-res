@@ -135,6 +135,7 @@ public class ArticleManager {
 					case "on sell" : return articleDAO.getMyArticles(pseudo);
 					case "future" : return articleDAO.getMyFuturArticles(pseudo);
 					case "sold" : return articleDAO.getMySoldArticles(pseudo);
+					case "all" : return articleDAO.getAllMyArticles(pseudo);
 				}
 				
 			}	
@@ -160,8 +161,7 @@ public class ArticleManager {
 				switch(mode)
 				{
 					case "on sell" : return articleDAO.getArticles();
-					case "future" : return articleDAO.getFuturArticles();
-					case "sold" : return articleDAO.getSoldArticles();
+
 				}
 				
 			}	

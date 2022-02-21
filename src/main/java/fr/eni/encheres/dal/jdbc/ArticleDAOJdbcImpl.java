@@ -31,6 +31,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	
 	private static final String SEARCH_ARTICLE_NAME_CAT = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND nom_article LIKE ? AND date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
+	private static final String SELECT_ALL_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+														+ "FROM ARTICLES_VENDUS \r\n" 
+														+ "INNER JOIN UTILISATEURS \r\n"
+														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+														+ "WHERE pseudo = ?;";
 	
 	private static final String	SELECT_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
 													+ "FROM ARTICLES_VENDUS \r\n" 
@@ -51,17 +56,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 														+ "WHERE date_debut_encheres > GETDATE() AND pseudo = ?;";
 	
 
-	private static final String	SELECT_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
-														+ "FROM ARTICLES_VENDUS"
-														+ "INNER JOIN UTILISATEURS \r\n"
-														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
-														+ "date_fin_encheres < GETDATE();";
-	
-	private static final String	SELECT_FUTURE_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
-															+ "FROM ARTICLES_VENDUS"
-															+ "INNER JOIN UTILISATEURS \r\n"
-															+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
-															+ "WHERE date_debut_encheres > GETDATE();";
 												
 	
 	private List<Article> listerArticles( ResultSet rs, boolean user)
@@ -169,24 +163,17 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		return getAllArticles(SELECT_ARTICLES);
 		
 	}
-
-	public List<Article> getFuturArticles() throws DALException{	
-		
-		return getAllArticles(SELECT_FUTURE_ARTICLES );
-		
-	}
-	
-	public List<Article> getSoldArticles() throws DALException{	
-		
-		return getAllArticles(SELECT_SOLD_ARTICLES);
-		
-	}
-
 	
 	//retourne mes articles qui arriveront, sont, ou qui étaient en enchères
 	public List<Article> getMyArticles(String pseudo) throws DALException{	
 		
 		return getAllMyArticles(SELECT_MY_ARTICLES, pseudo);
+		
+	}
+	
+public List<Article> getAllMyArticles(String pseudo) throws DALException{	
+		
+		return getAllMyArticles(SELECT_ALL_MY_ARTICLES, pseudo);
 		
 	}
 
