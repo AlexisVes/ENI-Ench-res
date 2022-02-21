@@ -72,7 +72,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			
 		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
 		try {
-			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
+			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -82,19 +82,13 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		if( rd != null)
 		{
 			rd.forward(request, response);
-		}
-				
+		}		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		
-		
 		
 		
 		response.sendRedirect( request.getContextPath() + "/home");
