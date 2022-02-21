@@ -76,6 +76,7 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 				
 			}
 			
+			
 		} catch (SQLException e) {
 			//propager une exception personnalisée
 			throw new DALException("Problème d'extraction des retraits de la base. Cause : " + e.getMessage());

@@ -30,6 +30,7 @@ public class ArticleManager {
 		public synchronized static ArticleManager getInstance() {
 			if (instance == null) {
 				instance = new ArticleManager();
+				
 			}
 			return instance;
 		}
