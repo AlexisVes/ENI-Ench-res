@@ -66,7 +66,16 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//On récupère l'enchère en cours
+		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
 			
+		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
+		try {
+			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
 				
@@ -82,17 +91,13 @@ public class getDetailsOnSellServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
-		//On récupère l'enchère en cours
-		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
-		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
-		try {
-			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
 		
-		doGet(request, response);
+		
+		
+		
+		
+		
+		response.sendRedirect( request.getContextPath() + "/home");
 	}
 
 }

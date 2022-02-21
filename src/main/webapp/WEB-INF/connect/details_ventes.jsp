@@ -17,14 +17,22 @@
 	<p>${requestScope.article.nomArticle}</p>
 	<p><span class="detail_vente">Description :</span> ${requestScope.article.description}</p>
 	<p><span class="detail_vente">Catégorie :</span> ${requestScope.libelleCategorie}</p>
-	<p><span class="detail_vente">Meilleure offre :</span> </p>
+	<p><span class="detail_vente">Meilleure offre :</span> ${requestScope.enchere} crédits par ${requestScope.encherisseur} </p>
 	<p><span class="detail_vente">Mise à prix :</span> ${requestScope.article.prixInitial}</p>
 	<p><span class="detail_vente">Fin de l'enchère :</span> ${requestScope.article.dateFinEncheres}</p>
 	<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
 	<p><span class="detail_vente">Vendeur :</span> ${sessionScope.connect}</p>
 	<form action="${pageContext.request.contextPath}/connect/encherir" method="post">
 	<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
-		<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente}" required="required" min="${requestScope.article.prixVente}">
+		
+		<c:if test="${requestScope.enchere != null}">
+			<input type="number" name="proposition" placeholder="min : ${requestScope.enchere}" required="required" min="${requestScope.enchere}">
+		</c:if>
+		
+		<c:if test="${requestScope.enchere == null}">
+			<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente}" required="required" min="${requestScope.article.prixVente}">
+		</c:if>
+		
 		<button>Enchérir</button>
 	</form>
 </body>
