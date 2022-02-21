@@ -179,5 +179,10 @@ public class UserManager {
 		
 	}
 	
+	public User getUserById( int no_utisateur ) throws DALException
+	{
+		return userDAO.getUserById(no_utisateur);
+	}
+	
 }
 
