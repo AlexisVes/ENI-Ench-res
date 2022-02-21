@@ -1,6 +1,7 @@
 package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.Article;
@@ -118,6 +119,36 @@ public class ArticleManager {
 		}
 		
 		
+		public List<Article> orderArticleByNames(List<Article> articles, String recherche)
+		{
+			List<Article> ordererArticles = new ArrayList<Article>(); 
+			
+			for( Article article : articles)
+			{
+				if( article.getNomArticle().contains(recherche))
+				{
+					
+					ordererArticles.add(article);
+				}
+			}
+			return ordererArticles;
+		}
+		
+		public List<Article> orderArticleByCatAndNames(List<Article> articles, String recherche, int categorie )
+		{
+
+			List<Article> ordererArticles = new ArrayList<Article>(); 
+			
+			for( Article article : articles)
+			{
+				if( article.getNomArticle().contains(recherche) && article.getNoCategorie() == categorie )
+				{
+					
+					ordererArticles.add(article);
+				}
+			}
+			return ordererArticles;
+		}
 		
 		/**
 		 * 

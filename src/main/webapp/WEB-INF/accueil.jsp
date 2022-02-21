@@ -47,51 +47,57 @@
 			
 			<c:if test="${sessionScope.connect != null }">
 			
-				<c:if test="${requestScope.achat != null }">
-					<input type="radio"  name="achat" value="achat" checked>
-				</c:if>
-				<c:if test="${requestScope.achat == null }">
-					<input type="radio"  name="achat" value="achat">
-				</c:if>
-				
-				<label for="achat"> Achat </label>
-				
-				<c:if test="${requestScope.achat != null }">
+				<div class="select_filters">	
+						
+					<c:if test="${requestScope.achat != null }">
+						<input type="radio"  name="achat" value="achat" checked>
+					</c:if>
+					<c:if test="${requestScope.achat == null }">
+						<input type="radio"  name="achat" value="achat">
+					</c:if>
 					
-					<input type="checkbox" name="encheres_ouvertes">
-	  				<label for="encheres_ouvertes">Enchères ouvertes</label>
-	  				
-	  				<input type="checkbox" name="mes_encheres">
-	  				<label for="mes_encheres">Mes enchères</label>
-	  				
-	  				<input type="checkbox" name="mes_encheres_remportees">
-	  				<label for="mes_encheres_remportees">Mes enchères remportées</label>
-				
-				</c:if>
-				
-				<c:if test="${requestScope.vente != null }">
-					<input type="radio"  name="achat" value="vente" checked>
-				</c:if>
-				
-				<c:if test="${requestScope.vente == null }">
-					<input type="radio"  name="achat" value="vente">
-				</c:if>	
-				
-				
-				<label for="vente"> Mes ventes </label>
-				
-				<c:if test="${requestScope.vente != null }">
-				
-					<input type="checkbox" name="mes_ventes_ouvertes">
-		  			<label for="mes_ventes_ouvertes">Mes ventes en cours</label>
+					<label for="achat"> Achat </label>
+					
+					<c:if test="${requestScope.achat != null }">
+						
+						<input type="checkbox" name="encheres_ouvertes">
+		  				<label for="encheres_ouvertes">Enchères ouvertes</label>
 		  				
-		  			<input type="checkbox" name="mes_ventes_futur">
-		  			<label for="mes_ventes_futur">Ventes non débutées</label>
+		  				<input type="checkbox" name="mes_encheres">
+		  				<label for="mes_encheres">Mes enchères</label>
 		  				
-		  			<input type="checkbox" name="ventes_terminees">
-		  			<label for="ventes_terminees">Ventes terminées</label>
+		  				<input type="checkbox" name="mes_encheres_remportees">
+		  				<label for="mes_encheres_remportees">Mes enchères remportées</label>
 				
-				</c:if>
+					</c:if>
+				</div>
+				
+				<div class="select_filters">
+					<c:if test="${requestScope.vente != null }">
+						<input type="radio"  name="achat" value="vente" checked>
+					</c:if>
+					
+					<c:if test="${requestScope.vente == null }">
+						<input type="radio"  name="achat" value="vente">
+					</c:if>	
+					
+					
+					<label for="vente"> Mes ventes </label>
+					
+					<c:if test="${requestScope.vente != null }">
+					
+						<input type="checkbox" name="mes_ventes_ouvertes">
+			  			<label for="mes_ventes_ouvertes">Mes ventes en cours</label>
+			  				
+			  			<input type="checkbox" name="mes_ventes_futur">
+			  			<label for="mes_ventes_futur">Ventes non débutées</label>
+			  				
+			  			<input type="checkbox" name="ventes_terminees">
+			  			<label for="ventes_terminees">Ventes terminées</label>
+					
+					</c:if>
+				
+				</div>
 			
 			</c:if>
 			
