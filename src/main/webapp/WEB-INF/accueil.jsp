@@ -31,7 +31,7 @@
 		
 		<h2>Liste des enchères</h2>
 		
-		<form action="${pageContext.request.contextPath}/home" method="post" >
+		<form class="navigation_filters" action="${pageContext.request.contextPath}/home" method="post" >
 		
 			<input type="text" name="search" placeholder="Rechercher">
 			
@@ -96,9 +96,8 @@
 			</c:if>
 			
 			<input type="submit" value="Rechercher">
-		
 		</form>
-		
+
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
 		<c:forEach var="article" items="${requestScope.listeArticles}">
 			<article>

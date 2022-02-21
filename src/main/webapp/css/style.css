@@ -24,6 +24,7 @@ body{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-family: arial;
 }
 
 footer{
@@ -54,7 +55,6 @@ article{
 	padding: 1em;
 	margin-bottom : 2em;
 	width: 20%;
-	font-family: arial;
 }
 
 article:hover{
@@ -77,4 +77,13 @@ article:hover{
 
 .grid button{
 	grid-row: 11;
+}
+
+.detail_vente {
+	color: #e1bd29;
+	font-weight: bold;
+}
+
+.navigation_filters {
+	padding-bottom: 20px;
 }

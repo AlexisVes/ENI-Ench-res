@@ -6,18 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Detail Ventes</title>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Détail Ventes</h1>
+
+	<a href="${pageContext.request.contextPath}/home" ><img src="../img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
+
+	<h1>Détail de la vente</h1>
 	
 	<p>${requestScope.article.nomArticle}</p>
-	<p>Description : ${requestScope.article.description}</p>
-	<p>Catégorie : ${requestScope.libelleCategorie}</p>
-	<p>Meilleure offre : </p>
-	<p>Mise à prix : ${requestScope.article.prixInitial}</p>
-	<p>Fin de l'enchère : ${requestScope.article.dateFinEncheres}</p>
-	<p>Retrait : ${requestScope.retrait.rue}</p>
-	<p>${requestScope.retrait.codePostal} ${requestScope.retrait.ville}</p>
-	<p>Vendeur : ${sessionScope.connect}</p>
+	<p><span class="detail_vente">Description :</span> ${requestScope.article.description}</p>
+	<p><span class="detail_vente">Catégorie :</span> ${requestScope.libelleCategorie}</p>
+	<p><span class="detail_vente">Meilleure offre :</span> </p>
+	<p><span class="detail_vente">Mise à prix :</span> ${requestScope.article.prixInitial}</p>
+	<p><span class="detail_vente">Fin de l'enchère :</span> ${requestScope.article.dateFinEncheres}</p>
+	<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
+	<p><span class="detail_vente">Vendeur :</span> ${sessionScope.connect}</p>
+	<form action="" method="post">
+	<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
+		<input type="number" name="proposition" placeholder="${requestScope.article.prixVente}">
+		<button>Enchérir</button>
+	</form>
 </body>
 </html>
