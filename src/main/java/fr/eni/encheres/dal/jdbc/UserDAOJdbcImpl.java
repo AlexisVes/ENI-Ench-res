@@ -70,7 +70,8 @@ public class UserDAOJdbcImpl implements UserDAO{
 	
 	public void insertUser( User user ) throws DALException
 	{
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		Connection cnx = ConnectionProvider.getConnection();
+		try {
 			
 			//On prepare la requête SQL
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -89,10 +90,10 @@ public class UserDAOJdbcImpl implements UserDAO{
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 	
-			cnx.close();
+			
 			
 		} 
-		catch (DALException | SQLException e) 
+		catch (SQLException e) 
 		{
 			
 			if( e.getMessage().contains("UK_email"))
@@ -105,6 +106,11 @@ public class UserDAOJdbcImpl implements UserDAO{
 			}
 
 		}
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -112,9 +118,9 @@ public class UserDAOJdbcImpl implements UserDAO{
 	public void updateUser(User user) throws DALException {
 		//Établir la connexion avec la bases de données 
 		PreparedStatement rqt;
-		
+		Connection cnx = ConnectionProvider.getConnection();
 		//créer la commande 
-		try(Connection cnx = ConnectionProvider.getConnection()) {
+		try {
 			rqt = cnx.prepareStatement(UPDATE_USER);
 			
 			//on envoie les données dans la BDD pour que celles-ci soient modifiées 
@@ -130,8 +136,12 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setInt(10, user.getUserId());
 			//Éxécution de la requête SQL
 			rqt.executeUpdate();
-			cnx.close();
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			cnx.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -142,16 +152,20 @@ public class UserDAOJdbcImpl implements UserDAO{
 	public void deleteUser(String pseudo) throws DALException {
 		//Établir la connexion avec la bases de données et créer la commande
 		PreparedStatement rqt;
-		try(Connection cnx = ConnectionProvider.getConnection()) {
+		Connection cnx = ConnectionProvider.getConnection();
+		try {
 			rqt = cnx.prepareStatement(DELETE_USER);
 			rqt.setString(1, pseudo);
 			//Éxécution de la requête de suppression en SQL
 			rqt.executeUpdate();
-			cnx.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

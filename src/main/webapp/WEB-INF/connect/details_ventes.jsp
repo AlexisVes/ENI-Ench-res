@@ -12,7 +12,7 @@
 	
 	<p>${requestScope.article.nomArticle}</p>
 	<p>Description : ${requestScope.article.description}</p>
-	<p>Catégorie : ${requestScope.libelleCategorie}</p>
+	<p>Catégorie : ${requestScope.libelleCategorie.value}</p>
 	<p>Meilleure offre : </p>
 	<p>Mise à prix : ${requestScope.article.prixInitial}</p>
 	<p>Fin de l'enchère : ${requestScope.article.dateFinEncheres}</p>

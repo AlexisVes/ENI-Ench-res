@@ -43,7 +43,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		int noArticle = article.getNoArticle();
 		
 		//On vérifie que le libellé de catégorie n'est pas null
-		if(categorieMgr.getLibelleCategorie((int) request.getAttribute("noCategorie")) != null){
+		if(categorieMgr.getLibelleCategorie(article.getNoCategorie()) != null){
 			String libelleCategorie = categorieMgr.getLibelleCategorie((int) request.getAttribute("noCategorie"));
 			request.setAttribute("libelleCategorie", libelleCategorie);
 		}
