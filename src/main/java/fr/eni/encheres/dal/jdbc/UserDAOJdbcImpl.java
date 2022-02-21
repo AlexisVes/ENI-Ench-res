@@ -27,7 +27,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 					cnx = ConnectionProvider.getConnection();
 
 					//créer la commande 
-					PreparedStatement rqt = cnx.prepareStatement(SELECT_USER_BY_ID);
+					PreparedStatement rqt = cnx.prepareStatement(SELECT_USER_BY_ID );
 					//valoriser les paramètres
 					rqt.setInt(1, no_utilisateur);
 					//récupérer le contenu du SELECT_USER dans un resultset
