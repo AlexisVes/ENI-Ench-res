@@ -24,6 +24,7 @@ body{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-family: arial;
 }
 
 footer{
@@ -54,7 +55,6 @@ article{
 	padding: 1em;
 	margin-bottom : 2em;
 	width: 20%;
-	font-family: arial;
 }
 
 article:hover{
@@ -79,8 +79,18 @@ article:hover{
 	grid-row: 11;
 }
 
+<<<<<<< HEAD
+.detail_vente {
+	color: #e1bd29;
+	font-weight: bold;
+}
+
+.navigation_filters {
+	padding-bottom: 20px;
+=======
 form .select_filters{
 	
 	display: flex;
 	flex-direction: column;
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 }
