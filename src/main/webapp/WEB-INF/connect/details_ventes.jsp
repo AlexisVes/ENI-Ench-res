@@ -20,7 +20,6 @@
 	<p>${requestScope.retrait.codePostal} ${requestScope.retrait.ville}</p>
 	<p>Vendeur : ${requestScope.artile.pseudo}
 	
-	
 
 
 </body>
