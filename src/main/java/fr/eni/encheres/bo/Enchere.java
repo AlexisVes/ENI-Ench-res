@@ -4,13 +4,15 @@ import java.time.LocalDate;
 
 public class Enchere {
 	
+	int no_enchere;
 	LocalDate date_enchere;
 	int montant_enchere;
 	int no_article;
 	int no_utilisateur;
 	
-	public Enchere(LocalDate date_enchere, int montant_enchere, int no_article, int no_utilisateur) {
+	public Enchere( int no_enchere, LocalDate date_enchere, int montant_enchere, int no_article, int no_utilisateur) {
 		super();
+		this.no_enchere = no_enchere;
 		this.date_enchere = date_enchere;
 		this.montant_enchere = montant_enchere;
 		this.no_article = no_article;
