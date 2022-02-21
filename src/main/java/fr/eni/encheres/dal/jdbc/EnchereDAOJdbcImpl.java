@@ -18,6 +18,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET date_enchere = ?; montant_enchere = ?, no_utilisateur = ? WHERE no_article = ?;";
 	
+	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no-utilisateur) VALUES(?,?,?,?);";
+	
 	public Enchere getEnchere( int no_article )
 	{
 		
@@ -54,7 +56,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	@Override
 	public void updateEnchere( Enchere enchere) {
 		
-Connection cnx = null;
+		Connection cnx = null;
 		
 		try {
 			
@@ -79,6 +81,46 @@ Connection cnx = null;
 			e.printStackTrace();
 		}
 		
+		
+	}
+
+
+	@Override
+	public void insertEnchere(Enchere enchere) {
+		
+		Connection cnx = null;
+		
+		try {
+			
+			cnx = ConnectionProvider.getConnection();
+			
+			PreparedStatement rqt = cnx.prepareStatement(INSERT_ENCHERE);
+			
+			
+			rqt.setDate(1,  Date.valueOf(enchere.getDate_enchere()));
+			rqt.setInt( 2, enchere.getMontant_enchere() );
+			rqt.setInt(3, enchere.getNo_article());
+			rqt.setInt( 4 , enchere.getNo_utilisateur() );
+			
+			ResultSet rs = rqt.executeQuery();
+			
+			
+		}
+		catch (SQLException e) {
+			//propager une exception personnalisée
+			e.printStackTrace();
+
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

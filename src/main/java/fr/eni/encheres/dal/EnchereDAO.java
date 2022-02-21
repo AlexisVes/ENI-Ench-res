@@ -7,5 +7,7 @@ public interface EnchereDAO {
 	Enchere getEnchere( int no_article );
 	
 	void updateEnchere( Enchere enchere );
+	
+	void insertEnchere( Enchere enchere );
 
 }

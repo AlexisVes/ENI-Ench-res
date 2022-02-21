@@ -210,7 +210,6 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			//exécuter la requête vers la BDD
 			rqt.executeUpdate();
 			
-			cnx.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
