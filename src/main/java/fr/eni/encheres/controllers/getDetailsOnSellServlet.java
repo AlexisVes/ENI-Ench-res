@@ -85,7 +85,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
 		//On récupère l'enchère en cours
 		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
-		request.setAttribute("enchere", enchere.getMontant_enchere());
+		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
 		try {
 			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getNom());
 		} catch (DALException e) {
