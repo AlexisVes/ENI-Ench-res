@@ -32,52 +32,38 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SEARCH_ARTICLE_NAME_CAT = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND nom_article LIKE ? AND date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
 	
-	private static final String	SELECT_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private static final String	SELECT_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
 													+ "FROM ARTICLES_VENDUS"
-													+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE() AND no_utilisateur = ?;";
+													+ "INNER JOIN UTILISATEURS \r\n"
+													+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+													+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE() AND pseudo = ?;";
 	
-	private static final String	SELECT_MY_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private static final String	SELECT_MY_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
 															+ "FROM ARTICLES_VENDUS"
-															+ "date_fin_encheres < GETDATE() AND no_utilisateur = ?;";
+															+ "INNER JOIN UTILISATEURS \r\n"
+															+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+															+ "date_fin_encheres < GETDATE() AND pseudo = ?;";
 	
-	private static final String	SELECT_MY_FUTUR_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+	private static final String	SELECT_MY_FUTURE_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
 														+ "FROM ARTICLES_VENDUS"
-														+ "WHERE date_debut_encheres > GETDATE() AND no_utilisateur = ?;";
+														+ "INNER JOIN UTILISATEURS \r\n"
+														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+														+ "WHERE date_debut_encheres > GETDATE() AND pseudo = ?;";
+	
+
+	private static final String	SELECT_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
+														+ "FROM ARTICLES_VENDUS"
+														+ "INNER JOIN UTILISATEURS \r\n"
+														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+														+ "date_fin_encheres < GETDATE();";
+	
+	private static final String	SELECT_FUTURE_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente,  ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo"
+															+ "FROM ARTICLES_VENDUS"
+															+ "INNER JOIN UTILISATEURS \r\n"
+															+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
+															+ "WHERE date_debut_encheres > GETDATE();";
 												
 	
-	public List<Article> getArticles() throws DALException{
-		
-		
-		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
-		
-		Connection cnx = null;
-		
-		try {
-				
-			cnx = ConnectionProvider.getConnection();		
-				
-			Statement rqt = cnx.createStatement();
-			
-			ResultSet rs = rqt.executeQuery(SELECT_ARTICLES);
-			Article articleCourant = null;
-			
-			lesArticlesExtraits  = listerArticles(rs, true);
-			
-		} catch (SQLException e) {
-			//propager une exception personnalisée
-			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
-		}
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return lesArticlesExtraits ;
-	}
-
-
 	private List<Article> listerArticles( ResultSet rs, boolean user)
 			throws SQLException {
 		Article articleCourant;
@@ -105,6 +91,116 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		
 		return searchList;
+	}
+	
+	private List<Article> getAllArticles(String sql_rqt) throws DALException {
+		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
+		
+		Connection cnx = null;
+		
+		try {
+			
+			cnx = ConnectionProvider.getConnection();		
+			
+			Statement rqt = cnx.createStatement();
+			
+			ResultSet rs = rqt.executeQuery(sql_rqt);
+			Article articleCourant = null;
+			
+			lesArticlesExtraits  = listerArticles(rs, true);
+			
+		} catch (SQLException e) {
+			//propager une exception personnalisée
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		}
+		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lesArticlesExtraits ;
+	}
+	
+	private List<Article> getAllMyArticles( String sql_rqt, String pseudo) throws DALException{
+		
+		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
+		
+		Connection cnx = null;
+		
+		try {
+			
+			cnx = ConnectionProvider.getConnection();		
+			
+			PreparedStatement rqt = cnx.prepareStatement(sql_rqt);
+			
+			rqt.setString(1, pseudo);
+			
+			ResultSet rs = rqt.executeQuery();
+			
+			Article articleCourant = null;
+			
+			lesArticlesExtraits  = listerArticles(rs, false);
+							
+		} 
+		catch (SQLException e) {
+			//propager une exception personnalisée
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lesArticlesExtraits ;
+		
+		
+	}
+	
+	
+	//retourne les articles qui arriveront, sont, ou qui étaient en enchères
+	public List<Article> getArticles() throws DALException{	
+		
+		return getAllArticles(SELECT_ARTICLES);
+		
+	}
+
+	public List<Article> getFuturArticles() throws DALException{	
+		
+		return getAllArticles(SELECT_FUTURE_ARTICLES );
+		
+	}
+	
+	public List<Article> getSoldArticles() throws DALException{	
+		
+		return getAllArticles(SELECT_SOLD_ARTICLES);
+		
+	}
+
+	
+	//retourne mes articles qui arriveront, sont, ou qui étaient en enchères
+	public List<Article> getMyArticles(String pseudo) throws DALException{	
+		
+		return getAllMyArticles(SELECT_MY_ARTICLES, pseudo);
+		
+	}
+
+	public List<Article> getMyFuturArticles(String pseudo) throws DALException{	
+		
+		return getAllMyArticles(SELECT_MY_FUTURE_ARTICLES, pseudo );
+		
+	}
+	
+	public List<Article> getMySoldArticles(String pseudo) throws DALException{	
+		
+		return getAllMyArticles(SELECT_MY_SOLD_ARTICLES, pseudo);
+		
 	}
 
 
