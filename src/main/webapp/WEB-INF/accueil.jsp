@@ -47,7 +47,13 @@
 			
 			<c:if test="${sessionScope.connect != null }">
 			
-				<input type="radio"  name="achat" value="achat">
+				<c:if test="${requestScope.achat != null }">
+					<input type="radio"  name="achat" value="achat" checked>
+				</c:if>
+				<c:if test="${requestScope.achat == null }">
+					<input type="radio"  name="achat" value="achat">
+				</c:if>
+				
 				<label for="achat"> Achat </label>
 				
 				<c:if test="${requestScope.achat != null }">
@@ -63,7 +69,15 @@
 				
 				</c:if>
 				
-				<input type="radio"  name="vente" value="vente">
+				<c:if test="${requestScope.vente != null }">
+					<input type="radio"  name="achat" value="vente" checked>
+				</c:if>
+				
+				<c:if test="${requestScope.vente == null }">
+					<input type="radio"  name="achat" value="vente">
+				</c:if>	
+				
+				
 				<label for="vente"> Mes ventes </label>
 				
 				<c:if test="${requestScope.vente != null }">

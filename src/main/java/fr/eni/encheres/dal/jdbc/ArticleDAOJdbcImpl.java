@@ -14,6 +14,7 @@ import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DALException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
+	
 	private static final String SELECT_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
 												+ "FROM ARTICLES_VENDUS \r\n"
 												+ "INNER JOIN UTILISATEURS \r\n"
@@ -30,6 +31,19 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	
 	private static final String SEARCH_ARTICLE_NAME_CAT = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ? AND nom_article LIKE ? AND date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
+	
+	private static final String	SELECT_MY_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+													+ "FROM ARTICLES_VENDUS"
+													+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE() AND no_utilisateur = ?;";
+	
+	private static final String	SELECT_MY_SOLD_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+															+ "FROM ARTICLES_VENDUS"
+															+ "date_fin_encheres < GETDATE() AND no_utilisateur = ?;";
+	
+	private static final String	SELECT_MY_FUTUR_ARTICLES = " SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie"
+														+ "FROM ARTICLES_VENDUS"
+														+ "WHERE date_debut_encheres > GETDATE() AND no_utilisateur = ?;";
+												
 	
 	public List<Article> getArticles() throws DALException{
 		
