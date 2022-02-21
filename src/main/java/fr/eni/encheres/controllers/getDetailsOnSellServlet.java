@@ -69,14 +69,17 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//On récupère l'enchère en cours
+		//On récupère l'enchère en cours (si elle existe...)
 		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
+		
+		if (enchere != null) {
+			request.setAttribute("enchere", enchere.getMontant_enchere()) ;
+			try {
+				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
 			
-		request.setAttribute("enchere", enchere.getMontant_enchere()) ;
-		try {
-			request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
-		} catch (DALException e) {
-			e.printStackTrace();
 		}
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
