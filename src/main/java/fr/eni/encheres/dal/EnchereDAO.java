@@ -12,4 +12,7 @@ public interface EnchereDAO {
 	
 	void insertEnchere (  LocalTime now, int prix, int no_utilisateur );
 
+	
+
+
 }
