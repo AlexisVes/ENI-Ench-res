@@ -293,5 +293,21 @@ public class ArticleManager
 			}
 			return null;
 		}
+		
+		
+		public void deleteArticle( int no_article ) throws BLLException
+		{
+			try
+{
+				articleDAO.deleteArticle(no_article);
+			} 
+			catch (DALException e) 
+			{
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;
+			}
+		}
 
 }

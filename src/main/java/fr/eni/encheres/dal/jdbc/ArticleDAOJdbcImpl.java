@@ -57,7 +57,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 														+ "WHERE date_debut_encheres > GETDATE() AND pseudo = ?;";
 	
-
+	private static final String	DELETE_ARTICLE = " DELETE ARTICLES WHERE no_article=?;";
 												
 	
 	/**
@@ -351,6 +351,26 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		} 	
 	
 		return searchList;
+	}
+
+
+	@Override
+	public void deleteArticle(int noArticle) throws DALException 
+	{
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement rqt = cnx.prepareStatement(DELETE_ARTICLE);
+			
+			rqt.setInt(1, noArticle);
+			
+			int rs = rqt.executeUpdate();
+					
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		} 	
 	}
 	
 }

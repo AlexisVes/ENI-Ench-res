@@ -1,6 +1,7 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,6 +90,16 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());		
 				
 				request.setAttribute("dateEnchere", enchere.getDate_enchere());
+			}
+			
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			
+			//On récupère le pseudo de l'utilisateur en cours
+			String pseudo = (String) session.getAttribute("connect");
+			
+			if( LocalDate.now().isBefore(article.getDateFinEncheres()) && article.getNoUtilisateur() == userMgr.getIdByPseudo(pseudo))
+			{
+				request.setAttribute("delete", "delete");
 			}
 		
 		}

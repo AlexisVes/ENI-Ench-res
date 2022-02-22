@@ -62,9 +62,9 @@ public class RetraitDAOJdbcImpl implements RetraitDAO
 			
 			ResultSet rs = rqt.executeQuery();
 			
+			rs.next();
 			if( rs != null) 
 			{
-				rs.next();
 				
 				int no_article = rs.getInt(1);
 				String rue = rs.getString(2);

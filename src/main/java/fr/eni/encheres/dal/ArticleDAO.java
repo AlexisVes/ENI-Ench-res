@@ -73,4 +73,11 @@ public interface ArticleDAO {
 	 */
 	public List<Article> getAllMyArticles(String pseudo) throws DALException;
 	
+	/**
+	 * Delete un article qui a pour no_article notre int en paramètre
+	 * dans notre BDD
+	 * @param noArticle
+	 * @throws DALException
+	 */
+	public void deleteArticle( int noArticle) throws DALException;
 }

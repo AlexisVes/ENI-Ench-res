@@ -46,6 +46,10 @@
 				
 			<input type="submit" value="Valider">
 			
+			<c:if test="${requestScope.delete}">
+				<a href="${pageContext.request.contextPath}/delete_article?article=${requestScope.article.noArticle}"> Supprimer l'article </a>
+			</c:if>
+			
 		</form>
 		
 	</body>
