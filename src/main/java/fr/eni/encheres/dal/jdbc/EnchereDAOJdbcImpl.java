@@ -22,6 +22,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
 	
+	private static final String DELETE_ENCHERE_BY_NO_ARTICLE = "DELETE ENCHERES WHERE no_article = ?;";
+	
 	public Enchere getEnchere( int no_article ) throws DALException
 	{
 		
@@ -104,6 +106,28 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} 
 
 
+	}
+	
+	public void deleteEnchereByNoArticle (int noArticle) throws DALException {
+		
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			
+			PreparedStatement rqt = cnx.prepareStatement(DELETE_ENCHERE_BY_NO_ARTICLE);
+			
+			//on valorise le paramètre avec le numéro de l'article
+			rqt.setInt(1, noArticle);
+			
+			//on execute le delete
+			rqt.executeUpdate();
+			
+		}
+		catch (SQLException | DALException e) 
+		{
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		} 
+		
 	}
 	
 }
