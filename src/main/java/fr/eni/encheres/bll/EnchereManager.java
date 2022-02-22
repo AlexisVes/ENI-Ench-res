@@ -53,6 +53,11 @@ public class EnchereManager {
 		}
 		
 	}
+	
+	public void insertEnchere( Enchere enchere )
+	{
+		enchereDAO.insertEnchere(enchere);
+	}
 
 	public synchronized static EnchereManager getInstance()
 {
