@@ -192,9 +192,10 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 
 	@Override
 	public void insertArticle(Article article) throws DALException {
-		
+		Connection cnx = null;
 		//on prepare la requête pour ajouter l'article en BDD		
-		try(Connection cnx = ConnectionProvider.getConnection()){
+		try{
+			cnx = ConnectionProvider.getConnection();
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
 			
 			//on valorise les paramètres de la requête 
@@ -211,6 +212,12 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			rqt.executeUpdate();
 			
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			cnx.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
