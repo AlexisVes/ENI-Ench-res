@@ -29,7 +29,7 @@
 		<p><span class="detail_vente">Mise à prix :</span> ${requestScope.article.prixInitial}</p>
 		<p><span class="detail_vente">Fin de l'enchère :</span> ${requestScope.article.dateFinEncheres}</p>
 		<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
-		<p><span class="detail_vente">Vendeur :</span> ${sessionScope.connect}</p>
+		<p><span class="detail_vente">Vendeur :</span> ${requestScope.nomVendeur}</p>
 		
 		
 		<form action="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${requestScope.article.nomArticle}" method="post">
