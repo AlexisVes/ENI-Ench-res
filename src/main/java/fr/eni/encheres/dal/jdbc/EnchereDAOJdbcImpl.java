@@ -61,7 +61,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
-			
+
 			rqt.setTimestamp(1, Timestamp.valueOf(now));
 			rqt.setInt( 2 , prix );
 			rqt.setInt( 3 , no_utilisateur );
