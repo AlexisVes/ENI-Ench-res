@@ -70,9 +70,8 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		}
 		
 		//On récupère l'enchère en cours (si elle existe...)
-		Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
-		
-		if (enchere != null) {
+		if (enchereMgr.getEnchere(article.getNoArticle()) != null) {
+			Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
 			request.setAttribute("enchere", enchere.getMontant_enchere()) ;
 			try {
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
@@ -96,6 +95,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		}
 		
 		int proposition = 0;
+		System.out.println("oui" + request.getParameter("proposition"));
 		if( request.getParameter("proposition") != null)
 		{
 			proposition = Integer.parseInt(request.getParameter("proposition"));
@@ -117,8 +117,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		response.sendRedirect( request.getContextPath() + "/home");
-	}
+		doGet(request, response);
 
+	}
 }
