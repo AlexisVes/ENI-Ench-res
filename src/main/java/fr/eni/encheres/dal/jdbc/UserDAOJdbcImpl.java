@@ -123,7 +123,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			rqt.setString(9, user.getPassword());
 			
 			//Éxécution de la requête SQL
-			int numberAffectedLines = rqt.executeUpdate();
+			rqt.executeUpdate();
 	
 		} 
 		catch (SQLException e) 
@@ -137,9 +137,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			{
 				throw new DALException("Pseudo déjà existant");
 			}
-
 		}
-		
 	}
 
 	@Override
@@ -185,3 +183,4 @@ public class UserDAOJdbcImpl implements UserDAO{
 		}
 	}
 }
+
