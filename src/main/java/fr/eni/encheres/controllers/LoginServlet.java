@@ -15,23 +15,23 @@ import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
 
 /**
+ * Affiche la page de connection, et permet de l'utilisateur de se connecter
  * Servlet implementation class LoginServlet
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
+
+    public LoginServlet() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     UserManager userManager = UserManager.getInstance();
 
 	/**
+	 * Affiche la page login.jsp
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,49 +53,52 @@ public class LoginServlet extends HttpServlet {
 		String pseudo = "";
 		
 		//Si l'utilisateur a bien rentré un pseudo, nous l'assimilons à une variable pseudo
-		if ( request.getParameter("pseudo") != null || request.getParameter("pseudo") != "") {
-			
-			pseudo = request.getParameter("pseudo");
-			
+		if ( request.getParameter("pseudo") != null || request.getParameter("pseudo") != "") 
+		{
+			pseudo = request.getParameter("pseudo");		
 		}
 		
 		String password = "";
 		
 		//Si l'utilisateur a bien rentré un mot de passe, nous l'assimilons à une variable password
-		if ( request.getParameter("password") != null || request.getParameter("password") != "") {
-			
+		if ( request.getParameter("password") != null || request.getParameter("password") != "") 
+		{	
 			password = request.getParameter("password");
-			
 		}
 		
 		// Nous vérifions si les données rentrées par l'utilisateurs correspondent à un utilisateurs dans notre base de données
 		// Si oui on ouvre une session qui correspond à une connection réussie
-		try {
+		try 
+		{
+			//Si nous trouvons bien un utilisateur avec ce pseudo associé, au bon mot de passe
 			if ( userManager.searchUser(pseudo, password) == true ){
 				
 				HttpSession session = ((HttpServletRequest)request).getSession();
 				
+				//Si l'utilisateur a coché "se souvenir"
 				if(  request.getParameter("souvenir") != null )
 				{
-					// create objet cookie 
+					// On créée de nouveaux objets Cookie
 					Cookie login = new Cookie("login", pseudo); 
 					Cookie mdp = new Cookie("password", password); 
-					// set the validity 
+					
+					// On définit leurs durées maximum
 					login.setMaxAge(24*3600); 
 					mdp.setMaxAge(24*3600);
-					// send cookie via HTTP 
+					
+					// On envoi les cookie via HTTP 
 					response.addCookie(login);
 					response.addCookie(mdp);				
 				}
 				
-				
+				// On crée un attribut de session connect, son éxistance détermine que l'utilisateur est crée
 				session.setAttribute("connect", pseudo);
 				
+				//On affiche la page d'accueil
 				response.sendRedirect( request.getContextPath() + "/home"); 
 				return;
-
 			}
-		
+
 		} 
 		catch (BLLException e) 
 		{

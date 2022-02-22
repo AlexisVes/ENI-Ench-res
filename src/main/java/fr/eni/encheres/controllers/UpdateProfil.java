@@ -20,12 +20,10 @@ import fr.eni.encheres.bo.User;
 public class UpdateProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateProfil() {
+
+    public UpdateProfil() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     UserManager userManager = UserManager.getInstance();
@@ -36,16 +34,22 @@ public class UpdateProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try {
+		try 
+		{
+			//Créer un objet User de l'utilisateur connecté
 			User user = userManager.searchUser(request.getParameter("pseudo"));
 			
+			//Le renvoi dans un attribut
 			request.setAttribute("userProfil", user);
 			
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (BLLException e) 
+		{
+			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
+		//Renvoi à la page update_profil.jsp
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/update_profil.jsp");
 		
 		if( rd != null)
@@ -61,6 +65,7 @@ public class UpdateProfil extends HttpServlet {
 		
 		try {
 			
+			//Si l'utilisateur a rentrer son bon mot de passe
 			boolean verification = userManager.searchUser(request.getParameter("pseudo"), request.getParameter("password"));
 			
 			if( verification )
@@ -135,7 +140,7 @@ public class UpdateProfil extends HttpServlet {
 				}
 				else
 				{
-					exception.addMessage("Veuillez rentrer un téléphone");
+					exception.addMessage("Veuillez rentrer un téléphone") ;
 				}
 				
 				
@@ -210,10 +215,15 @@ public class UpdateProfil extends HttpServlet {
 			}
 			
 			
-		} catch (BLLException e) {
+		} catch (BLLException e) 
+		{
 			request.setAttribute("message", e.getMessages());
-		} catch (ControllersException e) {
+			e.printStackTrace();
+		}
+		catch (ControllersException e)
+		{
 			request.setAttribute("message", e.getMessages());
+			e.printStackTrace();
 		} 
 		
 		doGet(request, response);

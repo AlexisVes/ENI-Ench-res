@@ -22,18 +22,18 @@ import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
 
 /**
+ * Affiche les différents détails sur une vente
  * Servlet implementation class getDetailsOnSellServlet
  */
 @WebServlet("/connect/sell_details")
 public class getDetailsOnSellServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public getDetailsOnSellServlet() {
+
+    public getDetailsOnSellServlet() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     CategorieManager categorieMgr = CategorieManager.getInstance();
@@ -47,63 +47,89 @@ public class getDetailsOnSellServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Récupère l'objet Article correspondant à celui dont on veux afficher les détails
 		Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
+		
+		//Récupère le numéro d'article de notre article
 		int noArticle = article.getNoArticle();
 		
 		//On vérifie que le libellé de catégorie n'est pas null
-		if(categorieMgr.getLibelleCategorie(article.getNoCategorie()) != null){
+		if(categorieMgr.getLibelleCategorie(article.getNoCategorie()) != null)
+		{
+			//On récupère dans une variable le libellé de notre catégorie
 			String libelleCategorie = categorieMgr.getLibelleCategorie(article.getNoCategorie());
+			//Et on l'insère dans un attribut
 			request.setAttribute("libelleCategorie", libelleCategorie);
 		} 
+		
 		//On récupère le prix de départ de l'article 
-		if(request.getParameter("nomArticle") != null) {
+		if(request.getParameter("nomArticle") != null) 
+		{
 			request.setAttribute("article", article);
 		}
 		
 		//On recupère le lieu du retrait que l'on envoie en attribut 
-		try {
+		try 
+		{
 			Retrait retrait = retraitMgr.getRetrait(noArticle);
 			request.setAttribute("retrait", retrait);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (DALException e) 
+		{
+			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
 		//On récupère l'enchère en cours (si elle existe...)
-		if (enchereMgr.getEnchere(article.getNoArticle()) != null) {
+		if (enchereMgr.getEnchere(article.getNoArticle()) != null) 
+		{
+			//Récupère l'objet Enchere pour notre article
 			Enchere enchere = enchereMgr.getEnchere(article.getNoArticle());
+			//Renvoi le montant de l'enchère dans un attribut
 			request.setAttribute("enchere", enchere.getMontant_enchere()) ;
-			try {
+			try 
+			{
+				//Renvoi dans un attribut le nom de l'encherisseur
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());
-			} catch (DALException e) {
+			}
+			catch (DALException e) 
+			{
 				e.printStackTrace();
+				request.setAttribute("message", e.getMessage());
 			}
 			
 		}
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
+		//On récupère le pseudo de l'utilisateur en cours
 		String pseudo = (String) session.getAttribute("connect");
 		
 		int userId = 0;
 		
-		try {
+		try 
+		{
+			//On récupère le numéro d'utilisateur de l'utilisateur actuellement connecté
 			userId = userMgr.searchUser(pseudo).getUserId();
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (BLLException e) 
+		{
+			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
 		int proposition = 0;
-		System.out.println("oui" + request.getParameter("proposition"));
+
+		//Si l'utilisateur a fait une proposition d'enchère, on l'a récupère
 		if( request.getParameter("proposition") != null)
 		{
 			proposition = Integer.parseInt(request.getParameter("proposition"));
-		}
+			
+			//On met à jour l'enchère de notre article
+			enchereMgr.controlerEnchere(proposition, article, userId);
+		}	
 		
-		enchereMgr.controlerEnchere(proposition, article, userId);
-		
-		
+		//On affiche la page: details_ventes
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/details_ventes.jsp");
 				
 		if( rd != null)
