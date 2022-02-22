@@ -7,12 +7,33 @@ import fr.eni.encheres.bo.Enchere;
 
 public interface EnchereDAO {
 	
-	Enchere getEnchere( int no_article );
+	/**
+	 * @param no_article
+	 * @return un Objet enchère qui provient de la BDD qui a pour no_article, celui indiqué en paramètre
+	 * @throws DALException
+	 */
+	Enchere getEnchere( int no_article ) throws DALException;
 	
-	void updateEnchere(  LocalDate now, int prix, int no_utilisateur, int no_article );
 	
-	void insertEnchere ( Enchere enchere);
-
+	/**
+	 * Modifie dans la base de données un utilisateur qui a pour no_article
+	 * celui indiqué en parèmetre.
+	 * Modifie sa date, son prix, et son enchérisseur
+	 * @param now
+	 * @param prix
+	 * @param no_utilisateur
+	 * @param no_article
+	 * @throws DALException
+	 */
+	void updateEnchere(  LocalDate now, int prix, int no_utilisateur, int no_article ) throws DALException;
+	
+	
+	/**
+	 * Ajoute en BDD une nouvelle enchère
+	 * @param enchere
+	 * @throws DALException
+	 */
+	void insertEnchere ( Enchere enchere) throws DALException;
 	
 
 

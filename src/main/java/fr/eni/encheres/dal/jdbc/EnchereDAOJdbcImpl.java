@@ -20,10 +20,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
 	
-	public Enchere getEnchere( int no_article )
+	public Enchere getEnchere( int no_article ) throws DALException
 	{
 		
-		try (Connection cnx = ConnectionProvider.getConnection()) {
+		try (Connection cnx = ConnectionProvider.getConnection()) 
+		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_ENCHERE);
 			
@@ -37,25 +38,25 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			{
 				enchere = new Enchere( rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getInt(3), rs.getInt(4), rs.getInt(5));
 			}
-			cnx.close();
 			
 			return enchere;
 			
 		}
-		catch (SQLException | DALException e) {
-			//propager une exception personnalisée
+		catch (SQLException | DALException e)
+		{
 			e.printStackTrace();
-
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
-		
-		return null;
+
 	}
 
 
 	@Override
-	public void updateEnchere( LocalDate now, int prix, int no_utilisateur, int no_article) {
+	public void updateEnchere( LocalDate now, int prix, int no_utilisateur, int no_article) throws DALException 
+	{
 
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
 			
@@ -66,21 +67,22 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			
 			int rs = rqt.executeUpdate();
 
-			
 		}
-		catch (SQLException | DALException e) {
-			//propager une exception personnalisée
+		catch 
+		(SQLException | DALException e) 
+		{
 			e.printStackTrace();
-
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
 	}
 
 
 	@Override
-	public void insertEnchere( Enchere enchere) {
+	public void insertEnchere( Enchere enchere) throws DALException {
 		
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ENCHERE);
 			
@@ -93,14 +95,12 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = rqt.executeQuery();
 			
 		}
-		catch (SQLException e) {
-			//propager une exception personnalisée
+		catch (SQLException | DALException e) 
+		{
 			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		} 
 
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 	

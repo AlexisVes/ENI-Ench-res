@@ -9,7 +9,8 @@ import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.RetraitDAO;
 
-public class RetraitDAOJdbcImpl implements RetraitDAO{
+public class RetraitDAOJdbcImpl implements RetraitDAO
+{
 	
 	private static final String INSERT_RETRAIT = "INSERT INTO RETRAITS VALUES(?, ?, ?, ?);";
 
@@ -19,9 +20,11 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 	/**
 	 * Une méthode permettant d'insérer en base de données le lieu du retrait 
 	 */
-	public void insertRetrait(Retrait retrait) throws DALException {
+	public void insertRetrait(Retrait retrait) throws DALException 
+	{
 		
-			try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 
 			//On prepare la requête SQL
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_RETRAIT);
@@ -35,23 +38,23 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 			
-	
 		} 
 		catch (DALException | SQLException e) 
 		{
-			
-			System.out.println("ça ne marche pas !");
-
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
 	}
 
 	@Override
-	public Retrait getRetrait(int noArticle) throws DALException {
+	public Retrait getRetrait(int noArticle) throws DALException
+	{
 		
 		Retrait retraitBDD = null;
 		
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 						
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_RETRAIT);
 			
@@ -59,7 +62,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 			
 			ResultSet rs = rqt.executeQuery();
 			
-			if( rs != null) {
+			if( rs != null) 
+			{
 				rs.next();
 				
 				int no_article = rs.getInt(1);
@@ -67,12 +71,13 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 				String code_postal = rs.getString(3);
 				String ville = rs.getString(4);
 				
-				retraitBDD = new Retrait(no_article, rue, code_postal, ville );
-				
+				retraitBDD = new Retrait(no_article, rue, code_postal, ville );		
 			}
 			
-		} catch (SQLException e) {
-			//propager une exception personnalisée
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
 			throw new DALException("Problème d'extraction des retraits de la base. Cause : " + e.getMessage());
 		}
 		

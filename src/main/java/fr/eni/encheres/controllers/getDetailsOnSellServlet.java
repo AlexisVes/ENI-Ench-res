@@ -87,26 +87,10 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());		
 			}
 			
-			HttpSession session = ((HttpServletRequest)request).getSession();
 			
-			//On récupère le pseudo de l'utilisateur en cours
-			String pseudo = (String) session.getAttribute("connect");
 			
-			int userId = 0;
-			
-			//On récupère le numéro d'utilisateur de l'utilisateur actuellement connecté
-			userId = userMgr.searchUser(pseudo).getUserId();
 	
-			int proposition = 0;
-	
-			//Si l'utilisateur a fait une proposition d'enchère, on l'a récupère
-			if( request.getParameter("proposition") != null)
-			{
-				proposition = Integer.parseInt(request.getParameter("proposition"));
-				
-				//On met à jour l'enchère de notre article
-				enchereMgr.controlerEnchere(proposition, article, userId);
-			}	
+		
 		}
 		catch( BLLException | DALException e )
 		{
@@ -128,6 +112,40 @@ public class getDetailsOnSellServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		try
+		{
+			//Récupère l'objet Article correspondant à celui dont on veux afficher les détails
+			Article article = articleMgr.getArticle(request.getParameter("nomArticle"));
+			
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			
+			//On récupère le pseudo de l'utilisateur en cours
+			String pseudo = (String) session.getAttribute("connect");
+
+			int userId = 0;
+			
+			//On récupère le numéro d'utilisateur de l'utilisateur actuellement connecté
+			userId = userMgr.searchUser(pseudo).getUserId();
+			
+			int proposition = 0;
+			
+			//Si l'utilisateur a fait une proposition d'enchère, on l'a récupère
+			if( request.getParameter("proposition") != null)
+			{
+				proposition = Integer.parseInt(request.getParameter("proposition"));
+				
+				//On met à jour l'enchère de notre article
+				enchereMgr.controlerEnchere(proposition, article, userId);
+			}	
+		}
+		catch(BLLException e)
+		{
+			request.setAttribute("message", e.getMessage());
+			e.printStackTrace();
+		}
+		
+		//On affiche la page: details_ventes
+		response.sendRedirect( request.getContextPath() + "/home"); 
+		return;	
 	}
 }

@@ -60,15 +60,24 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 
 												
 	
+	/**
+	 * Méthodes de création d'une liste d'article à partir d'une requête
+	 * @param rs
+	 * @param user
+	 * @return
+	 * @throws SQLException
+	 */
 	private List<Article> listerArticles( ResultSet rs, boolean user) throws SQLException 
 	{
 		Article articleCourant;
 		List<Article> searchList= new ArrayList<Article>();
 		
+		//Pour chaque ligne on créer un objet article correspondant, que l'on rajoute à la liste
 		while(rs.next())
 		{
 		
 			{
+				//On créer un article avec les valeurs trouvées en base
 				articleCourant = new Article();
 				articleCourant.setNomArticle(rs.getString("nom_article"));
 				articleCourant.setDescription(rs.getString("description"));
@@ -90,10 +99,19 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		return searchList;
 	}
 	
-	private List<Article> getAllArticles(String sql_rqt) throws DALException {
+	
+	/**
+	 * Méthodes qui récupère tout les articles de la base de données
+	 * @param sql_rqt
+	 * @return
+	 * @throws DALException
+	 */
+	private List<Article> getAllArticles(String sql_rqt) throws DALException 
+	{
 		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
 		
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 		
 			Statement rqt = cnx.createStatement();
 			
@@ -102,22 +120,35 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			
 			lesArticlesExtraits  = listerArticles(rs, true);
 			
-		} catch (SQLException e) {
-			//propager une exception personnalisée
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
 		return lesArticlesExtraits ;
 	}
 	
-	private List<Article> getAllMyArticles( String sql_rqt, String pseudo) throws DALException{
+	
+	/**
+	 * Récupère tout le articles qui ont pour créateur : le pseudo rentrer en paramètre
+	 * @param sql_rqt
+	 * @param pseudo
+	 * @return
+	 * @throws DALException
+	 */
+	private List<Article> getAllMyArticles( String sql_rqt, String pseudo) throws DALException
+	{
 		
 		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
 		
-		try(Connection cnx = ConnectionProvider.getConnection()) {
+		try(Connection cnx = ConnectionProvider.getConnection()) 
+		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(sql_rqt);
 			
+			//WHERE pseudo = this.pseudo
 			rqt.setString(1, pseudo);
 			
 			ResultSet rs = rqt.executeQuery();
@@ -125,13 +156,16 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			lesArticlesExtraits  = listerArticles(rs, true);
 							
 		} 
-		catch (SQLException e) {
-			//propager une exception personnalisée
-
-
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+
+		} 
+		catch (DALException e) 
+		{
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
 		return lesArticlesExtraits ;
@@ -140,42 +174,47 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 	
 	
 	//retourne les articles qui arriveront, sont, ou qui étaient en enchères
-	public List<Article> getArticles() throws DALException{	
-		
-		return getAllArticles(SELECT_ARTICLES);
-		
+	public List<Article> getArticles() throws DALException
+	{			
+		return getAllArticles(SELECT_ARTICLES);		
 	}
+	
 	
 	//retourne mes articles qui arriveront, sont, ou qui étaient en enchères
-	public List<Article> getMyArticles(String pseudo) throws DALException{	
-		
-		return getAllMyArticles(SELECT_MY_ARTICLES, pseudo);
-		
+	public List<Article> getMyArticles(String pseudo) throws DALException
+	{		
+		return getAllMyArticles(SELECT_MY_ARTICLES, pseudo);		
 	}
 	
-public List<Article> getAllMyArticles(String pseudo) throws DALException{	
-		
-		return getAllMyArticles(SELECT_ALL_MY_ARTICLES, pseudo);
-		
-	}
-
-	public List<Article> getMyFuturArticles(String pseudo) throws DALException{	
-		
-		return getAllMyArticles(SELECT_MY_FUTURE_ARTICLES, pseudo );
-		
+	
+	//retourne tout mes articles
+	public List<Article> getAllMyArticles(String pseudo) throws DALException
+	{			
+		return getAllMyArticles(SELECT_ALL_MY_ARTICLES, pseudo);		
 	}
 	
-	public List<Article> getMySoldArticles(String pseudo) throws DALException{	
-		
-		return getAllMyArticles(SELECT_MY_SOLD_ARTICLES, pseudo);
-		
+	
+	//Retourne mes articles qui seront en ventes
+	public List<Article> getMyFuturArticles(String pseudo) throws DALException
+	{		
+		return getAllMyArticles(SELECT_MY_FUTURE_ARTICLES, pseudo );	
+	}
+	
+	
+	//Retourne mes articles déjà vendus
+	public List<Article> getMySoldArticles(String pseudo) throws DALException
+	{	
+		return getAllMyArticles(SELECT_MY_SOLD_ARTICLES, pseudo);		
 	}
 
 
-	@Override
+	/**
+	 * Ajoute en base un nouvel article
+	 */
 	public void insertArticle(Article article) throws DALException {
 		//on prepare la requête pour ajouter l'article en BDD		
-		try (Connection cnx = ConnectionProvider.getConnection();){
+		try (Connection cnx = ConnectionProvider.getConnection();)
+		{
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
 			
 			//on valorise les paramètres de la requête 
@@ -192,20 +231,31 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			rqt.executeUpdate();
 			
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 	}
-
-	public Article getArticle( String nom) throws DALException {
+	
+	
+	
+	/**
+	 * On récupère un article trouvé en base qui a pour nom,
+	 * le nom rentré en paramètre
+	 */
+	public Article getArticle( String nom) throws DALException 
+	{
 	
 		Article articleBDD = null;
 		
-		try (Connection cnx = ConnectionProvider.getConnection()) {	
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{	
 				
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_ARTICLE);
 
+			//WHERE nom = this.nom
 			rqt.setString(1, nom);
 			
 			
@@ -225,13 +275,15 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 				int no_categorie = rs.getInt(8);
 				int no_utilisateur = rs.getInt(9);
 				
+				//On créer un article avec les valeurs trouvées en base
 				articleBDD = new Article(no_article, nom_article, description, debut_encheres, fin_encheres, prixIni, prixVente, no_utilisateur ,no_categorie);
-				
 				
 			}
 			
-		} catch (SQLException e) {
-			//propager une exception personnalisée
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
@@ -240,13 +292,19 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 	}
 
 
+	/**
+	 * On retourne une liste d'article qui contient dans leurs noms
+	 * la chaine de caractères entrée en paramètre
+	 */
 	@Override
-	public List<Article> getArticlesByName(String mot) {
+	public List<Article> getArticlesByName(String mot) throws DALException 
+	{
 		
 		Article articleBDD = null;
 		List<Article> searchList=null;
 						
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE);
 			rqt.setString(1, "%" + mot + "%");
@@ -256,20 +314,26 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
 			searchList = listerArticles( rs, false );
 			
-		} catch (DALException | SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (DALException | SQLException e) 
+		{
 			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}				
 
 		return searchList;
 	}
 
+	
+	
 	@Override
-	public List<Article> getArticlesByCat(String mot, int categorie) {
+	public List<Article> getArticlesByCat(String mot, int categorie) throws DALException 
+	{
 		Article articleBDD = null;
 		List<Article> searchList=null;
 						
-		try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE_NAME_CAT);
 			rqt.setInt(1, categorie);
@@ -279,9 +343,11 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
 			searchList = listerArticles( rs, false);
 			
-		} catch (DALException | SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (DALException | SQLException e) 
+		{
 			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		} 	
 	
 		return searchList;
