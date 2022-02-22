@@ -57,7 +57,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 														+ "WHERE date_debut_encheres > GETDATE() AND pseudo = ?;";
 	
-	private static final String	DELETE_ARTICLE = " DELETE ARTICLES WHERE no_article=?;";
+	private static final String	DELETE_ARTICLE = " DELETE ARTICLES_VENDUS WHERE no_article=?;";
 												
 	
 	/**

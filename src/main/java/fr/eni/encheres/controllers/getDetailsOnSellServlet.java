@@ -101,6 +101,16 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			{
 				request.setAttribute("delete", "delete");
 			}
+			
+			if( LocalDate.now().isAfter(article.getDateFinEncheres()) )
+			{
+				request.setAttribute("end", "end");
+			}
+			
+			if( LocalDate.now().isBefore(article.getDateDebutEncheres()) && article.getNoUtilisateur() == userMgr.getIdByPseudo(pseudo))
+			{
+				request.setAttribute("update", "update");
+			}
 		
 		}
 		catch( BLLException | DALException e )

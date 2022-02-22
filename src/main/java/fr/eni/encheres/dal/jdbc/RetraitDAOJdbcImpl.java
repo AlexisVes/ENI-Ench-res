@@ -13,8 +13,33 @@ public class RetraitDAOJdbcImpl implements RetraitDAO
 {
 	
 	private static final String INSERT_RETRAIT = "INSERT INTO RETRAITS VALUES(?, ?, ?, ?);";
+	
+	private static final String DELETE_RETRAIT = "DELETE RETRAITS WHERE no_article = ?;";
 
 	private static final String SELECT_RETRAIT = "SELECT no_article, rue, code_postal, ville FROM RETRAITS WHERE no_article = ?;";
+	
+	
+	public void deleteRetrait( int noArticle ) throws DALException
+	{
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+
+			//On prepare la requête SQL
+			PreparedStatement rqt = cnx.prepareStatement(DELETE_RETRAIT);
+			
+			rqt.setInt(1, noArticle);
+
+			//Éxécution de la requête SQL
+			int numberAffectedLines = rqt.executeUpdate();
+			
+		} 
+		catch ( SQLException e) 
+		{
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		}
+	}
+	
 	
 	@Override
 	/**

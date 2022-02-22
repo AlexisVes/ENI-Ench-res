@@ -38,6 +38,23 @@ public class RetraitManager
 			
 			private RetraitDAO retraitDAO;
 			
+			
+			public void deleteRetrait ( int no_article ) throws BLLException
+			{
+				try 
+				{
+					retraitDAO.deleteRetrait(no_article);
+				} 
+				catch (DALException e)
+				{
+					e.printStackTrace( );
+					BLLException exception = new BLLException();
+					exception.addMessage(e.getMessage());
+					throw exception;	
+				}
+			}
+			
+			
 			/**
 			 * Ajoute un retrait dans notre base de données
 			 * @param retrait
