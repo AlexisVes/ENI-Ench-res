@@ -7,6 +7,7 @@ import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
+import fr.eni.encheres.dal.UserDAO;
 
 public class EnchereManager {
 	
@@ -21,6 +22,7 @@ public class EnchereManager {
 	}
 	
 	private EnchereDAO enchereDAO;
+	private UserDAO userDAO;
 	
 	
 	public Enchere getEnchere(int no_article)
@@ -41,17 +43,28 @@ public class EnchereManager {
 		if( enchere != null) 
 		{
 			
-			if( prixSaisi > article.getPrixVente() ) 
-			{
-				enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
+			try {
+				if( prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
+				{
+					enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
+				}
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		else
 		{
-			enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
-			enchereDAO.insertEnchere(enchere);
+			try {
+				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) {
+					enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
+					enchereDAO.insertEnchere(enchere);	
+				}
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 	}
 	
 	public void insertEnchere( Enchere enchere )

@@ -18,7 +18,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere = ?, no_utilisateur = ? WHERE no_article = ?;";
 	
-	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no-utilisateur) VALUES(?,?,?,?);";
+	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
 	
 	public Enchere getEnchere( int no_article )
 	{
@@ -37,18 +37,16 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			{
 				enchere = new Enchere( rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getInt(3), rs.getInt(4), rs.getInt(5));
 			}
+			cnx.close();
 			
 			return enchere;
 			
 		}
-		catch (SQLException e) {
+		catch (SQLException | DALException e) {
 			//propager une exception personnalisée
 			e.printStackTrace();
 
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		}
 		
 		return null;
 	}
@@ -70,13 +68,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 			
 		}
-		catch (SQLException e) {
+		catch (SQLException | DALException e) {
 			//propager une exception personnalisée
 			e.printStackTrace();
 
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}
@@ -95,7 +90,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			rqt.setInt(3, enchere.getNo_article());
 			rqt.setInt( 4 , enchere.getNo_utilisateur() );
 			
-			ResultSet rs = rqt.executeQuery();
+			rqt.executeQuery();
 			
 		}
 		catch (SQLException e) {
