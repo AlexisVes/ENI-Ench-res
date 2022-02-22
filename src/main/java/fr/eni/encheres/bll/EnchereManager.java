@@ -20,6 +20,7 @@ public class EnchereManager
 	{
 		super();
 		enchereDAO = DAOFactory.createEnchereDAO("JDBC");
+		userDAO = DAOFactory.createUserDAO("JDBC");
 	}
 	
 	private EnchereDAO enchereDAO;
@@ -56,11 +57,20 @@ public class EnchereManager
 				}
 			
 			}
+<<<<<<< HEAD
+		}
+		else
+		{
+			try {
+				System.out.println("crédit : " +  userDAO.getUserById(no_utilisateur).getCredit());
+				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) {
+=======
 			else
 			{
 	
 				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
 				{
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 					enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
 					enchereDAO.insertEnchere(enchere);	
 				}

@@ -253,5 +253,8 @@ public class UserManager
 		return userDAO.getUserById(no_utisateur);
 	}
 	
+	public int getIdByPseudo (String pseudo) throws DALException {
+		return userDAO.getIdByPseudo(pseudo);
+	}
 }
 

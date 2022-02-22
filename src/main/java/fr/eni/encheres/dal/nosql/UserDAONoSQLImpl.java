@@ -36,4 +36,10 @@ public class UserDAONoSQLImpl implements UserDAO{
 		return null;
 	}
 
+	@Override
+	public int getIdByPseudo(String pseudo) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
