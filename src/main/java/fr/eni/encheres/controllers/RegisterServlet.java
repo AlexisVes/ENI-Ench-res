@@ -14,23 +14,24 @@ import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bll.UserManager;
 
 /**
+ * Affichage de la page d'inscription, et création d'un nouvelle utilisateur dans la base de données
+ * En fonction des données rentrées par l'utilisateur dans les champs
  * Servlet implementation class RegisterServlet
  */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterServlet() {
+
+    public RegisterServlet() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     UserManager userManager = UserManager.getInstance();
 
 	/**
+	 * Affiche la page d'inscription du site ENI-Enchere
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,10 +47,12 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 	/**
+	 * Créer un utilisateur si les champs sont biens remplies
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+		try 
+		{
 			String pseudo = null;
 			String nom = null;
 			String prenom = null;

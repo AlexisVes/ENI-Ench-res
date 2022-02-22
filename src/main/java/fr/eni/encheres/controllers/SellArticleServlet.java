@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.EnchereManager;
 import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bll.UserManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.User;
 
@@ -26,33 +28,39 @@ import fr.eni.encheres.bo.User;
 public class SellArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SellArticleServlet() {
+ 
+    public SellArticleServlet() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     UserManager userManager = UserManager.getInstance();
     ArticleManager articleManager = ArticleManager.getInstance();
     CategorieManager categorieMgr = CategorieManager.getInstance();
     RetraitManager retraitMgr = RetraitManager.getInstance();
+    EnchereManager enchereMgr = EnchereManager.getInstance();
     
 	/**
+	 * Affiche la page de vente d'article
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Récupère toutes les catégories de la base de données
 		request.setAttribute("listeCategories", categorieMgr.getCategories());
 		
-		try {
+		try 
+		{
+			//Récupère un objet User correspondant à l'utilisateur actuellement connecté
 			User user = userManager.searchUser(request.getParameter("pseudo"));
 			
+			//Renvoi cet objet dans un attribut
 			request.setAttribute("userProfil", user);
 			
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (BLLException e) 
+		{
+			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -66,10 +74,13 @@ public class SellArticleServlet extends HttpServlet {
 	}
 
 	/**
+	 * Récupère les données rentrées par l'utilisteur pour créer un nouvelle article en base
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Récupère les données rentrées dans les champs du formulaire par l'utilisateur
+		//Et les insères dans une variable
 		String nom = request.getParameter("article");
 
 		String description = request.getParameter("description");
@@ -90,20 +101,30 @@ public class SellArticleServlet extends HttpServlet {
 		
 		String ville = request.getParameter("ville");
 		
+		
+		//Créer un objet Article
 		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie);
 		
-		try {
+		try 
+		{
+			//Creer un nouvelle article dans la base de données
 			articleManager.vendreArticle(article);
 			
 			int noArticle = articleManager.getArticle(nom).getNoArticle();
 			
+			//Créer un nouveau retrait dans la base de données
 			Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
-			
 			retraitMgr.insertRetrait(retrait);
-		} catch (BLLException e) {
 			
+			//Créer un nouvelle objet Enchere dans la base de données
+			Enchere enchere = new Enchere( debutEnchere, miseAPrix, noArticle, userID);
+			enchereMgr.insertEnchere(enchere);
+			
+		} 
+		catch (BLLException e) 
+		{	
 			request.setAttribute("message", e.getMessages());
-			
+			e.printStackTrace();
 		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs

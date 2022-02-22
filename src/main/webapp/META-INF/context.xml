@@ -6,7 +6,7 @@
 		type="javax.sql.DataSource"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		
-		url="jdbc:sqlserver://localhost:1433;databasename=EniEncheresBDD"
+		url="jdbc:sqlserver://10.12.200.0:1433;databasename=EniEncheresBDD"
 		username="sa"
 		password="Pa$$w0rd"
 		
@@ -16,5 +16,6 @@
 		
 		removeAbandoned="true"
 		removeAbandonedTimeout="15"
+		
 		/>
 </Context>

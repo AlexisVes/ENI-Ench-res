@@ -32,7 +32,7 @@ public class DisplayProfilServlet extends HttpServlet
     UserManager userManager = UserManager.getInstance();
 
 	/**
-	 * 
+	 * Affiche le profil d'un utilisateur
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,10 +63,13 @@ public class DisplayProfilServlet extends HttpServlet
 	}
 
 	/**
+	 * Appel la méthode doGet, et affiche donc le profil d'un utilisateur
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		
+		doGet(request, response);
 		
 	}
 }
