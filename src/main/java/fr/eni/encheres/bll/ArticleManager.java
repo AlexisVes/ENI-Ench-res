@@ -293,12 +293,32 @@ public class ArticleManager
 			}
 			return null;
 		}
+
 		
-		public void updateArticleById(Article article) throws BLLException 
+		public void deleteArticle( int no_article ) throws BLLException
 		{
-			try {
-				articleDAO.updateArticleById(article);
-			} catch (DALException e) {
+			try
+			{
+				articleDAO.deleteArticle(no_article);
+			} 
+			catch (DALException e) 
+			{
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;
+			}
+		}
+
+		public void updateArticleById(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, int prixInitial, int noArticle) throws BLLException 
+		{
+			try 
+			{
+				articleDAO.updateArticleById(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, noArticle);
+			} 
+			catch 
+			(DALException e) 
+			{
 				e.printStackTrace();
 				BLLException exception = new BLLException();
 				exception.addMessage(e.getMessage());

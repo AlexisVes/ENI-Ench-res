@@ -20,4 +20,14 @@ public interface RetraitDAO {
 	 * @throws DALException
 	 */
 	Retrait getRetrait(int noArticle) throws DALException;
+
+
+	/**
+	 * Delele un retrait qui a pour no_article notre int en
+	 * paramètre
+	 * @param noArticle
+	 * @throws DALException
+	 */
+	void deleteRetrait( int noArticle ) throws DALException;
+
 }

@@ -1,5 +1,6 @@
 package fr.eni.encheres.dal;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.encheres.bo.Article;
@@ -74,10 +75,22 @@ public interface ArticleDAO {
 	public List<Article> getAllMyArticles(String pseudo) throws DALException;
 	
 	/**
-	 * Permet de modifier certains paramètres d'un article en BDD (nom, description, date début enchère, date fin enchère, prix initial)
-	 * @param article
+	 * Methode permettant de supprimer un article en BDD en fonction du numéro de cet article
+	 * @param noArticle
 	 * @throws DALException
 	 */
-	public  void updateArticleById(String nomArticle, String Description,  ) throws DALException;
+	public void deleteArticle( int noArticle) throws DALException;
+
+	/***
+	 * Une methode permettant de modifier certains paramètres d'un article (nom, description, date de début et fin d'enchères, prix intitial)
+	 * @param nomArticle
+	 * @param Description
+	 * @param dateDebutEnchere
+	 * @param dateFinEnchere
+	 * @param prixInitial
+	 * @throws DALException
+	 */
+	public void updateArticleById(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, int prixInitial, int noArticle ) throws DALException;
+
 	
 }

@@ -128,6 +128,23 @@ public class EnchereManager
 			throw exception;	
 		}
 	}
+	
+	
+	public void deleteEnchereByNoArticle(int noArticle) throws BLLException {
+		try 
+		{
+			enchereDAO.deleteEnchereByNoArticle(noArticle);
+		}
+		catch (DALException e) 
+		{
+			e.printStackTrace();
+			BLLException exception = new BLLException();
+			exception.addMessage(e.getMessage());
+			throw exception;	
+		}
+	}
+	
+	
 
 	public synchronized static EnchereManager getInstance()
 	{
@@ -145,13 +162,5 @@ public class EnchereManager
 		return instance;
 	}
 	
-	public void deleteEnchereByNoArticle(int noArticle) {
-		try {
-			enchereDAO.deleteEnchereByNoArticle(noArticle);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }
