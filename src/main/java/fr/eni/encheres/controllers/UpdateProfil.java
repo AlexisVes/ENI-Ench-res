@@ -140,7 +140,7 @@ public class UpdateProfil extends HttpServlet {
 				}
 				else
 				{
-					exception.addMessage("Veuillez rentrer un téléphone");
+					exception.addMessage("Veuillez rentrer un téléphone") ;
 				}
 				
 				
