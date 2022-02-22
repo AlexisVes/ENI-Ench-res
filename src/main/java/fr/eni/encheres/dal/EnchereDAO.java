@@ -1,6 +1,7 @@
 package fr.eni.encheres.dal;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import fr.eni.encheres.bo.Enchere;
@@ -25,7 +26,7 @@ public interface EnchereDAO {
 	 * @param no_article
 	 * @throws DALException
 	 */
-	void updateEnchere(  LocalDate now, int prix, int no_utilisateur, int no_article ) throws DALException;
+	void updateEnchere(  LocalDateTime now, int prix, int no_utilisateur, int no_article ) throws DALException;
 	
 	
 	/**

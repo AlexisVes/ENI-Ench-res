@@ -1,6 +1,7 @@
 package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import fr.eni.encheres.bo.User;
 
@@ -62,7 +63,7 @@ public class EnchereManager
 	public void gererEnchere (int prixSaisi, Article article, int no_utilisateur) throws BLLException 
 	{
 		
-		LocalDate now = LocalDate.now();
+		LocalDateTime now = LocalDateTime.now();
 		
 		try {
 		

@@ -5,7 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
@@ -36,7 +38,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			
 			if( rs.next() )
 			{
-				enchere = new Enchere( rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+				enchere = new Enchere( rs.getInt(1), rs.getTimestamp(2).toLocalDateTime() , rs.getInt(3), rs.getInt(4), rs.getInt(5));
 			}
 			
 			return enchere;
@@ -52,7 +54,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 
 	@Override
-	public void updateEnchere( LocalDate now, int prix, int no_utilisateur, int no_article) throws DALException 
+	public void updateEnchere( LocalDateTime now, int prix, int no_utilisateur, int no_article) throws DALException 
 	{
 
 		try (Connection cnx = ConnectionProvider.getConnection())
@@ -60,7 +62,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
  
-			//rqt.setDate(1,  Date.valueOf(now));
+			rqt.setTimestamp(1, Timestamp.valueOf(now));
 			rqt.setInt( 1 , prix );
 			rqt.setInt( 2 , no_utilisateur );
 			rqt.setInt( 3, no_article);
@@ -87,8 +89,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ENCHERE);
 			
-			
-			rqt.setDate(1, Date.valueOf(enchere.getDate_enchere()));
+			rqt.setTimestamp(1, Timestamp.valueOf(enchere.getDate_enchere()));
 			rqt.setInt( 2, enchere.getMontant_enchere() );
 			rqt.setInt(3, enchere.getNo_article());
 			rqt.setInt( 4 , enchere.getNo_utilisateur() );

@@ -8,13 +8,13 @@ public class Enchere
 {
 	
 	int no_enchere;
-	LocalDate date_enchere;
+	LocalDateTime date_enchere;
 	int montant_enchere;
 	int no_article;
 	int no_utilisateur;
 	String pseudo;
 	
-	public Enchere( LocalDate date_enchere, int montant_enchere, int no_article, int no_utilisateur) 
+	public Enchere( LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur) 
 	{
 		super();
 		this.date_enchere = date_enchere;
@@ -25,7 +25,7 @@ public class Enchere
 	
 	
 
-	public Enchere(int no_enchere, LocalDate date_enchere, int montant_enchere, int no_article, int no_utilisateur) 
+	public Enchere(int no_enchere, LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur) 
 	{
 		super();
 		this.no_enchere = no_enchere;
@@ -35,7 +35,7 @@ public class Enchere
 		this.no_utilisateur = no_utilisateur;
 	}
 	
-	public Enchere( int no_enchere, LocalDate date_enchere, int montant_enchere, int no_article, int no_utilisateur, String pseudo)
+	public Enchere( int no_enchere, LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur, String pseudo)
 	{
 		super();
 		this.no_enchere = no_enchere;
@@ -48,12 +48,12 @@ public class Enchere
 
 
 
-	public LocalDate getDate_enchere() 
+	public LocalDateTime getDate_enchere() 
 	{
 		return date_enchere;
 	}
 
-	public void setDate_enchere(LocalDate date_enchere) 
+	public void setDate_enchere(LocalDateTime date_enchere) 
 	{
 		this.date_enchere = date_enchere;
 	}
