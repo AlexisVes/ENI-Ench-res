@@ -2,6 +2,7 @@ package fr.eni.encheres.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -116,8 +117,10 @@ public class SellArticleServlet extends HttpServlet {
 			Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
 			retraitMgr.insertRetrait(retrait);
 			
+			LocalDateTime dateEnchere = LocalDateTime.now();
+			
 			//Créer un nouvelle objet Enchere dans la base de données
-			Enchere enchere = new Enchere( debutEnchere, miseAPrix, noArticle, userID);
+			Enchere enchere = new Enchere( dateEnchere, miseAPrix, noArticle, userID);
 			enchereMgr.insertEnchere(enchere);
 			
 		} 
