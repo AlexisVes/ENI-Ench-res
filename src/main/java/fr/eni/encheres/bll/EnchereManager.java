@@ -144,5 +144,14 @@ public class EnchereManager
 		}
 		return instance;
 	}
+	
+	public void deleteEnchereByNoArticle(int noArticle) {
+		try {
+			enchereDAO.deleteEnchereByNoArticle(noArticle);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

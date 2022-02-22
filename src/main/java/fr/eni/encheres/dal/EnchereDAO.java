@@ -37,5 +37,5 @@ public interface EnchereDAO {
 	void insertEnchere ( Enchere enchere) throws DALException;
 	
 
-
+	void deleteEnchereByNoArticle(int noArticle) throws DALException;
 }

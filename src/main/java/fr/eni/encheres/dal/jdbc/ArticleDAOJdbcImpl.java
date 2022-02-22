@@ -239,8 +239,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		}
 	}
 	
-	
-	
 	/**
 	 * On récupère un article trouvé en base qui a pour nom,
 	 * le nom rentré en paramètre
