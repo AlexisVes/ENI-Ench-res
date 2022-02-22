@@ -57,7 +57,14 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 														+ "ON UTILISATEURS.no_utilisateur = ARTICLES_VENDUS.no_utilisateur \r\n"
 														+ "WHERE date_debut_encheres > GETDATE() AND pseudo = ?;";
 	
+<<<<<<< HEAD
 	private static final String	DELETE_ARTICLE = " DELETE ARTICLES_VENDUS WHERE no_article=?;";
+=======
+	private static final String UPDATE_ARTICLE_BY_ID = 	"UPDATE ARTICLES_VENDUS\r\n"
+														+ "SET nom_article = '?', description = '?', date_debut_encheres = '?', date_fin_encheres = '?', prix_initial = '?', prix_vente ='?'\r\n"
+														+ "WHERE no_article ='?';";
+
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 												
 	
 	/**
@@ -353,6 +360,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 
 
 	@Override
+<<<<<<< HEAD
 	public void deleteArticle(int noArticle) throws DALException 
 	{
 		try (Connection cnx = ConnectionProvider.getConnection())
@@ -369,6 +377,33 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			e.printStackTrace();
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		} 	
+=======
+	public void updateArticleById(Article article) throws DALException {
+		
+		try (Connection cnx = ConnectionProvider.getConnection();)
+		{
+			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ARTICLE_BY_ID);
+			
+			//on valorise les paramètres de la requête 
+			rqt.setString(1, article.getNomArticle());
+			rqt.setString(2, article.getDescription());
+			rqt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
+			rqt.setDate(4, java.sql.Date.valueOf(article.getDateFinEncheres()));
+			rqt.setInt(5, article.getPrixInitial());
+			rqt.setInt(6, article.getPrixVente());
+			rqt.setInt(7, article.getNoArticle());
+			
+			//exécuter la requête vers la BDD
+			rqt.executeUpdate();
+			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		}
+		
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 	}
 	
 }
