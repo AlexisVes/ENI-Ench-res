@@ -293,24 +293,32 @@ public class ArticleManager
 			}
 			return null;
 		}
-		
-<<<<<<< HEAD
+
 		
 		public void deleteArticle( int no_article ) throws BLLException
 		{
 			try
-{
+			{
 				articleDAO.deleteArticle(no_article);
 			} 
 			catch (DALException e) 
 			{
-=======
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;
+			}
+		}
+
 		public void updateArticleById(Article article) throws BLLException 
 		{
-			try {
+			try 
+			{
 				articleDAO.updateArticleById(article);
-			} catch (DALException e) {
->>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
+			} 
+			catch 
+			(DALException e) 
+			{
 				e.printStackTrace();
 				BLLException exception = new BLLException();
 				exception.addMessage(e.getMessage());
