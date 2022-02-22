@@ -106,7 +106,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 	
 }
+
