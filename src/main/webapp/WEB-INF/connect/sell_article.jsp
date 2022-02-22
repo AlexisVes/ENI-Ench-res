@@ -38,7 +38,7 @@
 			</select>
 		
 			<label for="photoArticle"> Photo de l'article</label>
-			<input type="file" name="photoArticle">
+			<input type="file" name="photoArticle" id="photo_article" accept="image/png, image/jpeg">
 		
 			<label for="miseAPrix"> Mise à prix :</label>
 			<input type="number" name="miseAPrix">

@@ -213,7 +213,6 @@ public class UserDAOJdbcImpl implements UserDAO
 			rqt.setInt(10, user.getCredit());
 			rqt.setInt(11, user.getUserId());
 			
-
 			//Éxécution de la requête SQL
 			rqt.executeUpdate();
 
