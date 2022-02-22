@@ -74,19 +74,17 @@ public interface ArticleDAO {
 	public List<Article> getAllMyArticles(String pseudo) throws DALException;
 	
 	/**
-<<<<<<< HEAD
 	 * Delete un article qui a pour no_article notre int en paramètre
 	 * dans notre BDD
 	 * @param noArticle
 	 * @throws DALException
 	 */
 	public void deleteArticle( int noArticle) throws DALException;
-=======
-	 * Permet de modifier un article en BDD (nom, description, date début enchère...)
-	 * @param article
-	 * @throws DALException
+	
+	 /**Permet de modifier un article en BDD (nom, description, date début enchère...)
+	 *@param article
+	 *@throws DALException
 	 */
 	public  void updateArticleById(Article article) throws DALException;
 	
->>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 }
