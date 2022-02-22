@@ -74,8 +74,14 @@ public class EnchereManager
 				if( prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
 				{
 					User user = userDAO.getUserById(no_utilisateur);
+					
+					System.out.println( "nom :" + user.getNom());
+					
 					Enchere previousEnchere = enchereDAO.getEnchere(article.getNoArticle());
+					System.out.println("previous montant : " +  previousEnchere.getMontant_enchere());
+					
 					int previousIdUser = previousEnchere.getNo_utilisateur();
+					System.out.println("previousId " + previousIdUser);
 					User previousUser = userDAO.getUserById(previousIdUser);
 					
 					
