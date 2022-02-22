@@ -69,6 +69,5 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 				
 		return libelleCategorie;
 	}
-	
 
 }

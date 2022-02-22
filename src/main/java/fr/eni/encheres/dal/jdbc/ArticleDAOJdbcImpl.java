@@ -285,3 +285,4 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 	}
 	
 }
+

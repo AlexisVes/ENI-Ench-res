@@ -14,6 +14,7 @@ import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.UserManager;
 
 /**
+ * Déconnecte et détruit un utilisateur, et le renvoi sur la page d'acceuil
  * Servlet implementation class DeleteUserServlet
  */
 @WebServlet("/connect/delete_user")
@@ -30,20 +31,28 @@ public class DeleteUserServlet extends HttpServlet {
     
     UserManager userManager = UserManager.getInstance();
 
+    
 	/**
+	 * Supprime l'utilisateur, et le déconnecte, puis le renvoi sur la page d'acceuil du site
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		
-		try {
+		try 
+		{
+			//On supprime l'utilisateur
 			userManager.deleteUser(request.getParameter("utilisateur"));
 			
+			//On déconnecte l'utilisateur
 			HttpSession session = ((HttpServletRequest)request).getSession();
 			session.removeAttribute("connect");
 
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (BLLException e) 
+		{
 			e.printStackTrace();
+			request.setAttribute("message", e.getMessage());
 		}
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
@@ -55,11 +64,13 @@ public class DeleteUserServlet extends HttpServlet {
 				}
 	}
 
+	
 	/**
+	 * Fait appel au doGet
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		doGet(request, response);
 	}
 
