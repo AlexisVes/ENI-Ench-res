@@ -9,7 +9,8 @@ import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 
-public class ArticleManager {
+public class ArticleManager 
+{
 	
 	//volonté de n'avoir qu'une seule instance de cette classe en mémoire => SINGLETON
 		private static ArticleManager instance=null;

@@ -9,7 +9,8 @@ import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
 import fr.eni.encheres.dal.UserDAO;
 
-public class EnchereManager {
+public class EnchereManager 
+{
 	
 	//volonté de n'avoir qu'une seule instance de cette classe en mémoire => SINGLETON
 	private static EnchereManager instance=null;
@@ -26,6 +27,11 @@ public class EnchereManager {
 	private UserDAO userDAO;
 	
 	
+	/**
+	 * @param no_article
+	 * @return un Objet Enchere qui correspond à l'enchère qui a le no_article dans
+	 * la base de données
+	 */
 	public Enchere getEnchere(int no_article)
 	{
 		return enchereDAO.getEnchere(no_article);
@@ -33,39 +39,49 @@ public class EnchereManager {
 	
 	
 
-	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) 
+	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) throws BLLException 
 	{
 		
 		LocalDate now = LocalDate.now();
 		
 		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
 		
+		try {
 		
-		if( enchere != null) 
-		{
-			
-			try {
+			if( enchere != null) 
+			{
+				
 				if( prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
 				{
 					enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
 				}
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
 			}
+<<<<<<< HEAD
 		}
 		else
 		{
 			try {
 				System.out.println("crédit : " +  userDAO.getUserById(no_utilisateur).getCredit());
 				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) {
+=======
+			else
+			{
+	
+				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
+				{
+>>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 					enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
 					enchereDAO.insertEnchere(enchere);	
 				}
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
+		}
+		catch (DALException e) 
+		{
+			e.printStackTrace( );
+			BLLException exception = new BLLException();
+			exception.addMessage(e.getMessage());
+			throw exception;	
 		}
 	}
 	
@@ -75,7 +91,7 @@ public class EnchereManager {
 	}
 
 	public synchronized static EnchereManager getInstance()
-{
+	{
 		if (instance == null) 
 		{
 			try 
@@ -84,7 +100,6 @@ public class EnchereManager {
 			} 
 			catch (DALException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
