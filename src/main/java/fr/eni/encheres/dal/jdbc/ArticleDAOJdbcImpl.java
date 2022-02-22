@@ -13,7 +13,8 @@ import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DALException;
 
-public class ArticleDAOJdbcImpl implements ArticleDAO {
+public class ArticleDAOJdbcImpl implements ArticleDAO 
+{
 	
 	private static final String SELECT_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
 												+ "FROM ARTICLES_VENDUS \r\n"
@@ -22,6 +23,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 												+ "WHERE date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE();";
 	
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+	
 	private static final String SELECT_ARTICLE = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, no_utilisateur \r\n"
 												+ "FROM ARTICLES_VENDUS \r\n"
 												+ "WHERE nom_article = ?;";
@@ -58,14 +60,14 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 												
 	
-	private List<Article> listerArticles( ResultSet rs, boolean user)
-			throws SQLException {
+	private List<Article> listerArticles( ResultSet rs, boolean user) throws SQLException 
+	{
 		Article articleCourant;
 		List<Article> searchList= new ArrayList<Article>();
+		
 		while(rs.next())
 		{
-
-				
+		
 			{
 				articleCourant = new Article();
 				articleCourant.setNomArticle(rs.getString("nom_article"));
@@ -75,6 +77,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				articleCourant.setPrixInitial(rs.getInt("prix_initial"));
 				articleCourant.setPrixVente(rs.getInt("prix_vente"));
 				articleCourant.setNoCategorie(rs.getInt("no_categorie"));
+				
 				if( user )
 				{
 					articleCourant.setPseudo(rs.getString("pseudo"));		
