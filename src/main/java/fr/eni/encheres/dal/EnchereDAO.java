@@ -36,6 +36,10 @@ public interface EnchereDAO {
 	 */
 	void insertEnchere ( Enchere enchere) throws DALException;
 	
-
+	/**
+	 * Supprime une enchère en BDD depuis son numéro article
+	 * @param noArticle
+	 * @throws DALException
+	 */
 	void deleteEnchereByNoArticle(int noArticle) throws DALException;
 }

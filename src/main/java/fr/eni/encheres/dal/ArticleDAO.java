@@ -73,4 +73,11 @@ public interface ArticleDAO {
 	 */
 	public List<Article> getAllMyArticles(String pseudo) throws DALException;
 	
+	/**
+	 * Permet de modifier un article en BDD (nom, description, date début enchère...)
+	 * @param article
+	 * @throws DALException
+	 */
+	public  void updateArticleById(Article article) throws DALException;
+	
 }

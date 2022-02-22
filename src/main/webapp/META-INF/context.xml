@@ -9,6 +9,7 @@
 		url="jdbc:sqlserver://10.12.200.0:1433;databasename=EniEncheresBDD"
 		username="sa"
 		password="Pa$$w0rd"
+		charset='utf8mb4'
 		
 		maxIdle="3"
 		maxTotal="10"

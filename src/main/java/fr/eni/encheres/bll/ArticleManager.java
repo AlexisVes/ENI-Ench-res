@@ -293,5 +293,17 @@ public class ArticleManager
 			}
 			return null;
 		}
+		
+		public void updateArticleById(Article article) throws BLLException 
+		{
+			try {
+				articleDAO.updateArticleById(article);
+			} catch (DALException e) {
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;
+			}
+		}
 
 }

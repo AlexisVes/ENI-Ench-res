@@ -18,7 +18,7 @@
 		<h2>Nouvelle vente</h2>
 		
 		
-		<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.userId}" class="grid" method="post">
+		<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.userId}" class="grid" method="post" accept-charset="utf-8">
 		
 			<label for="article"> Article :</label>
 			<input type="text" name="article">
