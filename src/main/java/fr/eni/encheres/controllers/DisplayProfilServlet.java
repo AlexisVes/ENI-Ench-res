@@ -14,38 +14,45 @@ import fr.eni.encheres.bll.UserManager;
 import fr.eni.encheres.bo.User;
 
 /**
+ * Affiche le profil d'un utilisateur
  * Servlet implementation class DisplayProfilServlet
  */
 @WebServlet("/connect/profil")
-public class DisplayProfilServlet extends HttpServlet {
+public class DisplayProfilServlet extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DisplayProfilServlet() {
+
+    public DisplayProfilServlet()
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     RegisterServlet userVerification = new RegisterServlet();
     UserManager userManager = UserManager.getInstance();
 
 	/**
+	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try {
+		try 
+		{
+			//Récupère l'objet utilisateur correspondant à celui recherché
 			User user = userManager.searchUser(request.getParameter("pseudo"));
 			
+			//Renvoi l'objet utilisateur en attribut
 			request.setAttribute("userProfil", user);
 			
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (BLLException e) 
+		{
+			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
+		//Affiche la page profil
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connect/profil.jsp");
 		
 		if( rd != null)

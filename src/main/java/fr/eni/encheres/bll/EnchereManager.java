@@ -35,14 +35,14 @@ public class EnchereManager {
 		
 		LocalDate now = LocalDate.now();
 		
-		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());	
+		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
+		
 		
 		if( enchere != null) 
 		{
 			
 			if( prixSaisi > article.getPrixVente() ) 
 			{
-				System.out.println("3");
 				enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
 			}
 		}

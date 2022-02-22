@@ -87,6 +87,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 		}
 		
+
 		try {
 			cnx.close();
 		} catch (SQLException e) {
