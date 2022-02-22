@@ -117,7 +117,7 @@ public class SellArticleServlet extends HttpServlet {
 			Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
 			retraitMgr.insertRetrait(retrait);
 			
-			LocalDateTime dateEnchere = LocalDateTime.now();
+			LocalDateTime dateEnchere = LocalDateTime.now() ;
 			
 			//Créer un nouvelle objet Enchere dans la base de données
 			Enchere enchere = new Enchere( dateEnchere, miseAPrix, noArticle, userID);
