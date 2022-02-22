@@ -22,7 +22,7 @@
 		
 		<p><span class="detail_vente">Meilleure offre :</span> 
 		<c:if test="${requestScope.enchere != null}">
-			${requestScope.enchere} crédits par ${requestScope.encherisseur} le ${requestScope.dateEnchere }
+			${requestScope.enchere} crédits par ${requestScope.encherisseur} le ${requestScope.dateEnchere}
 		</c:if>
 		</p>
 		
@@ -36,11 +36,11 @@
 			<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
 				
 			<c:if test="${requestScope.enchere != null}">
-				<input type="number" name="proposition" placeholder="min : ${requestScope.enchere}" required="required" min="${requestScope.enchere}">
+				<input type="number" name="proposition" placeholder="min : ${requestScope.enchere + 1}" required="required" min="${requestScope.enchere + 1}">
 			</c:if>
 				
 			<c:if test="${requestScope.enchere == null}">
-				<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente}" required="required" min="${requestScope.article.prixVente}">
+				<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente + 1}" required="required" min="${requestScope.article.prixVente + 1}">
 			</c:if>
 				
 			<input type="submit" value="Valider">
