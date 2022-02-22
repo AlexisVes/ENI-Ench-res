@@ -18,7 +18,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String SELECT_ENCHERE = "SELECT no_enchere, date_enchere, montant_enchere, no_article, no_utilisateur FROM ENCHERES WHERE no_article = ?;";
 
-	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere = ?, no_utilisateur = ? WHERE no_article = ?;";
+	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET date_enchere = ?, montant_enchere = ?, no_utilisateur = ? WHERE no_article = ?;";
 	
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
 	
@@ -61,11 +61,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
- 
+			
 			rqt.setTimestamp(1, Timestamp.valueOf(now));
-			rqt.setInt( 1 , prix );
-			rqt.setInt( 2 , no_utilisateur );
-			rqt.setInt( 3, no_article);
+			rqt.setInt( 2 , prix );
+			rqt.setInt( 3 , no_utilisateur );
+			rqt.setInt( 4, no_article);
 
 			int rs = rqt.executeUpdate();
 

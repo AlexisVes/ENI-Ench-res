@@ -90,10 +90,6 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				
 				request.setAttribute("dateEnchere", enchere.getDate_enchere());
 			}
-			
-			
-			
-	
 		
 		}
 		catch( BLLException | DALException e )
