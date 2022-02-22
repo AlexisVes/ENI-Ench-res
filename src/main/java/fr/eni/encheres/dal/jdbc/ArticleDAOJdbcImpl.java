@@ -90,12 +90,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private List<Article> getAllArticles(String sql_rqt) throws DALException {
 		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
 		
-		Connection cnx = null;
+		try (Connection cnx = ConnectionProvider.getConnection()){
 		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();		
-			
 			Statement rqt = cnx.createStatement();
 			
 			ResultSet rs = rqt.executeQuery(sql_rqt);
@@ -108,12 +104,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return lesArticlesExtraits ;
 	}
 	
@@ -121,11 +111,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		
 		List<Article> lesArticlesExtraits = new ArrayList<Article>() ;
 		
-		Connection cnx = null;
-		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();		
+		try(Connection cnx = ConnectionProvider.getConnection()) {
 			
 			PreparedStatement rqt = cnx.prepareStatement(sql_rqt);
 			
@@ -145,14 +131,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return lesArticlesExtraits ;
-		
 		
 	}
 	
@@ -192,9 +171,8 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 
 	@Override
 	public void insertArticle(Article article) throws DALException {
-		
 		//on prepare la requête pour ajouter l'article en BDD		
-		try(Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection();){
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ARTICLE);
 			
 			//on valorise les paramètres de la requête 
@@ -218,14 +196,10 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 	}
 
 	public Article getArticle( String nom) throws DALException {
-		
-		Connection cnx = null;
-
+	
 		Article articleBDD = null;
 		
-		try {
-				
-			cnx = ConnectionProvider.getConnection();		
+		try (Connection cnx = ConnectionProvider.getConnection()) {	
 				
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_ARTICLE);
 
@@ -258,27 +232,19 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return articleBDD;
-		
-		
+	
 	}
 
 
 	@Override
 	public List<Article> getArticlesByName(String mot) {
 		
-		Connection cnx = null;
 		Article articleBDD = null;
 		List<Article> searchList=null;
 						
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
 			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE);
 			rqt.setString(1, "%" + mot + "%");
 			ResultSet rs = rqt.executeQuery();
@@ -291,25 +257,17 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}				
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+
 		return searchList;
 	}
 
 	@Override
 	public List<Article> getArticlesByCat(String mot, int categorie) {
-		
-		Connection cnx = null;
 		Article articleBDD = null;
 		List<Article> searchList=null;
 						
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
 			PreparedStatement rqt = cnx.prepareStatement(SEARCH_ARTICLE_NAME_CAT);
 			rqt.setInt(1, categorie);
 			rqt.setString(2, "%" + mot + "%");
@@ -322,15 +280,8 @@ public List<Article> getAllMyArticles(String pseudo) throws DALException{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 	
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	
 		return searchList;
-		
 	}
 	
 }

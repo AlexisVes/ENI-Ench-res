@@ -21,8 +21,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 	 */
 	public void insertRetrait(Retrait retrait) throws DALException {
 		
-try (Connection cnx = ConnectionProvider.getConnection()){
-			
+			try (Connection cnx = ConnectionProvider.getConnection()){
+
 			//On prepare la requête SQL
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_RETRAIT);
 			
@@ -35,7 +35,6 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 			
-			cnx.close();
 	
 		} 
 		catch (DALException | SQLException e) 
@@ -50,14 +49,10 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 	@Override
 	public Retrait getRetrait(int noArticle) throws DALException {
 		
-		Connection cnx = null;
-
 		Retrait retraitBDD = null;
 		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();
-			
+		try (Connection cnx = ConnectionProvider.getConnection()){
+						
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_RETRAIT);
 			
 			rqt.setInt(1, noArticle);
@@ -79,13 +74,6 @@ try (Connection cnx = ConnectionProvider.getConnection()){
 		} catch (SQLException e) {
 			//propager une exception personnalisée
 			throw new DALException("Problème d'extraction des retraits de la base. Cause : " + e.getMessage());
-		}
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		return retraitBDD;

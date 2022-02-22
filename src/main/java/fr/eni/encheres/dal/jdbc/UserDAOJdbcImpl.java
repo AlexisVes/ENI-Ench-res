@@ -21,50 +21,42 @@ public class UserDAOJdbcImpl implements UserDAO{
 	public User getUserById(int no_utilisateur) throws DALException
 	{
 		//Établir la connexion avec la bases de données 
-				Connection cnx = null;
-				User userBDD = null;
-				try {
-					cnx = ConnectionProvider.getConnection();
+		User userBDD = null;
+		try (Connection cnx = ConnectionProvider.getConnection()){
 
-					//créer la commande 
-					PreparedStatement rqt = cnx.prepareStatement(SELECT_USER_BY_ID );
-					//valoriser les paramètres
-					rqt.setInt(1, no_utilisateur);
-					//récupérer le contenu du SELECT_USER dans un resultset
-					ResultSet rs = rqt.executeQuery();
-					
-					//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
-					if(rs != null) {
-						rs.next();
-						int userId = rs.getInt(1);
-						String username =rs.getString(2);
-						String name = rs.getString(3);
-						String firstname = rs.getString(4);
-						String email = rs.getString(5);
-						String phone = rs.getString(6);
-						String street = rs.getString(7);
-						String zipCode = rs.getString(8);
-						String city = rs.getString(9);
-						String password = rs.getString(10);
-						int credit = rs.getInt(11);
-						byte admin = rs.getByte(12);
-						
-						//on créé l'objet userBDD
-						userBDD = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
-					} 
-					
-				} catch (SQLException e) {
-					System.out.println("user inconnu");
-					throw new DALException("Utilisateur inconnu");
-				}
+			//créer la commande 
+			PreparedStatement rqt = cnx.prepareStatement(SELECT_USER_BY_ID );
+			//valoriser les paramètres
+			rqt.setInt(1, no_utilisateur);
+			//récupérer le contenu du SELECT_USER dans un resultset
+			ResultSet rs = rqt.executeQuery();
+			
+			//s'appuyer sur ce result set pour alimenter les variables de l'objet User qui sera retourné 
+			if(rs != null) {
+				rs.next();
+				int userId = rs.getInt(1);
+				String username =rs.getString(2);
+				String name = rs.getString(3);
+				String firstname = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				String street = rs.getString(7);
+				String zipCode = rs.getString(8);
+				String city = rs.getString(9);
+				String password = rs.getString(10);
+				int credit = rs.getInt(11);
+				byte admin = rs.getByte(12);
 				
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return userBDD;
+				//on créé l'objet userBDD
+				userBDD = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
+			} 
+			
+		} catch (SQLException e) {
+			System.out.println("user inconnu");
+			throw new DALException("Utilisateur inconnu");
+		}
+		
+		return userBDD;
 	}
 	
 	@Override
@@ -73,10 +65,8 @@ public class UserDAOJdbcImpl implements UserDAO{
 	 */
 	public User getUser(String pseudo) throws DALException {
 		//Établir la connexion avec la bases de données 
-		Connection cnx = null;
 		User userBDD = null;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try (Connection cnx = ConnectionProvider.getConnection()){
 
 			//créer la commande 
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_USER);
@@ -110,19 +100,13 @@ public class UserDAOJdbcImpl implements UserDAO{
 			throw new DALException("Utilisateur inconnu");
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return userBDD;
 	}
 	
 	public void insertUser( User user ) throws DALException
 	{
-		Connection cnx = ConnectionProvider.getConnection();
-		try {
+
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 			//On prepare la requête SQL
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -141,8 +125,6 @@ public class UserDAOJdbcImpl implements UserDAO{
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 	
-			
-			
 		} 
 		catch (SQLException e) 
 		{
@@ -157,11 +139,6 @@ public class UserDAOJdbcImpl implements UserDAO{
 			}
 
 		}
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 	}
 
@@ -169,9 +146,8 @@ public class UserDAOJdbcImpl implements UserDAO{
 	public void updateUser(User user) throws DALException {
 		//Établir la connexion avec la bases de données 
 		PreparedStatement rqt;
-		Connection cnx = ConnectionProvider.getConnection();
 		//créer la commande 
-		try {
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			rqt = cnx.prepareStatement(UPDATE_USER);
 			
 			//on envoie les données dans la BDD pour que celles-ci soient modifiées 
@@ -191,11 +167,6 @@ public class UserDAOJdbcImpl implements UserDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 	}
 
@@ -203,19 +174,13 @@ public class UserDAOJdbcImpl implements UserDAO{
 	public void deleteUser(String pseudo) throws DALException {
 		//Établir la connexion avec la bases de données et créer la commande
 		PreparedStatement rqt;
-		Connection cnx = ConnectionProvider.getConnection();
-		try {
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			rqt = cnx.prepareStatement(DELETE_USER);
 			rqt.setString(1, pseudo);
 			//Éxécution de la requête de suppression en SQL
 			rqt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			cnx.close();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
