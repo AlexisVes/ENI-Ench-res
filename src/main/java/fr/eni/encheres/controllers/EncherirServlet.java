@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.EnchereManager;
+
 /**
  * Servlet implementation class EncherirServlet
  */
@@ -16,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 public class EncherirServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	EnchereManager enchereMgr;
+	ArticleManager articleMgr;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,7 +44,11 @@ public class EncherirServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//On récupère le prix saisi par l'utilisateur
 		int prixSaisi = Integer.parseInt(request.getParameter("proposition"));
+		//On s'appuie sur le manager Enchere pour contrôler que le prix saisi répond bien aux règles métier
+		enchereMgr.controlerEnchere(prixSaisi, articleMgr.getArticle(request.getParameter("nomArticle")), 5);
+		
 		
 		doGet(request, response);
 	}
