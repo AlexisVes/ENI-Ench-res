@@ -16,13 +16,15 @@ public class Article {
 	private int noUtilisateur;
 	
 	
-	public Article() {
+	public Article() 
+	{
 		super();
 	}
 
 	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int prixInitial, int prixVente, String etatVente, int noCategorie,
-			int noUtilisateur, String pseudo) {
+			int noUtilisateur, String pseudo) 
+	{
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -61,91 +63,113 @@ public class Article {
 		this.prixVente = prixVente;
 	}
 
-	public int getNoArticle() {
+	public int getNoArticle() 
+	{
 		return noArticle;
 	}
 
-	public void setNoArticle(int noArticle) {
+	public void setNoArticle(int noArticle) 
+	{
 		this.noArticle = noArticle;
 	}
 
-	public String getNomArticle() {
+	public String getNomArticle() 
+	{
 		return nomArticle;
 	}
 
-	public void setNomArticle(String nomArticle) {
+	public void setNomArticle(String nomArticle) 
+	{
 		this.nomArticle = nomArticle;
 	}
 
-	public String getDescription() {
+	public String getDescription() 
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description) 
+	{
 		this.description = description;
 	}
 
-	public LocalDate getDateDebutEncheres() {
+	public LocalDate getDateDebutEncheres() 
+	{
 		return dateDebutEncheres;
 	}
 
-	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDate dateDebutEncheres)
+	{
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
-	public LocalDate getDateFinEncheres() {
+	public LocalDate getDateFinEncheres() 
+	{
 		return dateFinEncheres;
 	}
 
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) 
+	{
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public int getPrixInitial() {
+	public int getPrixInitial() 
+	{
 		return prixInitial;
 	}
 
-	public void setPrixInitial(int prixInitial) {
+	public void setPrixInitial(int prixInitial) 
+	{
 		this.prixInitial = prixInitial;
 	}
 
-	public int getPrixVente() {
+	public int getPrixVente() 
+	{
 		return prixVente;
 	}
 
-	public void setPrixVente(int prixVente) {
+	public void setPrixVente(int prixVente) 
+	{
 		this.prixVente = prixVente;
 	}
 
-	public String getEtatVente() {
+	public String getEtatVente()
+	{
 		return etatVente;
 	}
 
-	public void setEtatVente(String etatVente) {
+	public void setEtatVente(String etatVente) 
+	{
 		this.etatVente = etatVente;
 	}
 
-	public int getNoCategorie() {
+	public int getNoCategorie()
+	{
 		return noCategorie;
 	}
 
-	public void setNoCategorie(int noCategorie) {
+	public void setNoCategorie(int noCategorie) 
+	{
 		this.noCategorie = noCategorie;
 	}
 
-	public String getPseudo() {
+	public String getPseudo()
+	{
 		return pseudo;
 	}
 
-	public void setPseudo(String pseudo) {
+	public void setPseudo(String pseudo)
+	{
 		this.pseudo = pseudo;
 	}
 
-	public int getNoUtilisateur() {
+	public int getNoUtilisateur() 
+	{
 		return noUtilisateur;
 	}
 
-	public void setNoUtilisateur(int noUtilisateur) {
+	public void setNoUtilisateur(int noUtilisateur) 
+	{
 		this.noUtilisateur = noUtilisateur;
 	}
 

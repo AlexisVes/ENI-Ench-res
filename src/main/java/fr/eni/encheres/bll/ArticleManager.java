@@ -20,49 +20,63 @@ public class ArticleManager {
 			 * permettre une communication avec la base de données. 
 			 */
 			//avisDAO = new AvisDAOJdbcImpl();
-				try {
+				try 
+				{
 					articleDAO = DAOFactory.createArticleDAO("JDBC");
-				} catch (DALException e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (DALException e) 
+				{
 					e.printStackTrace();
-				} //passer par la Factory
+				} 
+				//passer par la Factory
 		}
 		
 		
-		public synchronized static ArticleManager getInstance() {
-			if (instance == null) {
+		public synchronized static ArticleManager getInstance()
+		{
+			if (instance == null) 
+			{
 				instance = new ArticleManager();
-				
 			}
 			return instance;
 		}
 		
 		private ArticleDAO articleDAO;
 		
+		
 		/**
 		 * Récupération grâce à la DAO de tous les articles
 		 * @return on retourne dans une liste tout les articles encore en ventee
+		 * @throws BLLException 
 		 */
-		public List<Article> getArticlesAvailable()
+		public List<Article> getArticlesAvailable() throws BLLException
 		{
 			List<Article> articles = null;
 			
 			//Récupération de tout les articles dans la DAO
-			try {
+			try 
+			{
 				if( articleDAO.getArticles() != null )
 				{
 					articles = articleDAO.getArticles();
 				}
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch (DALException e) 
+			{
 				e.printStackTrace( );
-			}
-			
-			
-			return articles;
-			
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;	
+			}		
+			return articles;	
 		}
 		
+		
+		/**
+		 * Insère dans la base de données l'article recu en paramètre
+		 * @param article
+		 * @throws BLLException
+		 */
 		public void vendreArticle( Article article ) throws BLLException
 		{
 			
@@ -88,37 +102,74 @@ public class ArticleManager {
 			
 			try {
 				articleDAO.insertArticle(article);
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch (DALException e) 
+			{
 				e.printStackTrace();
+				BLLException dalException = new BLLException();
+				dalException.addMessage(e.getMessage());
+				throw dalException;	
 			}
 		}
 		
-		public Article getArticle( String nom )
+		
+		/**
+		 * On récupère un objet article dans la base de données avec son nom
+		 * @param nom String qui correspond au nom d'un article en base de données
+		 * @return l'article correspondant au nom rentré en paramètre
+		 * @throws BLLException 
+		 */
+		public Article getArticle( String nom ) throws BLLException
 		{
-			
 			Article article = null;
 			
-			try {
+			try 
+			{
 				article =  articleDAO.getArticle(nom);
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch (DALException e) 
+			{
 				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;	
 			}
+			
 			return article;
 		}
 		
+		
+		/**
+		 * 
+		 * @param mot
+		 * @return Une liste d'Article qui contiennent dans leurs noms notre paramètre
+		 */
 		public List<Article> getArticlesByName( String mot )
 		{
 			return articleDAO.getArticlesByName(mot);
 		}
 		
+		
+		/**
+		 * 
+		 * @param mot
+		 * @param categorie
+		 * @return  Une liste d'Article qui ont pour catégorie le paramètre rentré
+		 * et qui contiennent dans leurs noms notre paramètre
+		 */
 		public List<Article> getArticlesByCategorie( String mot, int categorie)
 		{
 			return articleDAO.getArticlesByCat(mot, categorie);
 		}
 		
 		
+		
+		/**
+		 * 
+		 * @param articles
+		 * @param recherche
+		 * @return Une liste d'Article qui contiennent dans leurs noms notre paramètre
+		 */
 		public List<Article> orderArticleByNames(List<Article> articles, String recherche)
 		{
 			List<Article> ordererArticles = new ArrayList<Article>(); 
@@ -134,6 +185,16 @@ public class ArticleManager {
 			return ordererArticles;
 		}
 		
+		
+		
+		/**
+		 * 
+		 * @param articles
+		 * @param recherche
+		 * @param categorie
+		 * @return Une liste d'Article qui ont pour catégorie le paramètre rentré
+		 * et qui contiennent dans leurs noms notre paramètre
+		 */
 		public List<Article> orderArticleByCatAndNames(List<Article> articles, String recherche, int categorie )
 		{
 
@@ -150,14 +211,16 @@ public class ArticleManager {
 			return ordererArticles;
 		}
 		
+		
+		
 		/**
 		 * 
 		 * @param pseudo LE nom du possesseur des articles
 		 * @param mode renvoi les vendu, a vendre ou en vente selon le mode choisi, respectivement: sold, futur, sell
-		 * 
 		 * @return
+		 * @throws BLLException 
 		 */
-		public List<Article> getMyArticles( String pseudo, String mode)
+		public List<Article> getMyArticles( String pseudo, String mode) throws BLLException
 		{
 			try {
 				
@@ -172,33 +235,38 @@ public class ArticleManager {
 			}	
 			catch(DALException e)
 			{
-				System.out.println("aie");
 				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;	
 			}
 			return null;
 		}
 		
 		
+		
 		/**
-		 * 
 		 * @param pseudo
 		 *@param mode renvoi les vendu, a vendre ou en vente selon le mode choisi, respectivement: sold, futur, sell
 		 * @return
+		 * @throws BLLException 
 		 */
-		public List<Article> getArticles( String mode )
+		public List<Article> getArticles( String mode ) throws BLLException
 		{
 			try {
 				
 				switch(mode)
 				{
 					case "on sell" : return articleDAO.getArticles();
-
 				}
 				
 			}	
 			catch(DALException e)
 			{
-				System.out.println("aie");
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;	
 			}
 			return null;
 		}

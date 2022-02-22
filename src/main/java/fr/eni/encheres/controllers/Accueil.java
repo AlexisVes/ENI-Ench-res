@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.bll.ArticleManager;
+import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
 import fr.eni.encheres.bo.Article;
 
@@ -44,11 +45,19 @@ public class Accueil extends HttpServlet {
 		
 		
 		//On vérifie que la liste d'articles n'est pas null
-		if(articleMgr.getArticlesAvailable() != null && request.getAttribute("listeArticles") == null) 
-		{ 
-			//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
-			articlesAvailable = articleMgr.getArticlesAvailable();
-			request.setAttribute("listeArticles", articlesAvailable);
+		try 
+		{
+			if(articleMgr.getArticlesAvailable() != null && request.getAttribute("listeArticles") == null) 
+			{ 
+				//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
+				articlesAvailable = articleMgr.getArticlesAvailable();
+				request.setAttribute("listeArticles", articlesAvailable);
+			}
+		} 
+		catch (BLLException e) 
+		{
+			request.setAttribute("message", e.getMessage());
+			e.printStackTrace();
 		}
 		
 		//Si j'ai cliqué sur le lien : "se déconnecter", je détruit ma session
@@ -99,146 +108,154 @@ public class Accueil extends HttpServlet {
 		//Récupère les catégories et les insères dans un attribut
 		request.setAttribute("listeCategories", categorieMgr.getCategories());
 		
-		//Si l'utilisateur a coché une checkbox
-		if( request.getParameter("achat") != null)
-		{	
-			//Si l'utilisateur a coché la checkbox "achat"
-			if( request.getParameter("achat").equals("achat") )
-			{
-				request.setAttribute("achat", true);
-				
-				//Si l'utilisateur a coché le check "encheres_ouvertes"
-				if( request.getParameter("encheres_ouvertes") != null)
+		try
+		{
+	
+			//Si l'utilisateur a coché une checkbox
+			if( request.getParameter("achat") != null)
+			{	
+				//Si l'utilisateur a coché la checkbox "achat"
+				if( request.getParameter("achat").equals("achat") )
 				{
-					//Récupère toutes les enchères en cours
-					if(articleMgr.getArticles( "on sell") != null )
+					request.setAttribute("achat", true);
+					
+					//Si l'utilisateur a coché le check "encheres_ouvertes"
+					if( request.getParameter("encheres_ouvertes") != null)
 					{
-						for( Article article : articleMgr.getArticles("on sell"))
+						//Récupère toutes les enchères en cours
+						if(articleMgr.getArticles( "on sell") != null )
 						{
-							articles.add(article);
+							for( Article article : articleMgr.getArticles("on sell"))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;
+						
+					}
+					
+					if( all )
+					{
+						if(articleMgr.getArticles("on sell") != null )
+						{
+							for( Article article : articleMgr.getArticles("on sell"))
+							{
+								articles.add(article);
+							}
 						}
 					}
 					
-					all = false;
 					
 				}
 				
-				if( all )
+				//Si l'utilisateur a coché la checkbox "vente"
+				if( request.getParameter("achat").equals("vente"))
 				{
-					if(articleMgr.getArticles("on sell") != null )
-					{
-						for( Article article : articleMgr.getArticles("on sell"))
+					request.setAttribute("vente", true);
+					
+					//Si l'utilisateur a coché le check "mes_ventes_ouvertes"
+					if( request.getParameter("mes_ventes_ouvertes") != null)
+					{	
+	
+						//On récupère les articles en vente actuellement par l'utilisateur
+						if(articleMgr.getMyArticles( pseudo, "on sell") != null )
 						{
-							articles.add(article);
+							for( Article article : articleMgr.getMyArticles( pseudo, "on sell"))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;
+						
+					}	
+					
+					//Si l'utilisateur a coché le check "mes_ventes_futur"
+					if( request.getParameter("mes_ventes_futur") != null)
+					{
+						//On récupère les futurs articles à vendre par l'utilisateur
+						if(articleMgr.getMyArticles( pseudo, "future") != null )
+						{
+							for( Article article : articleMgr.getMyArticles( pseudo, "future"))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;
+						
+					}
+					
+					//Si l'utilisateur a coché le check "ventes_terminees"
+					if( request.getParameter("ventes_terminees") != null)
+					{
+						//On récupère les articles déjà vendu par l'utilisateur
+						if(articleMgr.getMyArticles( pseudo, "sold") != null )
+						{
+							for( Article article : articleMgr.getMyArticles( pseudo, "sold"))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;
+						
+					}
+					
+					//Si l'utilisateur n'a rien cocher on récupère tout les artcles
+					if( all )
+					{
+						if(articleMgr.getMyArticles( pseudo, "sold") != null )
+						{
+							for( Article article : articleMgr.getMyArticles( pseudo, "all"))
+							{
+								articles.add(article);
+							}
 						}
 					}
+					
 				}
-				
 				
 			}
 			
-			//Si l'utilisateur a coché la checkbox "vente"
-			if( request.getParameter("achat").equals("vente"))
+			if(  request.getParameter("achat") == null )
 			{
-				request.setAttribute("vente", true);
-				
-				//Si l'utilisateur a coché le check "mes_ventes_ouvertes"
-				if( request.getParameter("mes_ventes_ouvertes") != null)
-				{	
-
-					//On récupère les articles en vente actuellement par l'utilisateur
-					if(articleMgr.getMyArticles( pseudo, "on sell") != null )
-					{
-						for( Article article : articleMgr.getMyArticles( pseudo, "on sell"))
-						{
-							articles.add(article);
-						}
-					}
-					
-					all = false;
-					
-				}	
-				
-				//Si l'utilisateur a coché le check "mes_ventes_futur"
-				if( request.getParameter("mes_ventes_futur") != null)
+				if( categorie == 0 )
 				{
-					//On récupère les futurs articles à vendre par l'utilisateur
-					if(articleMgr.getMyArticles( pseudo, "future") != null )
+					for( Article article : articleMgr.getArticlesByName(recherche))
 					{
-						for( Article article : articleMgr.getMyArticles( pseudo, "future"))
-						{
-							articles.add(article);
-						}
-					}
-					
-					all = false;
-					
-				}
-				
-				//Si l'utilisateur a coché le check "ventes_terminees"
-				if( request.getParameter("ventes_terminees") != null)
-				{
-					//On récupère les articles déjà vendu par l'utilisateur
-					if(articleMgr.getMyArticles( pseudo, "sold") != null )
-					{
-						for( Article article : articleMgr.getMyArticles( pseudo, "sold"))
-						{
-							articles.add(article);
-						}
-					}
-					
-					all = false;
-					
-				}
-				
-				//Si l'utilisateur n'a rien cocher on récupère tout les artcles
-				if( all )
-				{
-					if(articleMgr.getMyArticles( pseudo, "sold") != null )
-					{
-						for( Article article : articleMgr.getMyArticles( pseudo, "all"))
-						{
-							articles.add(article);
-						}
+						articles.add(article);
 					}
 				}
-				
+				else 
+				{
+					for( Article article : articleMgr.getArticlesByCategorie(recherche, categorie))
+					{
+						articles.add(article);
+					}
+				}
+			}
+			else
+			{
+				if( categorie == 0 )
+				{
+					articles = articleMgr.orderArticleByNames(articles, recherche);
+				}
+				else 
+				{
+					articles = articleMgr.orderArticleByCatAndNames(articles, recherche, categorie);
+				}
 			}
 			
+			
+			request.setAttribute("listeArticles", articles);
 		}
-		
-		if(  request.getParameter("achat") == null )
+		catch( BLLException e)
 		{
-			if( categorie == 0 )
-			{
-				for( Article article : articleMgr.getArticlesByName(recherche))
-				{
-					articles.add(article);
-				}
-			}
-			else 
-			{
-				for( Article article : articleMgr.getArticlesByCategorie(recherche, categorie))
-				{
-					articles.add(article);
-				}
-			}
+			request.setAttribute("message", e.getMessage());
+			e.printStackTrace();
 		}
-		else
-		{
-			if( categorie == 0 )
-			{
-				articles = articleMgr.orderArticleByNames(articles, recherche);
-			}
-			else 
-			{
-				articles = articleMgr.orderArticleByCatAndNames(articles, recherche, categorie);
-			}
-		}
-		
-		
-		request.setAttribute("listeArticles", articles);
-		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		
