@@ -14,7 +14,7 @@ public class UserDAOJdbcImpl implements UserDAO
 
 	private static final String INSERT_USER ="INSERT INTO UTILISATEURS ( pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur ) VALUES(?,?,?,?,?,?,?,?,?,100,0)";
 	private static final String SELECT_USER ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = ?";
-	private static final String UPDATE_USER ="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE no_utilisateur = ?;";
+	private static final String UPDATE_USER ="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ? WHERE no_utilisateur = ?;";
 	private static final String DELETE_USER ="DELETE UTILISATEURS WHERE pseudo = ?;";
 	private static final String SELECT_USER_BY_ID ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur = ?;";
 	private static final String SELECT_ID_BY_PSEUDO ="SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
@@ -199,7 +199,7 @@ public class UserDAOJdbcImpl implements UserDAO
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
 			rqt = cnx.prepareStatement(UPDATE_USER);
-			
+
 			//on envoie les données dans la BDD pour que celles-ci soient modifiées 
 			rqt.setString(1, user.getPseudo());
 			rqt.setString(2, user.getNom());
@@ -210,11 +210,13 @@ public class UserDAOJdbcImpl implements UserDAO
 			rqt.setString(7, user.getCodePostal());
 			rqt.setString(8, user.getVille());
 			rqt.setString(9, user.getPassword());
-			rqt.setInt(10, user.getUserId());
+			rqt.setInt(10, user.getCredit());
+			rqt.setInt(11, user.getUserId());
 			
+
 			//Éxécution de la requête SQL
 			rqt.executeUpdate();
-			
+
 		} 
 		catch (SQLException e) 
 		{

@@ -135,7 +135,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				proposition = Integer.parseInt(request.getParameter("proposition"));
 				
 				//On met à jour l'enchère de notre article
-				enchereMgr.controlerEnchere(proposition, article, userId);
+				enchereMgr.gererEnchere(proposition, article, userId);
 			}	
 		}
 		catch(BLLException e)
@@ -149,3 +149,4 @@ public class getDetailsOnSellServlet extends HttpServlet {
 		return;	
 	}
 }
+

@@ -2,6 +2,8 @@ package fr.eni.encheres.bll;
 
 import java.time.LocalDate;
 
+import fr.eni.encheres.bo.User;
+
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DALException;
@@ -49,8 +51,15 @@ public class EnchereManager
 	}
 	
 	
-
-	public void controlerEnchere (int prixSaisi, Article article, int no_utilisateur) throws BLLException 
+	/**
+	 * Une methode qui a la responsabilité de contrôler que le prix saisi répond aux règles métier, elle fait également la maj du solde de crédits
+	 * 
+	 * @param prixSaisi
+	 * @param article
+	 * @param no_utilisateur
+	 * @throws BLLException
+	 */
+	public void gererEnchere (int prixSaisi, Article article, int no_utilisateur) throws BLLException 
 	{
 		
 		LocalDate now = LocalDate.now();
@@ -64,9 +73,23 @@ public class EnchereManager
 				
 				if( prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
 				{
+					User user = userDAO.getUserById(no_utilisateur);
+					Enchere previousEnchere = enchereDAO.getEnchere(article.getNoArticle());
+					int previousIdUser = previousEnchere.getNo_utilisateur();
+					User previousUser = userDAO.getUserById(previousIdUser);
+					
+					
 					enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
+				
+					
+					user.setCredit(user.getCredit() - prixSaisi);
+					userDAO.updateUser(user);
+					
+					
+					previousUser.setCredit(previousUser.getCredit() + previousEnchere.getMontant_enchere());
+					userDAO.updateUser(previousUser);
+					
 				}
-			
 			}
 
 			else

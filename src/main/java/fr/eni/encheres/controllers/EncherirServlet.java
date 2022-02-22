@@ -56,7 +56,7 @@ public class EncherirServlet extends HttpServlet {
 			int prixSaisi = Integer.parseInt(request.getParameter("proposition"));
 			//On s'appuie sur le manager Enchere pour contrôler que le prix saisi répond bien aux règles métier
 			System.out.println("Le pseudo du user est " + session.getAttribute("connect"));
-			enchereMgr.controlerEnchere(prixSaisi, articleMgr.getArticle(request.getParameter("nomArticle")), userMgr.getIdByPseudo((String) session.getAttribute("connect")) );
+			enchereMgr.gererEnchere(prixSaisi, articleMgr.getArticle(request.getParameter("nomArticle")), userMgr.getIdByPseudo((String) session.getAttribute("connect")) );
 		}
 		catch( BLLException | DALException e)
 		{

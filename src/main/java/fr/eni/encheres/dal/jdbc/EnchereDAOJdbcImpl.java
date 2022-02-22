@@ -59,13 +59,14 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
-			
+ 
 			//rqt.setDate(1,  Date.valueOf(now));
 			rqt.setInt( 1 , prix );
 			rqt.setInt( 2 , no_utilisateur );
 			rqt.setInt( 3, no_article);
-			
+
 			int rs = rqt.executeUpdate();
+
 
 		}
 		catch 
@@ -91,8 +92,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			rqt.setInt( 2, enchere.getMontant_enchere() );
 			rqt.setInt(3, enchere.getNo_article());
 			rqt.setInt( 4 , enchere.getNo_utilisateur() );
-			
-			ResultSet rs = rqt.executeQuery();
+	
+			rqt.executeUpdate();
 			
 		}
 		catch (SQLException | DALException e) 
