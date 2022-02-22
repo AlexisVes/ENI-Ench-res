@@ -18,7 +18,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere = ?, no_utilisateur = ? WHERE no_article = ?;";
 	
-	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no-utilisateur) VALUES(?,?,?,?);";
+	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur) VALUES(?,?,?,?);";
 	
 	public Enchere getEnchere( int no_article )
 	{
@@ -48,13 +48,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
 		return null;
 	}
 
@@ -79,13 +72,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			//propager une exception personnalisée
 			e.printStackTrace();
 
-		}
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}
