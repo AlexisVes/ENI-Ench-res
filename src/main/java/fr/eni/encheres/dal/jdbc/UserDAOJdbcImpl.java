@@ -125,8 +125,6 @@ public class UserDAOJdbcImpl implements UserDAO{
 			//Éxécution de la requête SQL
 			int numberAffectedLines = rqt.executeUpdate();
 	
-			
-			
 		} 
 		catch (SQLException e) 
 		{
