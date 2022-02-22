@@ -144,10 +144,21 @@ public class ArticleManager
 		 * 
 		 * @param mot
 		 * @return Une liste d'Article qui contiennent dans leurs noms notre paramètre
+		 * @throws BLLException 
 		 */
-		public List<Article> getArticlesByName( String mot )
+		public List<Article> getArticlesByName( String mot ) throws BLLException
 		{
-			return articleDAO.getArticlesByName(mot);
+			try 
+			{
+				return articleDAO.getArticlesByName(mot);
+			}
+			catch (DALException e) 
+			{
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;	
+			}
 		}
 		
 		
@@ -157,10 +168,21 @@ public class ArticleManager
 		 * @param categorie
 		 * @return  Une liste d'Article qui ont pour catégorie le paramètre rentré
 		 * et qui contiennent dans leurs noms notre paramètre
+		 * @throws BLLException 
 		 */
-		public List<Article> getArticlesByCategorie( String mot, int categorie)
+		public List<Article> getArticlesByCategorie( String mot, int categorie) throws BLLException
 		{
-			return articleDAO.getArticlesByCat(mot, categorie);
+			try 
+			{
+				return articleDAO.getArticlesByCat(mot, categorie);
+			} 
+			catch (DALException e) 
+			{
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;	
+			}
 		}
 		
 		

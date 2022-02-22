@@ -31,10 +31,21 @@ public class EnchereManager
 	 * @param no_article
 	 * @return un Objet Enchere qui correspond à l'enchère qui a le no_article dans
 	 * la base de données
+	 * @throws BLLException 
 	 */
-	public Enchere getEnchere(int no_article)
+	public Enchere getEnchere(int no_article) throws BLLException
 	{
-		return enchereDAO.getEnchere(no_article);
+		try 
+		{
+			return enchereDAO.getEnchere(no_article);
+		} 
+		catch (DALException e) 
+		{
+			e.printStackTrace();
+			BLLException exception = new BLLException();
+			exception.addMessage(e.getMessage());
+			throw exception;	
+		}
 	}
 	
 	
@@ -44,9 +55,9 @@ public class EnchereManager
 		
 		LocalDate now = LocalDate.now();
 		
-		Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
-		
 		try {
+		
+			Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
 		
 			if( enchere != null) 
 			{
@@ -77,9 +88,19 @@ public class EnchereManager
 		}
 	}
 	
-	public void insertEnchere( Enchere enchere )
+	public void insertEnchere( Enchere enchere ) throws BLLException
 	{
-		enchereDAO.insertEnchere(enchere);
+		try 
+		{
+			enchereDAO.insertEnchere(enchere);
+		} 
+		catch (DALException e) 
+		{
+			e.printStackTrace();
+			BLLException exception = new BLLException();
+			exception.addMessage(e.getMessage());
+			throw exception;	
+		}
 	}
 
 	public synchronized static EnchereManager getInstance()
