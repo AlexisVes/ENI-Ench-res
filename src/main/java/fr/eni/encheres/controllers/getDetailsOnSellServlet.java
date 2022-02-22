@@ -55,7 +55,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			//Récupère le numéro d'article de notre article
 			int noArticle = article.getNoArticle();
 			
-			request.setAttribute("nomVendeur", article.getPseudo());
+			request.setAttribute("nomVendeur", userMgr.getUserById(article.getNoUtilisateur()));
 			
 			//On vérifie que le libellé de catégorie n'est pas null
 			if(categorieMgr.getLibelleCategorie(article.getNoCategorie()) != null)
