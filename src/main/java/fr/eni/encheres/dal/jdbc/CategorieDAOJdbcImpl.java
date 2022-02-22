@@ -22,12 +22,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 
 		//On établit la connexion vers la BDD
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
-		Connection cnx = null;
-		
-		cnx = ConnectionProvider.getConnection();		
 		Statement rqt;
 		
-		try {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			rqt = cnx.createStatement();
 			ResultSet rs = rqt.executeQuery(SELECT_CATEGORIES);
 			
@@ -41,13 +38,6 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			e.printStackTrace();
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		return listeCategorie;
 	}
 	
@@ -55,37 +45,30 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 		String libelleCategorie = null;
 		
 		//On établit la connexion vers la BDD
-				Connection cnx = null;
-	
-				try {
-					cnx = ConnectionProvider.getConnection();
-					PreparedStatement rqt = cnx.prepareStatement(SELECT_CATEGORIE);
 
-					rqt.setInt(1, noCategorie);
+	
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
+			PreparedStatement rqt = cnx.prepareStatement(SELECT_CATEGORIE);
+
+			rqt.setInt(1, noCategorie);
 					
-					ResultSet rs = rqt.executeQuery();
+			ResultSet rs = rqt.executeQuery();
 					
-					rs.next();
+			rs.next();
 					
-					if(rs != null) {
-						libelleCategorie = rs.getString("libelle");
-					}
-					
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				return libelleCategorie;
+			if(rs != null) {
+				libelleCategorie = rs.getString("libelle");
 			}
+					
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		return libelleCategorie;
+	}
 	
 
 }
