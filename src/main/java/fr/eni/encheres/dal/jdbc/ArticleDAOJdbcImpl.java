@@ -61,7 +61,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 	private static final String	DELETE_ARTICLE = " DELETE ARTICLES_VENDUS WHERE no_article=?;";
 =======
 	private static final String UPDATE_ARTICLE_BY_ID = 	"UPDATE ARTICLES_VENDUS\r\n"
-														+ "SET nom_article = '?', description = '?', date_debut_encheres = '?', date_fin_encheres = '?', prix_initial = '?', prix_vente ='?'\r\n"
+														+ "SET nom_article = '?', description = '?', date_debut_encheres = '?', date_fin_encheres = '?', prix_initial = '?'\r\n"
 														+ "WHERE no_article ='?';";
 
 >>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
@@ -390,8 +390,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			rqt.setDate(3, java.sql.Date.valueOf(article.getDateDebutEncheres()));
 			rqt.setDate(4, java.sql.Date.valueOf(article.getDateFinEncheres()));
 			rqt.setInt(5, article.getPrixInitial());
-			rqt.setInt(6, article.getPrixVente());
-			rqt.setInt(7, article.getNoArticle());
+			rqt.setInt(6, article.getNoArticle());
 			
 			//exécuter la requête vers la BDD
 			rqt.executeUpdate();
