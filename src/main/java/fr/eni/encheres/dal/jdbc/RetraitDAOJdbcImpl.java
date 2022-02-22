@@ -20,10 +20,9 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 	 * Une méthode permettant d'insérer en base de données le lieu du retrait 
 	 */
 	public void insertRetrait(Retrait retrait) throws DALException {
-			Connection cnx = null;
-			try {
-			
-			cnx = ConnectionProvider.getConnection();
+		
+			try (Connection cnx = ConnectionProvider.getConnection()){
+
 			//On prepare la requête SQL
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_RETRAIT);
 			
@@ -44,26 +43,16 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 			System.out.println("ça ne marche pas !");
 
 		}
-			try {
-				cnx.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		
 	}
 
 	@Override
 	public Retrait getRetrait(int noArticle) throws DALException {
 		
-		Connection cnx = null;
-
 		Retrait retraitBDD = null;
 		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();
-			
+		try (Connection cnx = ConnectionProvider.getConnection()){
+						
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_RETRAIT);
 			
 			rqt.setInt(1, noArticle);
@@ -85,13 +74,6 @@ public class RetraitDAOJdbcImpl implements RetraitDAO{
 		} catch (SQLException e) {
 			//propager une exception personnalisée
 			throw new DALException("Problème d'extraction des retraits de la base. Cause : " + e.getMessage());
-		}
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		return retraitBDD;

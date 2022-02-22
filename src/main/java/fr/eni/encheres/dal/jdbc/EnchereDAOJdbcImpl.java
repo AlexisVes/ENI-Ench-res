@@ -23,11 +23,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public Enchere getEnchere( int no_article )
 	{
 		
-		Connection cnx = null;
-		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_ENCHERE);
 			
@@ -58,12 +54,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return null;
 	}
@@ -71,12 +61,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public void updateEnchere( LocalDate now, int prix, int no_utilisateur, int no_article) {
-		
-		Connection cnx = null;
-		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();
+
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ENCHERE);
 			
@@ -102,25 +88,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 		}
 		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-
 	}
 
 
 	@Override
 	public void insertEnchere( Enchere enchere) {
 		
-		Connection cnx = null;
-		
-		try {
-			
-			cnx = ConnectionProvider.getConnection();
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 			PreparedStatement rqt = cnx.prepareStatement(INSERT_ENCHERE);
 			
@@ -138,13 +112,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			cnx.close();
-		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
