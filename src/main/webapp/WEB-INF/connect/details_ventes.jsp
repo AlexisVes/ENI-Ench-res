@@ -31,7 +31,6 @@
 		<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
 		<p><span class="detail_vente">Vendeur :</span> ${requestScope.nomVendeur.pseudo}</p>
 		
-		
 		<form action="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${requestScope.article.nomArticle}" method="post">
 		
 			<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
