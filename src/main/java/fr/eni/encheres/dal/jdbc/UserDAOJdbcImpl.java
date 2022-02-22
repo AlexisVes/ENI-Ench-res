@@ -210,7 +210,6 @@ public class UserDAOJdbcImpl implements UserDAO
 			rqt.setString(7, user.getCodePostal());
 			rqt.setString(8, user.getVille());
 			rqt.setString(9, user.getPassword());
-			System.out.println( "nouveau crédit :" +user.getCredit());
 			rqt.setInt(10, user.getCredit());
 			rqt.setInt(11, user.getUserId());
 			
