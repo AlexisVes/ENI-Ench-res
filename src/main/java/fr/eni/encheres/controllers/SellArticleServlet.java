@@ -46,11 +46,11 @@ public class SellArticleServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Récupère toutes les catégories de la base de données
-		request.setAttribute("listeCategories", categorieMgr.getCategories());
-		
 		try 
 		{
+			//Récupère toutes les catégories de la base de données
+			request.setAttribute("listeCategories", categorieMgr.getCategories());
+		
 			//Récupère un objet User correspondant à l'utilisateur actuellement connecté
 			User user = userManager.searchUser(request.getParameter("pseudo"));
 			

@@ -53,24 +53,23 @@ public class Accueil extends HttpServlet {
 				articlesAvailable = articleMgr.getArticlesAvailable();
 				request.setAttribute("listeArticles", articlesAvailable);
 			}
+		
+			//Si j'ai cliqué sur le lien : "se déconnecter", je détruit ma session
+			if( request.getParameter("disconnect") != null)
+			{
+				HttpSession session = ((HttpServletRequest)request).getSession();
+				session.removeAttribute("connect");
+			}
+			
+			//Je rentre dans l'attribut listeCatégories, toutes les catégories de ma base de données
+			request.setAttribute("listeCategories", categorieMgr.getCategories());
+			
 		} 
 		catch (BLLException e) 
 		{
 			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
-		
-		//Si j'ai cliqué sur le lien : "se déconnecter", je détruit ma session
-		if( request.getParameter("disconnect") != null)
-		{
-			HttpSession session = ((HttpServletRequest)request).getSession();
-			session.removeAttribute("connect");
-		}
-		
-		//Je rentre dans l'attribut listeCatégories, toutes les catégories de ma base de données
-		request.setAttribute("listeCategories", categorieMgr.getCategories());
-		
-		
 		
 		//Remonter cette liste vers l'IHM qui va afficher les articles disponibles aux utilisateurs
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
@@ -101,16 +100,15 @@ public class Accueil extends HttpServlet {
 		
 		boolean all = true;
 		
-		
-		
-		//Récupère les articles et les insères dans un attribut
-		request.setAttribute("listeArticles", articlesAvailable);
-		//Récupère les catégories et les insères dans un attribut
-		request.setAttribute("listeCategories", categorieMgr.getCategories());
-		
 		try
 		{
-	
+		
+			//Récupère les articles et les insères dans un attribut
+			request.setAttribute("listeArticles", articlesAvailable);
+			//Récupère les catégories et les insères dans un attribut
+			request.setAttribute("listeCategories", categorieMgr.getCategories());
+		
+			
 			//Si l'utilisateur a coché une checkbox
 			if( request.getParameter("achat") != null)
 			{	

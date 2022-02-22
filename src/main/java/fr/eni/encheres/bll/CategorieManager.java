@@ -9,10 +9,11 @@ import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.UserDAO;
 
-public class CategorieManager {
+public class CategorieManager 
+{
 	
 	//volonté de n'avoir qu'une seule instance de cette classe en mémoire => SINGLETON
-		private static CategorieManager instance=null;
+	private static CategorieManager instance=null;
 
 	private CategorieManager() {
 		/*
@@ -20,16 +21,20 @@ public class CategorieManager {
 		 * permettre une communication avec la base de données. 
 		 */
 		//avisDAO = new AvisDAOJdbcImpl();
-			try {
+			try 
+			{
 				categorieDAO = DAOFactory.createCategorieDAO("JDBC");
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
+			}
+			catch (DALException e)
+			{
 				e.printStackTrace();
-			} //passer par la Factory
+			} 
 	}
 	
-	public synchronized static CategorieManager getInstance() {
-		if (instance == null) {
+	public synchronized static CategorieManager getInstance()
+	{
+		if (instance == null) 
+		{
 			instance = new CategorieManager();
 		}
 		return instance;
@@ -37,30 +42,52 @@ public class CategorieManager {
 	
 	private CategorieDAO categorieDAO;
 	
-	public List<Categorie> getCategories(){
-		
+	
+	
+	/**
+	 * @return La liste de toutes les catégories de la base de données
+	 * @throws BLLException
+	 */
+	public List<Categorie> getCategories() throws BLLException
+	{	
 		List<Categorie> categories = new ArrayList<Categorie>();
 		
-		try {
-			
-			categories = categorieDAO.getCategories();
-			
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try 
+		{	
+			categories = categorieDAO.getCategories();	
+		} 
+		catch (DALException e) 
+		{
+			e.printStackTrace( );
+			BLLException exception = new BLLException();
+			exception.addMessage(e.getMessage());
+			throw exception;	
 		}
 		
 		return categories;
 	}
 	
-	public String getLibelleCategorie(int noCategorie) {
+	
+	/**
+	 * @param noCategorie
+	 * @return Le libellé de la catégorie
+	 * @throws BLLException
+	 */
+	public String getLibelleCategorie(int noCategorie) throws BLLException 
+	{
 		String libelleCategorie = null;
-		try {
+		try 
+		{
 			libelleCategorie = categorieDAO.getCategorie(noCategorie);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+		catch (DALException e) 
+		{
+			e.printStackTrace( );
+			BLLException exception = new BLLException();
+			exception.addMessage(e.getMessage());
+			throw exception;	
 		}
+		
 		return libelleCategorie;
 	}
 	
