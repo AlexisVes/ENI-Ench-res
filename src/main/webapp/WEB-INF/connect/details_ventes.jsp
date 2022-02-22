@@ -22,7 +22,7 @@
 		
 		<p><span class="detail_vente">Meilleure offre :</span> 
 		<c:if test="${requestScope.enchere != null}">
-			${requestScope.enchere} crédits par ${requestScope.encherisseur}
+			${requestScope.enchere} crédits par ${requestScope.encherisseur} le ${requestScope.dateEnchere }
 		</c:if>
 		</p>
 		

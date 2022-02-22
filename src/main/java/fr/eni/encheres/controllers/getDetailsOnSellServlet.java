@@ -87,6 +87,8 @@ public class getDetailsOnSellServlet extends HttpServlet {
 			
 				//Renvoi dans un attribut le nom de l'encherisseur
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());		
+				
+				request.setAttribute("dateEnchere", enchere.getDate_enchere());
 			}
 			
 			
