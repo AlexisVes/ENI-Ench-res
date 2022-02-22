@@ -90,7 +90,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			rqt.setInt(3, enchere.getNo_article());
 			rqt.setInt( 4 , enchere.getNo_utilisateur() );
 			
-			rqt.executeQuery();
+			ResultSet rs = rqt.executeQuery();
 			
 		}
 		catch (SQLException e) {

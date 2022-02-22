@@ -19,6 +19,7 @@ public class EnchereManager {
 	{
 		super();
 		enchereDAO = DAOFactory.createEnchereDAO("JDBC");
+		userDAO = DAOFactory.createUserDAO("JDBC");
 	}
 	
 	private EnchereDAO enchereDAO;
@@ -56,6 +57,7 @@ public class EnchereManager {
 		else
 		{
 			try {
+				System.out.println("crédit : " +  userDAO.getUserById(no_utilisateur).getCredit());
 				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) {
 					enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
 					enchereDAO.insertEnchere(enchere);	
