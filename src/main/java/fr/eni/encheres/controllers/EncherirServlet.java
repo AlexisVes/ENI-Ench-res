@@ -54,7 +54,7 @@ public class EncherirServlet extends HttpServlet {
 		}
 		catch( BLLException e)
 		{
-			request.setAttribute("message", e.getMessage()) ;
+			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
 		
