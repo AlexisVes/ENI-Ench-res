@@ -175,7 +175,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
 		}
 		
-		return lesArticlesExtraits ;
+		return lesArticlesExtraits;
 		
 	}
 	
