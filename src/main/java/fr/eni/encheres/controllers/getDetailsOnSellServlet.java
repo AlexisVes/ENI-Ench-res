@@ -95,6 +95,7 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				request.setAttribute("dateEnchere", enchere.getDate_enchere().format(FORMATTER));
 			}
 			
+			
 			HttpSession session = ((HttpServletRequest)request).getSession();
 			
 			//On récupère le pseudo de l'utilisateur en cours
