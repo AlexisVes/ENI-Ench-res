@@ -3,6 +3,10 @@
   <display-name>ENI-Ench-res</display-name>
   <welcome-file-list>
     <welcome-file>home</welcome-file>
-
+    
   </welcome-file-list>
+ 
+   <session-config>
+   	<session-timeout>5</session-timeout>  
+   </session-config>
 </web-app>

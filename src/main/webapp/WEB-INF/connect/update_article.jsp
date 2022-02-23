@@ -12,7 +12,7 @@
 	
 		<a href="${pageContext.request.contextPath}/home" ><img src="../img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 		
-		<form action="" method="post">
+		<form action="" method="post" class="grid">
 		
 			<label for= "nomArticle"> Nom de l'article :</label>
 			<input type="text" value="${requestScope.article.nomArticle}" name="nomArticle">
