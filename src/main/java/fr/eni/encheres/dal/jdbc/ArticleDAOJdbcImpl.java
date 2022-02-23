@@ -488,14 +488,15 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 	}
 
 	@Override
-	public void updateSellPrice(int noArticle) throws DALException {
+	public void updateSellPrice(int prixVente, int noArticle) throws DALException {
 		
 		try(Connection cnx = ConnectionProvider.getConnection()){
 
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_SELL_PRICE);
 			
 			//on valorise le paramètre avec le numéro de l'article
-			rqt.setInt(1, noArticle);
+			rqt.setInt(1, prixVente);
+			rqt.setInt(2, noArticle);
 			
 			//on exécute l'update du prix de vente 
 			rqt.executeUpdate();

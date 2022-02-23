@@ -333,10 +333,10 @@ public class ArticleManager
 		 * @param noUtilisateur
 		 * @throws BLLException
 		 */
-		public void updateSellPrice(int noUtilisateur) throws BLLException {
+		public void updateSellPrice(int prixVente, int noUtilisateur) throws BLLException {
 			try 
 			{
-				articleDAO.updateSellPrice(noUtilisateur);
+				articleDAO.updateSellPrice(prixVente, noUtilisateur);
 			} 
 			catch 
 			(DALException e) 

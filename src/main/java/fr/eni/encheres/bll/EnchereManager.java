@@ -94,7 +94,7 @@ public class EnchereManager
 					userDAO.updateUser(previousUser);
 					
 					//On met à jour le prix de vente 
-					articleDAO.updateSellPrice(article.getNoArticle());
+					articleDAO.updateSellPrice(prixSaisi, article.getNoArticle());
 				
 				}
 			}
