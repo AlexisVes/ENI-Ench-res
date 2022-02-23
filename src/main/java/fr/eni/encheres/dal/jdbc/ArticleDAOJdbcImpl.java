@@ -65,16 +65,20 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 														+ "WHERE no_article =?;";
 	private static String END_SELL_ARTICLE = "SELECT no_article WHERE date_fin_encheres = GETDATE()";
 
-	private static String SELECT_BOUGHT_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie\r\n"
+	private static String SELECT_BOUGHT_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
 													+ "FROM ENCHERES \r\n"
 													+ "INNER JOIN ARTICLES_VENDUS \r\n"
 													+ "ON ENCHERES.no_article = ARTICLES_VENDUS.no_article \r\n"
+													+ "INNER JOIN UTILISATEURS\r\n"
+													+ "ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur\r\n"
 													+ "WHERE ENCHERES.no_utilisateur = ? AND date_fin_encheres < GETDATE();";
 	
-	private static String SELECT_ON_BUY_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie\r\n"
+	private static String SELECT_ON_BUY_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
 													+ "FROM ENCHERES \r\n"
 													+ "INNER JOIN ARTICLES_VENDUS \r\n"
 													+ "ON ENCHERES.no_article = ARTICLES_VENDUS.no_article \r\n"
+													+ "INNER JOIN UTILISATEURS\r\n"
+													+ "ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur\r\n"
 													+ "WHERE ENCHERES.no_utilisateur = ? AND date_fin_encheres > GETDATE();";
 																						
 	
@@ -450,7 +454,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			ResultSet rs = rqt.executeQuery();
 			
 			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
-			searchList = listerArticles( rs, false);
+			searchList = listerArticles( rs, true);
 			
 		} 
 		catch (DALException | SQLException e) 
