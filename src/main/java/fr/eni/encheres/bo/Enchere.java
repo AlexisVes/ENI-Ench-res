@@ -20,7 +20,7 @@ public class Enchere
 		this.date_enchere = date_enchere;
 		this.montant_enchere = montant_enchere;
 		this.no_article = no_article;
-		this.no_utilisateur = no_utilisateur;
+		this.no_utilisateur = no_utilisateur ;
 	}
 	
 	public Enchere( LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur, Article article) 
