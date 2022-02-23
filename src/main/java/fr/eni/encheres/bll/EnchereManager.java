@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.User;
+import fr.eni.encheres.dal.ArticleDAO;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
@@ -22,10 +23,12 @@ public class EnchereManager
 		super();
 		enchereDAO = DAOFactory.createEnchereDAO("JDBC");
 		userDAO = DAOFactory.createUserDAO("JDBC");
+		articleDAO = DAOFactory.createArticleDAO("JDBC");
 	}
 	
 	private EnchereDAO enchereDAO;
 	private UserDAO userDAO;
+	private ArticleDAO articleDAO;
 	
 	
 	/**
@@ -90,6 +93,9 @@ public class EnchereManager
 					previousUser.setCredit(previousUser.getCredit() + previousEnchere.getMontant_enchere());
 					userDAO.updateUser(previousUser);
 					
+					//On met à jour le prix de vente 
+					articleDAO.updateSellPrice(article.getNoArticle());
+				
 				}
 			}
 

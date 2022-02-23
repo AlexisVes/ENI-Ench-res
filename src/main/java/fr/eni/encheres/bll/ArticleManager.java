@@ -327,5 +327,25 @@ public class ArticleManager
 				throw exception;
 			}
 		}
+		
+		/**
+		 * Methode permettant de mettre à jour le prix de vente à la suite d'un enchère validée 
+		 * @param noUtilisateur
+		 * @throws BLLException
+		 */
+		public void updateSellPrice(int noUtilisateur) throws BLLException {
+			try 
+			{
+				articleDAO.updateSellPrice(noUtilisateur);
+			} 
+			catch 
+			(DALException e) 
+			{
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;
+			}
+		}
 
 }
