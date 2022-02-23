@@ -45,11 +45,19 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
 		//On vérifie que la liste d'articles n'est pas null
 		try 
 		{
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			//On vérifie si l'utilisateur est admin ou non
+			if( session.getAttribute("connect") != null )
+			{
+				String pseudo = (String) session.getAttribute("connect");
+				int admin = userMgr.getUserById(userMgr.getIdByPseudo(pseudo)).getAdmninistrateur();
+				request.setAttribute("admin", admin);	
+			}
+			
 			if(articleMgr.getArticlesAvailable() != null && request.getAttribute("listeArticles") == null) 
 			{ 
 				//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
@@ -59,8 +67,7 @@ public class Accueil extends HttpServlet {
 		
 			//Si j'ai cliqué sur le lien : "se déconnecter", je détruit ma session
 			if( request.getParameter("disconnect") != null)
-			{
-				HttpSession session = ((HttpServletRequest)request).getSession();
+			{			
 				session.removeAttribute("connect");
 			}
 			
@@ -68,7 +75,7 @@ public class Accueil extends HttpServlet {
 			request.setAttribute("listeCategories", categorieMgr.getCategories());
 			
 		} 
-		catch (BLLException e) 
+		catch (BLLException | DALException e) 
 		{
 			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();

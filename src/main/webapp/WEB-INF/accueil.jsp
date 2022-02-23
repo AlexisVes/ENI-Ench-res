@@ -19,14 +19,16 @@
 				<c:if test="${sessionScope.connect == null}">
 					<a href="${pageContext.request.contextPath}/login" class="enibay_link">S'inscrire - Se connecter</a>
 				</c:if>
-				
 				<c:if test="${ sessionScope.connect != null }">
-						<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
-						<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
-						<a href="${pageContext.request.contextPath}/home?disconnect=disconnect"> Se déconnecter</a>
+					<!-- On affiche le menu Admin si l'utilisateur connecté est administrateur -->
+					<c:if test="${requestScope.admin == 1 }">
+						<a href="${pageContext.request.contextPath}/connect/admin?pseudo=${sessionScope.connect}">Admin</a>
+					</c:if>
+					<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
+					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
+					<a href="${pageContext.request.contextPath}/home?disconnect=disconnect"> Se déconnecter</a>
 				</c:if>
 			</div>
-			
 		</nav>
 		
 		<p class="jaune"> ${requestScope.confirmation } </p>
