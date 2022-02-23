@@ -59,6 +59,8 @@ public class ConnectFilter implements Filter {
 			}
 		}
 	}
+	
+	
 
 	/**
 	 * @see Filter#init(FilterConfig)
