@@ -8,7 +8,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Accueil</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	</head>
 	<body>
@@ -32,7 +31,7 @@
 		
 		<p class="jaune"> ${requestScope.confirmation } </p>
 		
-		<h2 class="float-end">Liste des enchères</h2>
+		<h2>Liste des enchères</h2>
 		
 		<form class="navigation_filters" action="${pageContext.request.contextPath}/home" method="post" >
 		
