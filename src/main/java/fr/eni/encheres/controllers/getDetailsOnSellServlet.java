@@ -2,6 +2,8 @@ package fr.eni.encheres.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,7 +91,8 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				//Renvoi dans un attribut le nom de l'encherisseur
 				request.setAttribute("encherisseur", userMgr.getUserById(enchere.getNo_utilisateur()).getPseudo());		
 				
-				request.setAttribute("dateEnchere", enchere.getDate_enchere());
+				final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-YYYY HH:mm");
+				request.setAttribute("dateEnchere", enchere.getDate_enchere().format(FORMATTER));
 			}
 			
 			HttpSession session = ((HttpServletRequest)request).getSession();
