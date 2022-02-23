@@ -1,8 +1,8 @@
 package fr.eni.encheres.actualisation;
 
 
-private class TimerMaj implements Runnable
-{
-
-
-}
+//private class TimerMaj implements Runnable
+//{
+//
+//
+//}

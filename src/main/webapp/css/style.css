@@ -79,7 +79,6 @@ article:hover{
 	grid-row: 11;
 }
 
-<<<<<<< HEAD
 .detail_vente {
 	color: #e1bd29;
 	font-weight: bold;
@@ -87,10 +86,9 @@ article:hover{
 
 .navigation_filters {
 	padding-bottom: 20px;
-=======
-form .select_filters{
-	
+}
+
+form.select_filters{
 	display: flex;
 	flex-direction: column;
->>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
 }

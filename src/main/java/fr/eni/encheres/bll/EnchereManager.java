@@ -1,12 +1,10 @@
 package fr.eni.encheres.bll;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import fr.eni.encheres.bo.User;
 
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.User;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
 import fr.eni.encheres.dal.EnchereDAO;
