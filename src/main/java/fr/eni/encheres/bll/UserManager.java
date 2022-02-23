@@ -1,5 +1,7 @@
 package fr.eni.encheres.bll;
 
+import java.util.List;
+
 import fr.eni.encheres.bo.User;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.DAOFactory;
@@ -255,6 +257,10 @@ public class UserManager
 	
 	public int getIdByPseudo (String pseudo) throws DALException {
 		return userDAO.getIdByPseudo(pseudo);
+	}
+	
+	public List<User> selectAllUsers() throws DALException {
+		return userDAO.selectAllUsers();
 	}
 }
 

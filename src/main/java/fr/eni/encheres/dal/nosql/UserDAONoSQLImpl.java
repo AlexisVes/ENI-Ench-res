@@ -1,5 +1,7 @@
 package fr.eni.encheres.dal.nosql;
 
+import java.util.List;
+
 import fr.eni.encheres.bo.User;
 import fr.eni.encheres.dal.DALException;
 import fr.eni.encheres.dal.UserDAO;
@@ -40,6 +42,12 @@ public class UserDAONoSQLImpl implements UserDAO{
 	public int getIdByPseudo(String pseudo) throws DALException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<User> selectAllUsers() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

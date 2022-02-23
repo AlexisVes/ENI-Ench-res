@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import org.eclipse.jdt.internal.compiler.ast.SuperReference;
 
 import fr.eni.encheres.bo.User;
 import fr.eni.encheres.dal.DALException;
@@ -18,6 +22,7 @@ public class UserDAOJdbcImpl implements UserDAO
 	private static final String DELETE_USER ="DELETE UTILISATEURS WHERE pseudo = ?;";
 	private static final String SELECT_USER_BY_ID ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur = ?;";
 	private static final String SELECT_ID_BY_PSEUDO ="SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
+	private static final String SELECT_ALL_USERS ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS;";
 	
 	public User getUserById(int no_utilisateur) throws DALException
 	{
@@ -245,6 +250,45 @@ public class UserDAOJdbcImpl implements UserDAO
 			e.printStackTrace();
 			throw new DALException(e.getMessage());
 		}
+	}
+
+	@SuppressWarnings("null")
+	@Override
+	public List<User> selectAllUsers() throws DALException {
+		List<User> allUsers=null;
+		
+		// établir la connexion avec la base de données et créer la commande
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
+			PreparedStatement rqt = cnx.prepareStatement(SELECT_ALL_USERS);
+			//On exécute la requête 
+			ResultSet rs = rqt.executeQuery();
+			
+			while(rs.next()) {
+				int userId = rs.getInt(1);
+				String username =rs.getString(2);
+				String name = rs.getString(3);
+				String firstname = rs.getString(4);
+				String email = rs.getString(5);
+				String phone = rs.getString(6);
+				String street = rs.getString(7);
+				String zipCode = rs.getString(8);
+				String city = rs.getString(9);
+				String password = rs.getString(10);
+				int credit = rs.getInt(11);
+				byte admin = rs.getByte(12);
+				
+				//on créé l'objet userBDD
+				User user = new User(userId, username, name, firstname, email, phone, street, zipCode, city, password, credit, admin);
+				
+				//On alimente la liste 
+				allUsers.add(user);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return allUsers;
 	}
 }
 

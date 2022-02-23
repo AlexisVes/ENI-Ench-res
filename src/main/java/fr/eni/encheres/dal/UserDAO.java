@@ -1,5 +1,7 @@
 package fr.eni.encheres.dal;
 
+import java.util.List;
+
 import fr.eni.encheres.bo.User;
 
 public interface UserDAO {
@@ -53,6 +55,13 @@ public interface UserDAO {
 	 * @throws DALException
 	 */
 	void deleteUser(String pseudo) throws DALException;
+	
+	/**
+	 * Une méthode qui permet de récupérer la liste des utilisateurs en BDD (utile pour l'admin, pour la suppression de comptes)
+	 * @return La liste des utilisateurs présents en BDD
+	 * @throws DALException
+	 */
+	List<User> selectAllUsers() throws DALException;
 
 }
 
