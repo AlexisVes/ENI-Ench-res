@@ -68,7 +68,8 @@ public class UpdateArticleServlet extends HttpServlet {
 		
 		String nomArticle = request.getParameter("nomArticle");
 		String description = request.getParameter("description");
-		LocalDate dateDebut = request.getParameter("dateDebut");
+		LocalDate dateDebut = LocalDate.parse(request.getParameter("dateDebut"));
+		
 		
 		doGet(request, response);
 	}
