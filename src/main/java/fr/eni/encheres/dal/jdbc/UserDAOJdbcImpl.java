@@ -290,7 +290,6 @@ public class UserDAOJdbcImpl implements UserDAO
 		}
 		return allUsers;
 	}
-	
 }
 
 
