@@ -1,8 +1,6 @@
 package fr.eni.encheres.dal;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import fr.eni.encheres.bo.Enchere;
 

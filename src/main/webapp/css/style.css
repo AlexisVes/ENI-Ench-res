@@ -87,8 +87,8 @@ article:hover{
 	padding-bottom: 20px;
 }
 
+
 form .select_filters{
-	
 	display: flex;
 	flex-direction: column;
 }
@@ -132,3 +132,4 @@ form .select_filters{
 	}
 	
 }
+
