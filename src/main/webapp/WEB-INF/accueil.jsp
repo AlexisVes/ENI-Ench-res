@@ -22,7 +22,7 @@
 				<c:if test="${ sessionScope.connect != null }">
 					<!-- On affiche le menu Admin si l'utilisateur connecté est administrateur -->
 					<c:if test="${requestScope.admin == 1 }">
-						<a href="${pageContext.request.contextPath}/connect/admin?pseudo=${sessionScope.connect}">Admin</a>
+						<a href="${pageContext.request.contextPath}/administrator/admin">Admin</a>
 					</c:if>
 					<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
 					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>

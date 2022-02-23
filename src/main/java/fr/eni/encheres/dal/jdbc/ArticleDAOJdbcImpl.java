@@ -81,6 +81,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 													+ "ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur\r\n"
 													+ "WHERE ENCHERES.no_utilisateur = ? AND date_fin_encheres > GETDATE();";
 																						
+	private static String UPDATE_SELL_PRICE = "UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?;";
 	
 	/**
 	 * Méthodes de création d'une liste d'article à partir d'une requête
@@ -119,6 +120,26 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		}
 		
 		return searchList;
+	}
+	
+	private Article map( ResultSet rs, boolean user) throws SQLException 
+	{
+		Article articleCourant = new Article();
+				articleCourant.setNomArticle(rs.getString("nom_article"));
+				articleCourant.setDescription(rs.getString("description"));
+				articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleCourant.setPrixInitial(rs.getInt("prix_initial"));
+				articleCourant.setPrixVente(rs.getInt("prix_vente"));
+				articleCourant.setNoCategorie(rs.getInt("no_categorie"));
+				
+				if( user )
+				{
+					articleCourant.setPseudo(rs.getString("pseudo"));		
+				}
+
+		
+		return articleCourant;
 	}
 	
 	
@@ -464,6 +485,25 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		} 	
 	
 		return searchList;
+	}
+
+	@Override
+	public void updateSellPrice(int noArticle) throws DALException {
+		
+		try(Connection cnx = ConnectionProvider.getConnection()){
+
+			PreparedStatement rqt = cnx.prepareStatement(UPDATE_SELL_PRICE);
+			
+			//on valorise le paramètre avec le numéro de l'article
+			rqt.setInt(1, noArticle);
+			
+			//on exécute l'update du prix de vente 
+			rqt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

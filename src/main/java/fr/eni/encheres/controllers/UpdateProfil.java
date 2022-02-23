@@ -200,15 +200,12 @@ public class UpdateProfil extends HttpServlet {
 					
 					userManager.updateUser(user);
 
-					RequestDispatcher rd = request.getRequestDispatcher("/home");
 					
 					request.setAttribute("confirmation", "La modification demandée a bien été effectuée");
 					
-					if( rd != null)
-					{
-						rd.forward(request, response);
-						return;
-					}
+					//On affiche la page d'accueil
+					response.sendRedirect( request.getContextPath() + "/home"); 
+					return;
 
 				}
 				

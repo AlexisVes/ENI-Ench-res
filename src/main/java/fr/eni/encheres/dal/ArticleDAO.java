@@ -96,4 +96,6 @@ public interface ArticleDAO {
 	
 	List<Article> getMyBoughtArticles(int no_utilisateur) throws DALException;
 	
+	void updateSellPrice(int noArticle) throws DALException;
+	
 }
