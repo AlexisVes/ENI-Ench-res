@@ -92,6 +92,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				
 				// On crée un attribut de session connect, son éxistance détermine que l'utilisateur est crée
+				session.setMaxInactiveInterval(20);
 				session.setAttribute("connect", pseudo);
 				
 				//On affiche la page d'accueil
