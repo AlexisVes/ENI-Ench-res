@@ -217,4 +217,26 @@ public class User
 		this.admninistrateur = admninistrateur;
 	}
 
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
+
+	public List<Enchere> getEncheres() {
+		return encheres;
+	}
+
+	public void setEncheres(List<Enchere> encheres) {
+		this.encheres = encheres;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	
+	
 }
