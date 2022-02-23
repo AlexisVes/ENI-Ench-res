@@ -115,7 +115,6 @@
 					<h3><a href="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${article.nomArticle}">${article.nomArticle}</a></h3>
 					<p>Prix : ${article.prixVente}</p>
 					<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-					
 					<p> Vendeur : 
 					<c:if test="${sessionScope.connect == null}">
 						${article.pseudo}
