@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.UserManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.dal.DALException;
 
 /**
  * Affichige de la page d'accueil du site ENI_enchères
@@ -34,6 +36,7 @@ public class Accueil extends HttpServlet {
     
     ArticleManager articleMgr = ArticleManager.getInstance();
     CategorieManager categorieMgr = CategorieManager.getInstance();
+    UserManager userMgr = UserManager.getInstance();
     List<Article> articlesAvailable;
 
 	/**
@@ -42,11 +45,19 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
 		//On vérifie que la liste d'articles n'est pas null
 		try 
 		{
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			//On vérifie si l'utilisateur est admin ou non
+			if( session.getAttribute("connect") != null )
+			{
+				String pseudo = (String) session.getAttribute("connect");
+				int admin = userMgr.getUserById(userMgr.getIdByPseudo(pseudo)).getAdmninistrateur();
+				request.setAttribute("admin", admin);	
+			}
+			
 			if(articleMgr.getArticlesAvailable() != null && request.getAttribute("listeArticles") == null) 
 			{ 
 				//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil
@@ -56,8 +67,7 @@ public class Accueil extends HttpServlet {
 		
 			//Si j'ai cliqué sur le lien : "se déconnecter", je détruit ma session
 			if( request.getParameter("disconnect") != null)
-			{
-				HttpSession session = ((HttpServletRequest)request).getSession();
+			{			
 				session.removeAttribute("connect");
 			}
 			
@@ -65,7 +75,7 @@ public class Accueil extends HttpServlet {
 			request.setAttribute("listeCategories", categorieMgr.getCategories());
 			
 		} 
-		catch (BLLException e) 
+		catch (BLLException | DALException e) 
 		{
 			request.setAttribute("message", e.getMessage());
 			e.printStackTrace();
@@ -98,6 +108,17 @@ public class Accueil extends HttpServlet {
 		//Récupère le pseudo de l'utilisateur actuellement connecté
 		String pseudo = (String) session.getAttribute("connect");
 		
+		int no_utilisateur = 0;
+		
+		try 
+		{
+			no_utilisateur = userMgr.getIdByPseudo(pseudo);
+		} 
+		catch (DALException e1)
+		{
+			e1.printStackTrace();
+		}
+		
 		boolean all = true;
 		
 		try
@@ -121,9 +142,9 @@ public class Accueil extends HttpServlet {
 					if( request.getParameter("encheres_ouvertes") != null)
 					{
 						//Récupère toutes les enchères en cours
-						if(articleMgr.getArticles( "on sell") != null )
+						if(articleMgr.getArticles( "on sell", no_utilisateur) != null )
 						{
-							for( Article article : articleMgr.getArticles("on sell"))
+							for( Article article : articleMgr.getArticles("on sell", no_utilisateur))
 							{
 								articles.add(article);
 							}
@@ -133,11 +154,40 @@ public class Accueil extends HttpServlet {
 						
 					}
 					
+					if( request.getParameter("mes_encheres") != null)
+					{
+						//Récupère toutes les enchères en cours
+						if(articleMgr.getArticles( "future", no_utilisateur) != null )
+						{
+							for( Article article : articleMgr.getArticles("future", no_utilisateur))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;	
+					}
+					
+					if( request.getParameter("mes_encheres_remportees") != null)
+					{
+						//Récupère toutes les enchères en cours
+						if(articleMgr.getArticles( "bought", no_utilisateur) != null )
+						{
+							for( Article article : articleMgr.getArticles("bought", no_utilisateur))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;	
+					}
+					
+					
 					if( all )
 					{
-						if(articleMgr.getArticles("on sell") != null )
+						if(articleMgr.getArticles("on sell", no_utilisateur) != null )
 						{
-							for( Article article : articleMgr.getArticles("on sell"))
+							for( Article article : articleMgr.getArticles("on sell", no_utilisateur))
 							{
 								articles.add(article);
 							}

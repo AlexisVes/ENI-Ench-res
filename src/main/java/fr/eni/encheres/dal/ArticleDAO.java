@@ -92,5 +92,10 @@ public interface ArticleDAO {
 	 */
 	public void updateArticleById(String nomArticle, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere, int prixInitial, int noArticle ) throws DALException;
 
+	List<Article> getMyOnBuyArticles(int no_utilisateur) throws DALException;
+	
+	List<Article> getMyBoughtArticles(int no_utilisateur) throws DALException;
+	
+	void updateSellPrice(int prixVente, int noArticle) throws DALException;
 	
 }

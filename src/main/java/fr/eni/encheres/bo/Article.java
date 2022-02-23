@@ -15,6 +15,11 @@ public class Article {
 	private String pseudo;
 	private int noUtilisateur;
 	
+	private Enchere enchere;
+	private Categorie categorie;
+	private User user;
+	private Retrait retrait;
+	
 	
 	public Article() 
 	{
@@ -173,6 +178,39 @@ public class Article {
 		this.noUtilisateur = noUtilisateur;
 	}
 
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
+	}
+
+	
 	
 }
 

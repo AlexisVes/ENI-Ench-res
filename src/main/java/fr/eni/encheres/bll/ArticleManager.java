@@ -274,13 +274,15 @@ public class ArticleManager
 		 * @return
 		 * @throws BLLException 
 		 */
-		public List<Article> getArticles( String mode ) throws BLLException
+		public List<Article> getArticles( String mode, int no_utilisateur ) throws BLLException
 		{
 			try {
 				
 				switch(mode)
 				{
 					case "on sell" : return articleDAO.getArticles();
+					case "future" : return articleDAO.getMyOnBuyArticles(no_utilisateur);
+					case "bought" : return articleDAO.getMyBoughtArticles(no_utilisateur);
 				}
 				
 			}	
@@ -315,6 +317,26 @@ public class ArticleManager
 			try 
 			{
 				articleDAO.updateArticleById(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, noArticle);
+			} 
+			catch 
+			(DALException e) 
+			{
+				e.printStackTrace();
+				BLLException exception = new BLLException();
+				exception.addMessage(e.getMessage());
+				throw exception;
+			}
+		}
+		
+		/**
+		 * Methode permettant de mettre à jour le prix de vente à la suite d'un enchère validée 
+		 * @param noUtilisateur
+		 * @throws BLLException
+		 */
+		public void updateSellPrice(int prixVente, int noUtilisateur) throws BLLException {
+			try 
+			{
+				articleDAO.updateSellPrice(prixVente, noUtilisateur);
 			} 
 			catch 
 			(DALException e) 

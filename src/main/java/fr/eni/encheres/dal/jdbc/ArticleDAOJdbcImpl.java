@@ -65,7 +65,23 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 														+ "WHERE no_article =?;";
 	private static String END_SELL_ARTICLE = "SELECT no_article WHERE date_fin_encheres = GETDATE()";
 
-												
+	private static String SELECT_BOUGHT_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+													+ "FROM ENCHERES \r\n"
+													+ "INNER JOIN ARTICLES_VENDUS \r\n"
+													+ "ON ENCHERES.no_article = ARTICLES_VENDUS.no_article \r\n"
+													+ "INNER JOIN UTILISATEURS\r\n"
+													+ "ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur\r\n"
+													+ "WHERE ENCHERES.no_utilisateur = ? AND date_fin_encheres < GETDATE();";
+	
+	private static String SELECT_ON_BUY_ARTICLES = "SELECT nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur, no_categorie, pseudo \r\n"
+													+ "FROM ENCHERES \r\n"
+													+ "INNER JOIN ARTICLES_VENDUS \r\n"
+													+ "ON ENCHERES.no_article = ARTICLES_VENDUS.no_article \r\n"
+													+ "INNER JOIN UTILISATEURS\r\n"
+													+ "ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur\r\n"
+													+ "WHERE ENCHERES.no_utilisateur = ? AND date_fin_encheres > GETDATE();";
+																						
+	private static String UPDATE_SELL_PRICE = "UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?;";
 	
 	/**
 	 * Méthodes de création d'une liste d'article à partir d'une requête
@@ -104,6 +120,26 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		}
 		
 		return searchList;
+	}
+	
+	private Article map( ResultSet rs, boolean user) throws SQLException 
+	{
+		Article articleCourant = new Article();
+				articleCourant.setNomArticle(rs.getString("nom_article"));
+				articleCourant.setDescription(rs.getString("description"));
+				articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articleCourant.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articleCourant.setPrixInitial(rs.getInt("prix_initial"));
+				articleCourant.setPrixVente(rs.getInt("prix_vente"));
+				articleCourant.setNoCategorie(rs.getInt("no_categorie"));
+				
+				if( user )
+				{
+					articleCourant.setPseudo(rs.getString("pseudo"));		
+				}
+
+		
+		return articleCourant;
 	}
 	
 	
@@ -414,7 +450,62 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 	}
 
 
+	public List<Article> getMyBoughtArticles(int no_utilisateur) throws DALException
+	{
+		return myArticleOnView(no_utilisateur, SELECT_BOUGHT_ARTICLES);
+	}
+	
+	public List<Article> getMyOnBuyArticles(int no_utilisateur) throws DALException
+	{
+		return myArticleOnView(no_utilisateur,  SELECT_ON_BUY_ARTICLES );
+	}
 
+
+	private List<Article> myArticleOnView(int no_utilisateur, String rqtSql) throws DALException {
+		Article articleBDD = null;
+		List<Article> searchList=null;
+						
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			
+			PreparedStatement rqt = cnx.prepareStatement(rqtSql);
+			
+			rqt.setInt(1, no_utilisateur);
+			
+			ResultSet rs = rqt.executeQuery();
+			
+			//on vérifie le nombre de lignes récupérées dans le result set pour alimenter la liste
+			searchList = listerArticles( rs, true);
+			
+		} 
+		catch (DALException | SQLException e) 
+		{
+			e.printStackTrace();
+			throw new DALException("Problème d'extraction des articles de la base. Cause : " + e.getMessage());
+		} 	
+	
+		return searchList;
+	}
+
+	@Override
+	public void updateSellPrice(int prixVente, int noArticle) throws DALException {
+		
+		try(Connection cnx = ConnectionProvider.getConnection()){
+
+			PreparedStatement rqt = cnx.prepareStatement(UPDATE_SELL_PRICE);
+			
+			//on valorise le paramètre avec le numéro de l'article
+			rqt.setInt(1, prixVente);
+			rqt.setInt(2, noArticle);
+			
+			//on exécute l'update du prix de vente 
+			rqt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }
 

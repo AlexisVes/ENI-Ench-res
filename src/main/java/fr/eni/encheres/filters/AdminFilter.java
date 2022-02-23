@@ -14,17 +14,21 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.encheres.bll.UserManager;
+import fr.eni.encheres.dal.DALException;
+
 /**
- * Servlet Filter implementation class ConnectFilter
+ * Servlet Filter implementation class AdminFilter
  */
 @WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
-, urlPatterns = { "/connect/*" })
-public class ConnectFilter implements Filter {
+, urlPatterns = { "/administrator/*" })
+public class AdminFilter implements Filter {
 
+	UserManager userMgr = UserManager.getInstance();
     /**
      * Default constructor. 
      */
-    public ConnectFilter() {
+    public AdminFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -38,18 +42,29 @@ public class ConnectFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
-	{
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
-		if(session.getAttribute("connect") != null) 
+		String pseudo = (String) session.getAttribute("connect");
+		
+		byte admin = 0;
+		try 
+		{
+			admin = userMgr.getUserById(userMgr.getIdByPseudo(pseudo)).getAdmninistrateur();
+		} 
+		catch (DALException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		if( admin == 1 ) 
 		{
 			chain.doFilter(request, response);
 		}
 		else 
 		{
-			((HttpServletRequest)request).setAttribute("message", "Vous n'êtes pas connecté");
+			((HttpServletRequest)request).setAttribute("message", "Vous n'êtes pas administrateur");
 			
 			RequestDispatcher rd = ((HttpServletRequest)request).getRequestDispatcher("/home");
 			
@@ -59,8 +74,6 @@ public class ConnectFilter implements Filter {
 			}
 		}
 	}
-	
-	
 
 	/**
 	 * @see Filter#init(FilterConfig)
@@ -68,4 +81,5 @@ public class ConnectFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}
+
 }
