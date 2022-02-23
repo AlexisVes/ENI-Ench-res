@@ -61,8 +61,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 	private static final String	DELETE_ARTICLE = " DELETE ARTICLES_VENDUS WHERE no_article=?;";
 
 	private static final String UPDATE_ARTICLE_BY_ID = 	"UPDATE ARTICLES_VENDUS\r\n"
-														+ "SET nom_article = '?', description = '?', date_debut_encheres = '?', date_fin_encheres = '?', prix_initial = '?'\r\n"
-														+ "WHERE no_article ='?';";
+														+ "SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ? \r\n"
+														+ "WHERE no_article =?;";
 
 												
 	
@@ -383,6 +383,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		
 		try (Connection cnx = ConnectionProvider.getConnection();)
 		{
+			
 			PreparedStatement rqt = cnx.prepareStatement(UPDATE_ARTICLE_BY_ID);
 			
 			//on valorise les paramètres de la requête 
@@ -391,7 +392,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 			rqt.setDate(3, java.sql.Date.valueOf(dateDebutEnchere));
 			rqt.setDate(4, java.sql.Date.valueOf(dateFinEnchere));
 			rqt.setInt(5, prixInitial);
-			rqt.setInt(6, noArticle);
+			rqt.setInt(6, prixInitial);
+			rqt.setInt(7, noArticle);
 			
 			//exécuter la requête vers la BDD
 			rqt.executeUpdate();

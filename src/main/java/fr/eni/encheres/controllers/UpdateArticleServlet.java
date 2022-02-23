@@ -66,12 +66,29 @@ public class UpdateArticleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nomArticle = request.getParameter("nomArticle");
-		String description = request.getParameter("description");
-		LocalDate dateDebut = LocalDate.parse(request.getParameter("dateDebut"));
+		try
+		{	
+			String ancienNomArticle = request.getParameter("article");
+			
+			int noArticle = articleMgr.getArticle(ancienNomArticle).getNoArticle();
+			
+			String nomArticle = request.getParameter("nomArticle");
+			String description = request.getParameter("description");
+			LocalDate dateDebut = LocalDate.parse(request.getParameter("dateDebut"));
+			LocalDate dateFin = LocalDate.parse(request.getParameter("dateFin"));
+			int prix = Integer.parseInt(request.getParameter("prix"));
+			
+			articleMgr.updateArticleById(nomArticle, description, dateDebut, dateFin, prix, noArticle);
+		}
+		catch( BLLException e)
+		{
+			request.setAttribute("message", e.getMessage());
+			e.printStackTrace();
+		}
 		
-		
-		doGet(request, response);
+		//On affiche la page d'accueil
+		response.sendRedirect( request.getContextPath() + "/home"); 
+		return;
 	}
 
 }
