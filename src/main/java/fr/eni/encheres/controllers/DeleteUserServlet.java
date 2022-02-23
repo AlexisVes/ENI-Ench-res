@@ -1,6 +1,7 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
+import fr.eni.encheres.bll.EnchereManager;
+import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bll.UserManager;
+import fr.eni.encheres.bo.Article;
 
 /**
  * Déconnecte et détruit un utilisateur, et le renvoi sur la page d'acceuil
@@ -30,7 +35,9 @@ public class DeleteUserServlet extends HttpServlet {
     }
     
     UserManager userManager = UserManager.getInstance();
-
+    ArticleManager articleManager = ArticleManager.getInstance();
+    RetraitManager retraitManager = RetraitManager.getInstance();
+    EnchereManager enchereManager = EnchereManager.getInstance();
     
 	/**
 	 * Supprime l'utilisateur, et le déconnecte, puis le renvoi sur la page d'acceuil du site
@@ -41,11 +48,27 @@ public class DeleteUserServlet extends HttpServlet {
 		
 		try 
 		{
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			
+			String pseudo = (String) session.getAttribute("connect");
+			
+			System.out.println(pseudo);
+			
+			List<Article> userArticles = articleManager.getMyArticles(pseudo, "all");
+			
+			
+			for( Article article : userArticles )
+			{
+				retraitManager.deleteRetrait(articleManager.getArticle(article.getNomArticle()).getNoArticle());
+				enchereManager.deleteEnchereByNoArticle(articleManager.getArticle(article.getNomArticle()).getNoArticle());
+				articleManager.deleteArticle(articleManager.getArticle(article.getNomArticle()).getNoArticle());
+			}
+			
 			//On supprime l'utilisateur
 			userManager.deleteUser(request.getParameter("utilisateur"));
 			
 			//On déconnecte l'utilisateur
-			HttpSession session = ((HttpServletRequest)request).getSession();
+			
 			session.removeAttribute("connect");
 
 		}

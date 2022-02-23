@@ -79,16 +79,13 @@ public class LoginServlet extends HttpServlet {
 				if(  request.getParameter("souvenir") != null )
 				{
 					// On créée de nouveaux objets Cookie
-					Cookie login = new Cookie("login", pseudo); 
-					Cookie mdp = new Cookie("password", password); 
+					Cookie login = new Cookie("login", pseudo);  
 					
 					// On définit leurs durées maximum
 					login.setMaxAge(24*3600); 
-					mdp.setMaxAge(24*3600);
 					
 					// On envoi les cookie via HTTP 
-					response.addCookie(login);
-					response.addCookie(mdp);				
+					response.addCookie(login);			
 				}
 				
 				// On crée un attribut de session connect, son éxistance détermine que l'utilisateur est crée
