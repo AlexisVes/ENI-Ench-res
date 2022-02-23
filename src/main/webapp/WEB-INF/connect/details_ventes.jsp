@@ -22,7 +22,7 @@
 		
 		<p><span class="detail_vente">Meilleure offre :</span> 
 		<c:if test="${requestScope.enchere != null}">
-			${requestScope.enchere} crédits par ${requestScope.encherisseur} le ${requestScope.dateEnchere}
+			${requestScope.enchere} crédits par ${requestScope.encherisseur} le ${requestScope.dateEnchere }
 		</c:if>
 		</p>
 		
@@ -31,31 +31,22 @@
 		<p><span class="detail_vente">Retrait :</span> ${requestScope.retrait.rue} ${requestScope.retrait.codePostal} ${requestScope.retrait.ville} </p>
 		<p><span class="detail_vente">Vendeur :</span> ${requestScope.nomVendeur.pseudo}</p>
 		
-		<c:if test="${requestScope.end == null}">
-			<form action="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${requestScope.article.nomArticle}" method="post">
-			
-				<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
-					
-				<c:if test="${requestScope.enchere != null}">
-					<input type="number" name="proposition" placeholder="min : ${requestScope.enchere + 1}" required="required" min="${requestScope.enchere + 1}">
-				</c:if>
-					
-				<c:if test="${requestScope.enchere == null}">
-					<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente + 1}" required="required" min="${requestScope.article.prixVente + 1}">
-				</c:if>
-					
-				<input type="submit" value="Valider">
+		
+		<form action="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${requestScope.article.nomArticle}" method="post">
+		
+			<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
 				
-			</form>
-		</c:if>
-		
-		<c:if test="${requestScope.delete != null}">
-			<a href="${pageContext.request.contextPath}/connect/delete_article?article=${requestScope.article.noArticle}"> Supprimer l'article </a>
-		</c:if>
-		
-		<c:if test="${requestScope.update != null}">
-			<a href="${pageContext.request.contextPath}/connect/update_article?article=${requestScope.article.nomArticle}"> Modifier l'article </a>
-		</c:if>
+			<c:if test="${requestScope.enchere != null}">
+				<input type="number" name="proposition" placeholder="min : ${requestScope.enchere + 1}" required="required" min="${requestScope.enchere + 1}">
+			</c:if>
+				
+			<c:if test="${requestScope.enchere == null}">
+				<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente + 1}" required="required" min="${requestScope.article.prixVente + 1}">
+			</c:if>
+				
+			<input type="submit" value="Valider">
+			
+		</form>
 		
 	</body>
 </html>
