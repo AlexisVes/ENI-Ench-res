@@ -1,9 +1,13 @@
 package fr.eni.encheres.bo;
 
+import java.util.List;
+
 public class Categorie 
 {
 	private int noCategorie;
 	private String libelle;
+	
+	List<Article> articles;
 	
 	
 	public Categorie(int noCategorie, String libelle)

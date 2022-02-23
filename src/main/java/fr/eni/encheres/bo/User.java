@@ -1,5 +1,8 @@
 package fr.eni.encheres.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User 
 {
 	
@@ -16,6 +19,8 @@ public class User
 	private int credit;
 	private byte admninistrateur;
 	
+	private List<Article> articles = new ArrayList<Article>();
+	private List<Enchere> encheres = new ArrayList<Enchere>();;
 	
 
 	public User(String pseudo, String nom, String prenom, String email, String tel, String rue,
