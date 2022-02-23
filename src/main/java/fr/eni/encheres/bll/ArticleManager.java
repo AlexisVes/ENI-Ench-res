@@ -274,13 +274,15 @@ public class ArticleManager
 		 * @return
 		 * @throws BLLException 
 		 */
-		public List<Article> getArticles( String mode ) throws BLLException
+		public List<Article> getArticles( String mode, int no_utilisateur ) throws BLLException
 		{
 			try {
 				
 				switch(mode)
 				{
 					case "on sell" : return articleDAO.getArticles();
+					case "future" : return articleDAO.getMyOnBuyArticles(no_utilisateur);
+					case "bought" : return articleDAO.getMyBoughtArticles(no_utilisateur);
 				}
 				
 			}	

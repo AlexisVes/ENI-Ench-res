@@ -24,6 +24,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	
 	private static final String DELETE_ENCHERE_BY_NO_ARTICLE = "DELETE ENCHERES WHERE no_article = ?;";
 	
+	
 	public Enchere getEnchere( int no_article ) throws DALException
 	{
 		

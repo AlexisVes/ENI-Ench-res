@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
 import fr.eni.encheres.bll.CategorieManager;
+import fr.eni.encheres.bll.UserManager;
 import fr.eni.encheres.bo.Article;
+import fr.eni.encheres.dal.DALException;
 
 /**
  * Affichige de la page d'accueil du site ENI_enchères
@@ -34,6 +36,7 @@ public class Accueil extends HttpServlet {
     
     ArticleManager articleMgr = ArticleManager.getInstance();
     CategorieManager categorieMgr = CategorieManager.getInstance();
+    UserManager userMgr = UserManager.getInstance();
     List<Article> articlesAvailable;
 
 	/**
@@ -98,6 +101,17 @@ public class Accueil extends HttpServlet {
 		//Récupère le pseudo de l'utilisateur actuellement connecté
 		String pseudo = (String) session.getAttribute("connect");
 		
+		int no_utilisateur = 0;
+		
+		try 
+		{
+			no_utilisateur = userMgr.getIdByPseudo(pseudo);
+		} 
+		catch (DALException e1)
+		{
+			e1.printStackTrace();
+		}
+		
 		boolean all = true;
 		
 		try
@@ -121,9 +135,9 @@ public class Accueil extends HttpServlet {
 					if( request.getParameter("encheres_ouvertes") != null)
 					{
 						//Récupère toutes les enchères en cours
-						if(articleMgr.getArticles( "on sell") != null )
+						if(articleMgr.getArticles( "on sell", no_utilisateur) != null )
 						{
-							for( Article article : articleMgr.getArticles("on sell"))
+							for( Article article : articleMgr.getArticles("on sell", no_utilisateur))
 							{
 								articles.add(article);
 							}
@@ -133,11 +147,40 @@ public class Accueil extends HttpServlet {
 						
 					}
 					
+					if( request.getParameter("mes_encheres") != null)
+					{
+						//Récupère toutes les enchères en cours
+						if(articleMgr.getArticles( "future", no_utilisateur) != null )
+						{
+							for( Article article : articleMgr.getArticles("future", no_utilisateur))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;	
+					}
+					
+					if( request.getParameter("mes_encheres_remportees") != null)
+					{
+						//Récupère toutes les enchères en cours
+						if(articleMgr.getArticles( "bought", no_utilisateur) != null )
+						{
+							for( Article article : articleMgr.getArticles("bought", no_utilisateur))
+							{
+								articles.add(article);
+							}
+						}
+						
+						all = false;	
+					}
+					
+					
 					if( all )
 					{
-						if(articleMgr.getArticles("on sell") != null )
+						if(articleMgr.getArticles("on sell", no_utilisateur) != null )
 						{
-							for( Article article : articleMgr.getArticles("on sell"))
+							for( Article article : articleMgr.getArticles("on sell", no_utilisateur))
 							{
 								articles.add(article);
 							}
