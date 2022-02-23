@@ -12,15 +12,26 @@ public class Enchere
 	int no_utilisateur;
 	String pseudo;
 	
+	private Article article;
+	
 	public Enchere( LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur) 
 	{
 		super();
 		this.date_enchere = date_enchere;
 		this.montant_enchere = montant_enchere;
 		this.no_article = no_article;
-		this.no_utilisateur = no_utilisateur;
+		this.no_utilisateur = no_utilisateur ;
 	}
 	
+	public Enchere( LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur, Article article) 
+	{
+		super();
+		this.date_enchere = date_enchere;
+		this.montant_enchere = montant_enchere;
+		this.no_article = no_article;
+		this.no_utilisateur = no_utilisateur;
+		this.article = article;
+	}
 	
 
 	public Enchere(int no_enchere, LocalDateTime date_enchere, int montant_enchere, int no_article, int no_utilisateur) 
@@ -94,6 +105,22 @@ public class Enchere
 	public void setPseudo(String pseudo) 
 	{
 		this.pseudo = pseudo;
+	}
+
+	public int getNo_enchere() {
+		return no_enchere;
+	}
+
+	public void setNo_enchere(int no_enchere) {
+		this.no_enchere = no_enchere;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 	
