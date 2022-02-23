@@ -63,6 +63,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 	private static final String UPDATE_ARTICLE_BY_ID = 	"UPDATE ARTICLES_VENDUS\r\n"
 														+ "SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ? \r\n"
 														+ "WHERE no_article =?;";
+	private static String END_SELL_ARTICLE = "SELECT no_article WHERE date_fin_encheres = GETDATE()";
 
 												
 	
@@ -178,6 +179,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO
 		
 	}
 	
+	//retourne les articles qui arriveront, sont, ou qui étaient en enchères
+	public List<Article> getOnDateArticles() throws DALException
+	{			
+		return getAllArticles(END_SELL_ARTICLE);		
+	}
 	
 	//retourne les articles qui arriveront, sont, ou qui étaient en enchères
 	public List<Article> getArticles() throws DALException
