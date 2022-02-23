@@ -58,7 +58,6 @@ public class Accueil extends HttpServlet {
 				request.setAttribute("admin", admin);	
 			}
 			
-			
 			if(articleMgr.getArticlesAvailable() != null && request.getAttribute("listeArticles") == null) 
 			{ 
 				//Récupérer la liste des articles disponibles à la vente en base de données et qui doivent être affichés sur la page d'accueil

@@ -18,6 +18,7 @@
 			<div class="liens-nav">
 				<c:if test="${sessionScope.connect == null}">
 					<a href="${pageContext.request.contextPath}/login" class="enibay_link">S'inscrire - Se connecter</a>
+					<a href="${pageContext.request.contextPath}/mdp"> Mot de passe oublié</a>
 				</c:if>
 				<c:if test="${ sessionScope.connect != null }">
 					<!-- On affiche le menu Admin si l'utilisateur connecté est administrateur -->
