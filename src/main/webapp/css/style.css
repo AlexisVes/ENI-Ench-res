@@ -130,7 +130,32 @@ form .select_filters{
 	.liens-nav a{
 		margin-bottom: 1em;
 	}
-	
+
 }
 
-
+.admin-title {
+	color: #e1bd29;
+	padding-bottom: 20px;
+}
+.admin-heading {
+	padding : 5px;
+	background-color: grey;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+}
+.admin-delete {
+	background-color: red;
+	color: white;
+}
+.delete-logo {
+	height:40px;
+	width: auto;
+}
+td {
+	padding : 5px;
+    border: 1px solid grey;;
+}
+.delete-td {
+	text-align: center;
+}

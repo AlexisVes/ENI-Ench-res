@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.internal.compiler.ast.SuperReference;
@@ -255,15 +256,15 @@ public class UserDAOJdbcImpl implements UserDAO
 	@SuppressWarnings("null")
 	@Override
 	public List<User> selectAllUsers() throws DALException {
-		List<User> allUsers=null;
+		List<User> allUsers = new ArrayList<User>();
 		
 		// établir la connexion avec la base de données et créer la commande
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			
-			PreparedStatement rqt = cnx.prepareStatement(SELECT_ALL_USERS);
+			Statement rqt = cnx.createStatement();
 			//On exécute la requête 
-			ResultSet rs = rqt.executeQuery();
-			
+			ResultSet rs = rqt.executeQuery(SELECT_ALL_USERS);
+			rs.next();
 			while(rs.next()) {
 				int userId = rs.getInt(1);
 				String username =rs.getString(2);
