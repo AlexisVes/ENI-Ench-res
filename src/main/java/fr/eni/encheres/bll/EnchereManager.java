@@ -102,6 +102,7 @@ public class EnchereManager
 			else
 			{
 	
+				
 				if (prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
 				{
 					enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
