@@ -47,11 +47,11 @@
 			<input type="submit" value="Valider">
 			
 			<c:if test="${requestScope.delete != null }">
-				<a href="${pageContext.request.contextPath}/connect/delete_article"> Supprimer article</a>
+				<a href="${pageContext.request.contextPath}/connect/delete_article?article=${requestScope.article.nomArticle}"> Supprimer article</a>
 			</c:if>
 			
 			<c:if test="${requestScope.update != null }">
-				<a href="${pageContext.request.contextPath}/connect/update_article"> Modifier article </a>
+				<a href="${pageContext.request.contextPath}/connect/update_article?article=${requestScope.article.nomArticle}"> Modifier article </a>
 			</c:if>
 			
 		</form>

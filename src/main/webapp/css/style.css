@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 .error{
 	color: red;
 }
@@ -53,13 +54,11 @@ article{
 	border : 1px solid #e1bd29;
 	border-radius: 10%;
 	padding: 1em;
-	margin-bottom : 2em;
-	width: 20%;
+	margin: 2em;
 }
 
 article:hover{
 	box-shadow : 3px 3px 3px #e1bd29;
-	zoom: 120%;
 }
 
 .grid {
@@ -79,7 +78,6 @@ article:hover{
 	grid-row: 11;
 }
 
-<<<<<<< HEAD
 .detail_vente {
 	color: #e1bd29;
 	font-weight: bold;
@@ -87,10 +85,50 @@ article:hover{
 
 .navigation_filters {
 	padding-bottom: 20px;
-=======
+}
+
 form .select_filters{
 	
 	display: flex;
 	flex-direction: column;
->>>>>>> branch 'main' of https://github.com/AlexisVes/ENI-Ench-res.git
+}
+.col {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+
+
+@media screen and (max-width: 800px)
+{
+	.col 
+	{
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 500px)
+{
+/* 	body{
+		text-align: center;
+	} */
+	
+	.col 
+	{
+		grid-template-columns: repeat(1, 1fr);
+	}
+	nav
+	{
+		display: flex;
+		flex-direction: column;
+	}
+	.liens-nav 
+	{
+		flex-direction: column
+	}
+	
+	.liens-nav a{
+		margin-bottom: 1em;
+	}
+	
 }

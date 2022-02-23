@@ -21,9 +21,9 @@
 				</c:if>
 				
 				<c:if test="${ sessionScope.connect != null }">
-					<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
-					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
-					<a href="${pageContext.request.contextPath}/home?disconnect=disconnect"> Se déconnecter</a>
+						<a href="${pageContext.request.contextPath}/connect/sell_article?pseudo=${sessionScope.connect}"> Vendre un article</a>
+						<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${sessionScope.connect}"> Mon profil</a>
+						<a href="${pageContext.request.contextPath}/home?disconnect=disconnect"> Se déconnecter</a>
 				</c:if>
 			</div>
 			
@@ -107,23 +107,25 @@
 		</form>
 
 		<!-- S'appuyer sur la liste pour afficher les articles disponibles à la vente -->
-		<c:forEach var="article" items="${requestScope.listeArticles}">
-			<article>
-				<h3><a href="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${article.nomArticle}">${article.nomArticle}</a></h3>
-				<p>Prix : ${article.prixVente}</p>
-				<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
-				
-				<p> Vendeur : 
-				<c:if test="${sessionScope.connect == null}">
-					${article.pseudo}
-				</c:if>
-				
-				<c:if test="${sessionScope.connect != null}">
-					<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${article.pseudo}" class="enibay_link">${article.pseudo}</a>
-				</c:if>
-				</p>
-			</article>
-		</c:forEach>
+		<div class="col">
+			<c:forEach var="article" items="${requestScope.listeArticles}">
+				<article>
+					<h3><a href="${pageContext.request.contextPath}/connect/sell_details?nomArticle=${article.nomArticle}">${article.nomArticle}</a></h3>
+					<p>Prix : ${article.prixVente}</p>
+					<p>Fin de l'enchère : ${article.dateFinEncheres}</p>
+					
+					<p> Vendeur : 
+					<c:if test="${sessionScope.connect == null}">
+						${article.pseudo}
+					</c:if>
+					
+					<c:if test="${sessionScope.connect != null}">
+						<a href="${pageContext.request.contextPath}/connect/profil?pseudo=${article.pseudo}" class="enibay_link">${article.pseudo}</a>
+					</c:if>
+					</p>
+				</article>
+			</c:forEach>
+		</div>
 		<%@ include file="/WEB-INF/fragments/footer.jspf"%>
 	</body>
 </html>
