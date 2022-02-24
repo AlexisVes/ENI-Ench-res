@@ -16,6 +16,7 @@
 	<a href="${pageContext.request.contextPath}/home" ><img src="./img/enibay_logo.png" alt="logo enibay" class="logo_enibay"></a>
 
 	<h1>Mon Profil</h1>
+	
 	<form action="${pageContext.request.contextPath}/register" method="Post" class="grid">
 		
 		<label for="pseudo"> Pseudo :</label>
