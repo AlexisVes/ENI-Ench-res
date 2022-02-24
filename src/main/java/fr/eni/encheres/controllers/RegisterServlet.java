@@ -69,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
 			//Si l'utilisateur n'a pas rentré de pseudo, on rajoute une message à notre exception
 			if(!request.getParameter("pseudo").isEmpty())
 			{
-				pseudo = request.getParameter("pseudo");
+				pseudo = request.getParameter("pseudo").toLowerCase();
 			}
 			else
 			{

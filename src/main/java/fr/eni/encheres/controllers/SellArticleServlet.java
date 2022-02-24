@@ -121,6 +121,7 @@ public class SellArticleServlet extends HttpServlet {
 			articleManager.vendreArticle(article);
 			
 			int noArticle = articleManager.getArticle(nom).getNoArticle();
+			System.out.println("no article" + noArticle);
 			
 			//Créer un nouveau retrait dans la base de données
 			Retrait retrait = new Retrait(noArticle,rue,codePostal,ville);
@@ -128,10 +129,7 @@ public class SellArticleServlet extends HttpServlet {
 			
 			LocalDateTime dateEnchere = LocalDateTime.now() ;
 			
-			//Créer un nouvelle objet Enchere dans la base de données
-			Enchere enchere = new Enchere( dateEnchere, miseAPrix, noArticle, userID);
-			enchereMgr.insertEnchere(enchere);
-			
+
 		} 
 		catch (BLLException e) 
 		{	
