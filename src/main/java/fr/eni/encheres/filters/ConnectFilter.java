@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
 , urlPatterns = { "/connect/*" })
+
 public class ConnectFilter implements Filter {
 
     /**
