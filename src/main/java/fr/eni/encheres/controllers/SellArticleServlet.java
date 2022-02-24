@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.BLLException;
@@ -26,6 +28,11 @@ import fr.eni.encheres.bo.User;
  * Servlet implementation class SellArticleServlet
  */
 @WebServlet("/connect/sell_article")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
+		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+		)
 public class SellArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -87,7 +94,7 @@ public class SellArticleServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		
 		int categorie = Integer.parseInt(request.getParameter("categorieSelect"));
-		
+	    
 		String photoArticle = request.getParameter("photoArticle");
 		
 		int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
@@ -106,6 +113,7 @@ public class SellArticleServlet extends HttpServlet {
 		
 		//Créer un objet Article
 		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie, photoArticle);
+		
 		
 		try 
 		{

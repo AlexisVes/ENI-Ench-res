@@ -18,7 +18,7 @@
 		<h2>Nouvelle vente</h2>
 		
 		
-		<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.userId}" class="grid" method="post" accept-charset="utf-8">
+		<form action="${pageContext.request.contextPath}/connect/sell_article?user=${requestScope.userProfil.userId}" class="grid" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		
 			<label for="article"> Article :</label>
 			<input type="text" name="article">
@@ -60,7 +60,7 @@
 			<input type="text" name="ville" value="${requestScope.userProfil.ville}">
 			
 			
-			<input type="submit" value="Valider">
+			<input type="submit" value=" Valider">
 			
 		</form>
 	
