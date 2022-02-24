@@ -264,7 +264,6 @@ public class UserDAOJdbcImpl implements UserDAO
 			Statement rqt = cnx.createStatement();
 			//On exécute la requête 
 			ResultSet rs = rqt.executeQuery(SELECT_ALL_USERS);
-			rs.next();
 			while(rs.next()) {
 				int userId = rs.getInt(1);
 				String username =rs.getString(2);

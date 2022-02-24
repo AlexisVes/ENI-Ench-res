@@ -94,16 +94,8 @@ public class SellArticleServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		
 		int categorie = Integer.parseInt(request.getParameter("categorieSelect"));
-		
-
-		// Receive file uploaded to the Servlet from the HTML5 form
-	    Part photoArticle = request.getPart("photoArticle");
-	    String fileName = photoArticle.getSubmittedFileName();
-	    for (Part part : request.getParts()) {
-	      part.write("C:\\Users\\brolland2021\\Pictures\\" + fileName);
-	    }
-	    System.out.println("The file uploaded sucessfully.");
 	    
+		String photoArticle = request.getParameter("photoArticle");
 		
 		int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
 		
@@ -119,9 +111,8 @@ public class SellArticleServlet extends HttpServlet {
 		
 		String ville = request.getParameter("ville");
 		
-		
 		//Créer un objet Article
-		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie);
+		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie, photoArticle);
 		
 		try 
 		{

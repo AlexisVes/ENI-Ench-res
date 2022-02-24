@@ -52,8 +52,6 @@ public class DeleteUserServlet extends HttpServlet {
 			
 			String pseudo = (String) session.getAttribute("connect");
 			
-			System.out.println(pseudo);
-			
 			List<Article> userArticles = articleManager.getMyArticles(pseudo, "all");
 			
 			
@@ -67,9 +65,10 @@ public class DeleteUserServlet extends HttpServlet {
 			//On supprime l'utilisateur
 			userManager.deleteUser(request.getParameter("utilisateur"));
 			
-			//On déconnecte l'utilisateur
-			
-			session.removeAttribute("connect");
+			//On déconnecte l'utilisateur si il a supprimé son propre compte, sinon c'est que la suppression vient d'un admin
+			if (userManager.searchUser(pseudo).getAdmninistrateur() != 1) {
+				session.removeAttribute("connect");
+			}
 
 		}
 		catch (BLLException e) 

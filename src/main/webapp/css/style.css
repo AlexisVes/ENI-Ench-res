@@ -172,3 +172,8 @@ td {
 	text-align: center;
 	background-color: #DCDCDC;
 }
+.photo-article {
+	width: 300px;
+	height: auto;
+	border: solid 2px #e1bd29;
+}

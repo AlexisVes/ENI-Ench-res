@@ -74,6 +74,13 @@ public class getDetailsOnSellServlet extends HttpServlet {
 				request.setAttribute("article", article);
 			}
 			
+			//On vérifie si une photo a été ajoutée lors de la création de la vente
+			if(article.getPhotoArticle() != null) {
+				String photoArticle = article.getPhotoArticle();
+				request.setAttribute("photoArticle", photoArticle);
+				
+			}
+			
 			//On recupère le lieu du retrait que l'on envoie en attribut 
 			Retrait retrait = retraitMgr.getRetrait(noArticle);
 			request.setAttribute("retrait", retrait);

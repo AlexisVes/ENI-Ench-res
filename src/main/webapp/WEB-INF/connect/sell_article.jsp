@@ -28,7 +28,6 @@
 		
 			<label for="categorieSelect"> Catégorie </label>
 			
-			
 			<select name="categorieSelect">
 			
 			   <c:forEach var="categorie" items="${requestScope.listeCategories}">
@@ -38,7 +37,7 @@
 			</select>
 		
 			<label for="photoArticle"> Photo de l'article</label>
-			<input type="file" name="photoArticle" class="photo_article" accept="image/png, image/jpeg">
+			<input type="text" name="photoArticle" class="photo_article" placeholder="lien direct vers l'image">
 		
 			<label for="miseAPrix"> Mise à prix :</label>
 			<input type="number" name="miseAPrix">
