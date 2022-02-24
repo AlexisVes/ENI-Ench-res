@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		//Si l'utilisateur a bien rentré un pseudo, nous l'assimilons à une variable pseudo
 		if ( request.getParameter("pseudo") != null || request.getParameter("pseudo") != "") 
 		{
-			pseudo = request.getParameter("pseudo");		
+			pseudo = request.getParameter("pseudo").toLowerCase();		
 		}
 		
 		String password = "";
