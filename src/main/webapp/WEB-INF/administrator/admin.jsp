@@ -32,15 +32,15 @@
 		</tr>
 		<c:forEach items="${requestScope.allUsers}" var="item">
 		<tr>
-			<td>${item.pseudo}</td>
-			<td>${item.nom}</td>
-			<td>${item.prenom}</td> 
-			<td>${item.email}</td>
-			<td>${item.tel}</td>
-			<td>${item.rue}</td>
-			<td>${item.codePostal}</td>
-			<td>${item.ville}</td>
-			<td>${item.credit}</td>
+			<td class="heading-one">${item.pseudo}</td>
+			<td class="heading-two">${item.nom}</td>
+			<td class="heading-one">${item.prenom}</td> 
+			<td class="heading-two">${item.email}</td>
+			<td class="heading-one">${item.tel}</td>
+			<td class="heading-two">${item.rue}</td>
+			<td class="heading-one">${item.codePostal}</td>
+			<td class="heading-two">${item.ville}</td>
+			<td class="heading-one">${item.credit}</td>
 			<td class="delete-td"><a href="${pageContext.request.contextPath}/connect/delete_user?utilisateur=${item.pseudo}"><img src ="../img/admin-delete.png" alt="delete icon" class="delete-logo"></a><td>
 		</tr>
 		</c:forEach>

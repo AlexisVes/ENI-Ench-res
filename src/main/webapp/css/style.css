@@ -133,16 +133,28 @@ form .select_filters{
 
 }
 
+.user_table {
+	border-collapse: collapse;
+}
+
 .admin-title {
 	color: #e1bd29;
 	padding-bottom: 20px;
 }
 .admin-heading {
 	padding : 5px;
-	background-color: grey;
-	color: black;
+	background-color: #2F4F4F;
+	color: white;
 	font-weight: bold;
 	text-align: center;
+}
+.heading-one {
+	background-color: #DCDCDC;
+	color: black;
+}
+.heading-two {
+	background-color: #A9A9A9;
+	color: black;
 }
 .admin-delete {
 	background-color: red;
@@ -158,4 +170,5 @@ td {
 }
 .delete-td {
 	text-align: center;
+	background-color: #DCDCDC;
 }
