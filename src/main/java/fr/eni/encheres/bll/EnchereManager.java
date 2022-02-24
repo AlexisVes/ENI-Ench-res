@@ -69,33 +69,23 @@ public class EnchereManager
 		try {
 		
 			Enchere enchere = enchereDAO.getEnchere(article.getNoArticle());
-		
+			User user = userDAO.getUserById(no_utilisateur);
+			
+			
 			if( enchere != null) 
 			{
+				Enchere previousEnchere = enchereDAO.getEnchere(article.getNoArticle());				
+				int previousIdUser = previousEnchere.getNo_utilisateur();
+				User previousUser = userDAO.getUserById(previousIdUser);
 				
 				if( prixSaisi > article.getPrixVente() && userDAO.getUserById(no_utilisateur).getCredit() >= prixSaisi) 
 				{
-					User user = userDAO.getUserById(no_utilisateur);
-
-					
-					Enchere previousEnchere = enchereDAO.getEnchere(article.getNoArticle());				
-					int previousIdUser = previousEnchere.getNo_utilisateur();
-					User previousUser = userDAO.getUserById(previousIdUser);
-					
-					
-					enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
-				
-					
-					user.setCredit(user.getCredit() - prixSaisi);
-					userDAO.updateUser(user);
-					
 					
 					previousUser.setCredit(previousUser.getCredit() + previousEnchere.getMontant_enchere());
 					userDAO.updateUser(previousUser);
 					
-					//On met à jour le prix de vente 
-					articleDAO.updateSellPrice(prixSaisi, article.getNoArticle());
-				
+					enchereDAO.updateEnchere( now, prixSaisi, no_utilisateur, article.getNoArticle());
+		
 				}
 			}
 
@@ -107,8 +97,16 @@ public class EnchereManager
 				{
 					enchere = new Enchere( now, prixSaisi, article.getNoArticle(),  no_utilisateur );
 					enchereDAO.insertEnchere(enchere);	
+										
 				}
 			} 
+			
+			user.setCredit(user.getCredit() - prixSaisi);
+			userDAO.updateUser(user);
+			
+			
+			//On met à jour le prix de vente 
+			articleDAO.updateSellPrice(prixSaisi, article.getNoArticle());
 		}
 		catch (DALException e) 
 		{

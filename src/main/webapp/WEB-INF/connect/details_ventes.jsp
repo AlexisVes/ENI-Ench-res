@@ -16,8 +16,8 @@
 	
 		<h1>Détail de la vente</h1>
 		
-		<p>${requestScope.article.nomArticle}</p>
-		<c:if test="${requestScope.photoArticle != NULL}">
+		<h2 class="jaune">${requestScope.article.nomArticle}</h2>
+		<c:if test="${!empty requestScope.photoArticle}">
 			<img  class="photo-article" src="${requestScope.photoArticle}" alt="photo article">
 		</c:if>
 		<p><span class="detail_vente">Description :</span> ${requestScope.article.description}</p>
@@ -51,7 +51,7 @@
 				
 			</form>
 		</c:if>
-		
+
 			<c:if test="${requestScope.delete != null }">
 				<a href="${pageContext.request.contextPath}/connect/delete_article?article=${requestScope.article.nomArticle}"> Supprimer article</a>
 			</c:if>

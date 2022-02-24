@@ -56,6 +56,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO
 			
 			//On y insère nos paramètres, on n'oubliant pas de convertir pour que ce soit compatible à SQL
 			rqt.setInt(1, retrait.getNoArticle());
+			System.out.println(retrait.getNoArticle());
 			rqt.setString(2, retrait.getRue());
 			rqt.setString(3, retrait.getCodePostal());
 			rqt.setString(4, retrait.getVille());
@@ -84,13 +85,14 @@ public class RetraitDAOJdbcImpl implements RetraitDAO
 			PreparedStatement rqt = cnx.prepareStatement(SELECT_RETRAIT);
 			
 			rqt.setInt(1, noArticle);
+			System.out.println(noArticle);
 			
 			ResultSet rs = rqt.executeQuery();
 			
 			rs.next();
 			if( rs != null) 
 			{
-				
+				System.out.println(rs.getInt(1));
 				int no_article = rs.getInt(1);
 				String rue = rs.getString(2);
 				String code_postal = rs.getString(3);
