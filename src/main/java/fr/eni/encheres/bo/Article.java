@@ -14,6 +14,7 @@ public class Article {
 	private int noCategorie;
 	private String pseudo;
 	private int noUtilisateur;
+	private String photoArticle;
 	
 	private Enchere enchere;
 	private Categorie categorie;
@@ -43,7 +44,7 @@ public class Article {
 	}
 	
 	public Article(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int prixInitial, int noUtilisateur, int noCategorie)
+			LocalDate dateFinEncheres, int prixInitial, int noUtilisateur, int noCategorie, String photoArticle)
 	{
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -52,6 +53,7 @@ public class Article {
 		this.prixInitial = prixInitial;
 		this.noUtilisateur = noUtilisateur;
 		this.noCategorie = noCategorie;
+		this.photoArticle = photoArticle;
 	}
 	
 	public Article( int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
@@ -210,7 +212,13 @@ public class Article {
 		this.retrait = retrait;
 	}
 
-	
-	
+	public String getPhotoArticle() {
+		return photoArticle;
+	}
+
+	public void setPhotoArticle(String photoArticle) {
+		this.photoArticle = photoArticle;
+	}
+
 }
 

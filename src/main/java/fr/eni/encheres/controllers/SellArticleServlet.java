@@ -88,6 +88,8 @@ public class SellArticleServlet extends HttpServlet {
 		
 		int categorie = Integer.parseInt(request.getParameter("categorieSelect"));
 		
+		String photoArticle = request.getParameter("photoArticle");
+		
 		int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
 		
 		LocalDate debutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
@@ -102,9 +104,8 @@ public class SellArticleServlet extends HttpServlet {
 		
 		String ville = request.getParameter("ville");
 		
-		
 		//Créer un objet Article
-		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie);
+		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie, photoArticle);
 		
 		try 
 		{
