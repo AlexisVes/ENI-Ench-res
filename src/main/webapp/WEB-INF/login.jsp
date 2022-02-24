@@ -42,6 +42,7 @@
 		</p>
 		
 		<a href="${pageContext.request.contextPath}/register">Créer un compte</a>
+		<a href="${pageContext.request.contextPath}/mdp"> Mot de passe oublié</a>
 		
 		<%@ include file="/WEB-INF/fragments/footer.jspf"%>	
 		

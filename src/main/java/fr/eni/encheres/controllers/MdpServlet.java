@@ -30,12 +30,11 @@ public class MdpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mdp.jsp");
-		if(rd != null) {
+		
+		if( rd != null)
+		{
 			rd.forward(request, response);
 		}
-//		if(request.getParameter("email") != null) {
-//			response.sendRedirect( request.getContextPath() + "/WEB-INF/mdp.jsp");
-//		}
 		
 	}
 
@@ -43,8 +42,12 @@ public class MdpServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String email = request.getParameter("email");
+		request.setAttribute("email", email);
+		System.out.println("oui" + email);
 		doGet(request, response);
+		
 	}
 
 }
