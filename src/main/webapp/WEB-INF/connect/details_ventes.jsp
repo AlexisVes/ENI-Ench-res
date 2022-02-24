@@ -60,5 +60,6 @@
 				<a href="${pageContext.request.contextPath}/connect/update_article?article=${requestScope.article.nomArticle}"> Modifier article </a>
 			</c:if>
 		
+		
 	</body>
 </html>
