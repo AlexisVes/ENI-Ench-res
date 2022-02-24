@@ -57,7 +57,7 @@ public class Article {
 	}
 	
 	public Article( int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie)
+			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie, String photoArticle)
 	{
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -68,6 +68,7 @@ public class Article {
 		this.noCategorie = noCategorie;
 		this.noArticle = noArticle;
 		this.prixVente = prixVente;
+		this.photoArticle = photoArticle;
 	}
 
 	public int getNoArticle() 

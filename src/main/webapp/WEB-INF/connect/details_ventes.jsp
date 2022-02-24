@@ -17,6 +17,9 @@
 		<h1>Détail de la vente</h1>
 		
 		<p>${requestScope.article.nomArticle}</p>
+		<c:if test="${requestScope.photoArticle != NULL}">
+			<img  class="photo-article" src="${requestScope.photoArticle}" alt="photo article">
+		</c:if>
 		<p><span class="detail_vente">Description :</span> ${requestScope.article.description}</p>
 		<p><span class="detail_vente">Catégorie :</span> ${requestScope.libelleCategorie}</p>
 		
