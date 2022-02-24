@@ -114,6 +114,7 @@ public class SellArticleServlet extends HttpServlet {
 		//Créer un objet Article
 		Article article = new Article(nom, description, debutEnchere, finEnchere, miseAPrix, userID, categorie, photoArticle);
 		
+		
 		try 
 		{
 			//Creer un nouvelle article dans la base de données
