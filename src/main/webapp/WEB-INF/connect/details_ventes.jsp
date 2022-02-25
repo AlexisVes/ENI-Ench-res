@@ -41,11 +41,11 @@
 				<label for="proposition"><span class="detail_vente"> Ma proposition :</span></label>
 					
 				<c:if test="${requestScope.enchere != null}">
-					<input type="number" name="proposition" placeholder="min : ${requestScope.enchere + 1}" required="required" min="${requestScope.enchere + 1}">
+					<input type="number" name="proposition" placeholder="min : ${requestScope.enchere + 1}" required="required" min="${requestScope.enchere + 1}" max="2147483647">
 				</c:if>
 					
 				<c:if test="${requestScope.enchere == null}">
-					<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente + 1}" required="required" min="${requestScope.article.prixVente + 1}">
+					<input type="number" name="proposition" placeholder="min : ${requestScope.article.prixVente + 1}" required="required" min="${requestScope.article.prixVente + 1}" max="2147483647">
 				</c:if>
 					
 				<input type="submit" value="Valider">

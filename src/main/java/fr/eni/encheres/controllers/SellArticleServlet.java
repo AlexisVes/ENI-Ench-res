@@ -28,11 +28,6 @@ import fr.eni.encheres.bo.User;
  * Servlet implementation class SellArticleServlet
  */
 @WebServlet("/connect/sell_article")
-@MultipartConfig(
-		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
-		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
-		)
 public class SellArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
